@@ -74,7 +74,7 @@ export const metadata: Metadata = {
     locale: "en_GB",
     images: [
       {
-        url: "/images/sitora-global-poster.jpg",
+        url: "/images/sitora-global-poster.jpg?v=3",
         width: 1200,
         height: 630,
         alt: "Sitora global web and corporate branding agency",
@@ -87,7 +87,7 @@ export const metadata: Metadata = {
     title: "Sitora | Global Web & Corporate Branding Agency",
     description:
       "Cinematic corporate websites, premium brand identities and SEO-led digital platforms for ambitious businesses.",
-    images: ["/images/sitora-global-poster.jpg"],
+    images: ["/images/sitora-global-poster.jpg?v=3"],
   },
 
   robots: {
