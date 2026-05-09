@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, Menu, Sparkles, X } from "lucide-react";
+import Image from "next/image";
 
 const navItems = [
   { label: "Home", href: "/home" },
@@ -23,10 +24,16 @@ export function SiteHeader() {
     <header className="fixed left-0 right-0 top-0 z-50 border-b border-white/10 bg-[#03050a]/75 backdrop-blur-2xl">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-5 px-5 py-4 sm:px-8">
         <Link href="/home" className="flex shrink-0 items-center gap-3">
-          <span className="relative flex h-11 w-11 items-center justify-center rounded-2xl bg-[#d8b66d] text-[#070910] shadow-lg shadow-[#d8b66d]/20">
-            <span className="absolute inset-0 rounded-2xl bg-white/30 blur-md" />
-            <Sparkles className="relative h-5 w-5" />
-          </span>
+          <span className="relative flex h-11 w-11 items-center justify-center overflow-hidden rounded-2xl border border-[#d8b66d]/30 bg-[#05070d] shadow-lg shadow-[#d8b66d]/20">
+  <Image
+    src="/public/android-chrome-192x192.png"
+    alt="Sitora logo"
+    width={44}
+    height={44}
+    className="h-full w-full object-cover"
+    priority
+  />
+</span>
 
           <span className="text-xl font-semibold tracking-tight text-white">
             Sitora

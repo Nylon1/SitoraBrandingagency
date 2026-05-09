@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowRight, Mail, Sparkles } from "lucide-react";
+import { InstallAppButton } from "@/components/InstallAppButton";
 
 export function SiteFooter() {
   return (
@@ -81,9 +82,12 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="mt-10 border-t border-white/10 pt-6 text-sm text-white/40">
-          © {new Date().getFullYear()} Sitora. All rights reserved.
-        </div>
+       <div className="mt-10 border-t border-white/10 pt-6 text-sm text-white/40">
+  <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+    <p>© {new Date().getFullYear()} Sitora. All rights reserved.</p>
+    <InstallAppButton />
+  </div>
+</div>
       </div>
     </footer>
   );
