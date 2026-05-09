@@ -1,26 +1,63 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+:root { --background: #03050a; --foreground: #ffffff; --sitora-gold: #d8b66d; --sitora-gold-soft: rgba(216, 182, 109, 0.16); --sitora-panel: rgba(255, 255, 255, 0.045); --sitora-border: rgba(255, 255, 255, 0.1); --sitora-muted: rgba(255, 255, 255, 0.62); }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+*, *::before, *::after { box-sizing: border-box; }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+html { scroll-behavior: smooth; background: var(--background); }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
+body { margin: 0; min-height: 100vh; background: radial-gradient(circle at 18% 10%, rgba(216, 182, 109, 0.08), transparent 28%), radial-gradient(circle at 86% 18%, rgba(37, 99, 235, 0.08), transparent 30%), linear-gradient(180deg, #03050a 0%, #05070d 42%, #03050a 100%); color: var(--foreground); font-family: var(--font-inter), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; text-rendering: geometricPrecision; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; overflow-x: hidden; }
+
+body::before { content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 9999; background: linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px); background-size: 72px 72px; mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), transparent 70%); }
+
+body::after { content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 9998; background: radial-gradient(circle at center, transparent 0%, transparent 58%, rgba(0, 0, 0, 0.34) 100%); }
+
+::selection { background: var(--sitora-gold); color: #070910; }
+
+::-webkit-scrollbar { width: 10px; }
+
+::-webkit-scrollbar-track { background: #03050a; }
+
+::-webkit-scrollbar-thumb { background: linear-gradient(180deg, rgba(216, 182, 109, 0.9), rgba(216, 182, 109, 0.35)); border: 2px solid #03050a; border-radius: 999px; }
+
+::-webkit-scrollbar-thumb:hover { background: linear-gradient(180deg, rgba(242, 207, 131, 1), rgba(216, 182, 109, 0.52)); }
+
+a { color: inherit; text-decoration: none; }
+
+button, a { -webkit-tap-highlight-color: transparent; }
+
+button { font: inherit; }
+
+img, video, canvas, svg { display: block; max-width: 100%; }
+
+input, textarea, select, button { font: inherit; }
+
+h1, h2, h3, h4, h5, h6, p { margin: 0; }
+
+h1, h2, h3 { text-wrap: balance; }
+
+p { text-wrap: pretty; }
+
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: 0.01ms !important; } }
+
+.sitora-serif { font-family: var(--font-playfair), Georgia, serif; }
+
+.sitora-glow { box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08), 0 24px 80px rgba(0, 0, 0, 0.45), 0 0 90px rgba(216, 182, 109, 0.12); }
+
+.sitora-glass { border: 1px solid rgba(255, 255, 255, 0.1); background: rgba(255, 255, 255, 0.045); backdrop-filter: blur(24px); }
+
+.sitora-gold-text { color: var(--sitora-gold); }
+
+.sitora-gradient-text { background: linear-gradient(135deg, #ffffff 0%, #f8e6b7 45%, #d8b66d 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+.sitora-noise { position: relative; }
+
+.sitora-noise::before { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0.08; background-image: radial-gradient(circle at 20% 20%, rgba(255,255,255,0.2) 0 1px, transparent 1px), radial-gradient(circle at 80% 10%, rgba(255,255,255,0.16) 0 1px, transparent 1px), radial-gradient(circle at 50% 80%, rgba(255,255,255,0.12) 0 1px, transparent 1px); background-size: 18px 18px, 24px 24px, 30px 30px; }
+
+@keyframes sitora-float { 0%, 100% { transform: translate3d(0, 0, 0); } 50% { transform: translate3d(0, -12px, 0); } }
+
+@keyframes sitora-pulse { 0%, 100% { opacity: 0.45; transform: scale(1); } 50% { opacity: 0.85; transform: scale(1.04); } }
+
+.sitora-float { animation: sitora-float 7s ease-in-out infinite; }
+
+.sitora-pulse { animation: sitora-pulse 5s ease-in-out infinite; }
