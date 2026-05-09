@@ -3,20 +3,21 @@
 import { usePathname } from "next/navigation";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { AutoBreadcrumbs } from "@/components/AutoBreadcrumbs";
 
 export function SiteShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
 
-  // Keep the cinematic entry page clean
-  const hideHeaderAndFooter = pathname === "/";
+  const hideChrome = pathname === "/";
 
-  if (hideHeaderAndFooter) {
+  if (hideChrome) {
     return <>{children}</>;
   }
 
   return (
     <>
       <SiteHeader />
+      <AutoBreadcrumbs />
       {children}
       <SiteFooter />
     </>
