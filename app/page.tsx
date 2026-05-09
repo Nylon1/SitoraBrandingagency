@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 export default function SitoraGateway() {
   return (
@@ -25,15 +26,26 @@ export default function SitoraGateway() {
       </div>
 
       <section className="relative z-10 flex min-h-screen items-center justify-center px-6 py-16">
-        <motion.div
-          initial={{ opacity: 0, y: 24, scale: 0.98 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-          className="mx-auto max-w-5xl text-center"
-        >
-          <p className="mx-auto max-w-2xl text-xs font-bold uppercase tracking-[0.45em] text-[#d8b66d] sm:text-sm">
-            Global Web & Corporate Branding Agency
-          </p>
+       <motion.div
+  initial={{ opacity: 0, y: 24, scale: 0.98 }}
+  animate={{ opacity: 1, y: 0, scale: 1 }}
+  transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+  className="mx-auto max-w-5xl text-center"
+>
+  <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl border border-[#d8b66d]/30 bg-[#05070d] shadow-2xl shadow-[#d8b66d]/20">
+    <Image
+      src="/android-chrome-192x192.png"
+      alt="Sitora logo"
+      width={64}
+      height={64}
+      className="h-full w-full object-cover"
+      priority
+    />
+  </div>
+
+  <p className="mx-auto max-w-2xl text-xs font-bold uppercase tracking-[0.45em] text-[#d8b66d] sm:text-sm">
+    Global Web & Corporate Branding Agency
+  </p>
 
           <h1 className="mt-6 text-7xl font-semibold leading-none tracking-[-0.08em] text-white drop-shadow-2xl sm:text-8xl lg:text-9xl">
             Sitora

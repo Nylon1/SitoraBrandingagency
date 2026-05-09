@@ -26,7 +26,7 @@ export function SiteHeader() {
         <Link href="/home" className="flex shrink-0 items-center gap-3">
           <span className="relative flex h-11 w-11 items-center justify-center overflow-hidden rounded-2xl border border-[#d8b66d]/30 bg-[#05070d] shadow-lg shadow-[#d8b66d]/20">
   <Image
-    src="/public/android-chrome-192x192.png"
+    src="/android-chrome-192x192.png"
     alt="Sitora logo"
     width={44}
     height={44}
