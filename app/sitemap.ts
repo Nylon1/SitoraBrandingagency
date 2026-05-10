@@ -25,6 +25,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/industries/training-providers",
     "/industries/finance-brokers",
     "/industries/corporate-services",
+    "/websites-for-celebrities-athletes",
   ];
 
   return staticPages.map((path) => ({

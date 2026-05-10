@@ -26,6 +26,11 @@ import {
   Target,
   WandSparkles,
   Workflow,
+  Star,
+  Trophy,
+  Camera,
+  Mic2,
+  Handshake,
 } from "lucide-react";
 
 const services = [
@@ -614,6 +619,141 @@ export default function SitoraHomePage() {
         </div>
       </section>
 
+<section className="relative overflow-hidden px-5 py-28 sm:px-8">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(216,182,109,0.12),transparent_30%),radial-gradient(circle_at_80%_70%,rgba(59,130,246,0.10),transparent_34%)]" />
+
+        <div className="relative mx-auto max-w-7xl overflow-hidden rounded-[2.8rem] border border-white/10 bg-[#05070d] p-6 shadow-2xl shadow-black/40 sm:p-10 lg:p-12">
+          <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(216,182,109,0.16),rgba(255,255,255,0.035),rgba(37,99,235,0.12))]" />
+
+          <div className="absolute inset-0 opacity-[0.12]">
+            <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,.10)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.10)_1px,transparent_1px)] bg-[size:64px_64px]" />
+          </div>
+
+          <motion.div
+            animate={{ opacity: [0.35, 0.75, 0.35], scale: [1, 1.05, 1] }}
+            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute right-[-12%] top-[-20%] h-[520px] w-[520px] rounded-full border border-[#d8b66d]/20 bg-[radial-gradient(circle,rgba(216,182,109,0.17),transparent_65%)]"
+          />
+
+          <div className="relative grid gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -28 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.25 }}
+              transition={{ duration: 0.75 }}
+            >
+              <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-[#d8b66d]/25 bg-[#d8b66d]/10 px-4 py-2 text-sm text-[#d8b66d]">
+                <Star className="h-4 w-4" />
+                New specialist service
+              </div>
+
+              <p className="text-sm font-bold uppercase tracking-[0.32em] text-[#d8b66d]">
+                Celebrity & Personal Brand Websites
+              </p>
+
+              <h2 className="mt-4 text-5xl font-semibold leading-[0.96] tracking-[-0.06em] text-white sm:text-6xl lg:text-7xl">
+                Official websites for people with influence.
+              </h2>
+
+              <p className="mt-7 max-w-2xl text-lg leading-8 text-white/64">
+                Sitora builds premium official websites for celebrities, athletes,
+                sports personalities, speakers and public figures who need a
+                trusted digital home for media, partnerships, bookings and serious
+                enquiries.
+              </p>
+
+              <div className="mt-9 flex flex-col gap-4 sm:flex-row">
+                <a
+                  href="/websites-for-celebrities-athletes"
+                  className="group inline-flex items-center justify-center gap-3 rounded-full bg-[#d8b66d] px-7 py-4 font-bold text-[#070910] shadow-2xl shadow-[#d8b66d]/20 transition hover:bg-[#f2cf83]"
+                >
+                  Explore Personal Brand Websites
+                  <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+                </a>
+
+                <a
+                  href="/contact"
+                  className="inline-flex items-center justify-center rounded-full border border-white/15 bg-white/[0.04] px-7 py-4 font-semibold text-white transition hover:bg-white/10"
+                >
+                  Request Private Consultation
+                </a>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.94, y: 24 }}
+              whileInView={{ opacity: 1, scale: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.25 }}
+              transition={{ duration: 0.75 }}
+              className="relative"
+            >
+              <div className="absolute -inset-8 rounded-[3rem] bg-[#d8b66d]/10 blur-3xl" />
+
+              <div className="relative rounded-[2.2rem] border border-white/10 bg-black/25 p-5 backdrop-blur-xl">
+                <div className="grid gap-4 sm:grid-cols-2">
+                  {[
+                    [
+                      Trophy,
+                      "Athletes & Sports Stars",
+                      "Official profiles, achievements, highlights and sponsorship enquiry routes.",
+                    ],
+                    [
+                      Camera,
+                      "Celebrities & Media Figures",
+                      "Polished public presence for press, fans, agents and commercial teams.",
+                    ],
+                    [
+                      Mic2,
+                      "Speakers & Personalities",
+                      "Speaking pages, appearance enquiries, media kits and booking pathways.",
+                    ],
+                    [
+                      Handshake,
+                      "Brand Partnerships",
+                      "Professional enquiry flows for sponsors, collaborations and endorsements.",
+                    ],
+                  ].map(([Icon, title, text], index) => {
+                    const RealIcon = Icon as ElementType;
+
+                    return (
+                      <motion.div
+                        key={title as string}
+                        initial={{ opacity: 0, y: 22 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, amount: 0.2 }}
+                        transition={{ duration: 0.5, delay: index * 0.06 }}
+                        whileHover={{ y: -5 }}
+                        className="rounded-[1.6rem] border border-white/10 bg-white/[0.045] p-5 transition hover:border-[#d8b66d]/35 hover:bg-[#d8b66d]/10"
+                      >
+                        <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#d8b66d]/15 text-[#d8b66d]">
+                          <RealIcon className="h-6 w-6" />
+                        </div>
+                        <h3 className="text-lg font-semibold tracking-tight text-white">
+                          {title as string}
+                        </h3>
+                        <p className="mt-3 text-sm leading-7 text-white/56">
+                          {text as string}
+                        </p>
+                      </motion.div>
+                    );
+                  })}
+                </div>
+
+                <div className="mt-5 rounded-2xl border border-[#d8b66d]/20 bg-[#d8b66d]/10 p-5">
+                  <div className="flex items-start gap-3">
+                    <ShieldCheck className="mt-1 h-5 w-5 shrink-0 text-[#d8b66d]" />
+                    <p className="text-sm leading-7 text-white/70">
+                      Social media creates attention. An official website creates
+                      authority, control and a serious route for opportunities.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+      
       <section id="locations" className="px-5 pb-28 sm:px-8">
         <div className="mx-auto max-w-7xl overflow-hidden rounded-[2.6rem] border border-white/10 bg-[linear-gradient(135deg,rgba(216,182,109,0.14),rgba(255,255,255,0.04),rgba(37,99,235,0.12))] p-7 sm:p-12">
           <div className="grid gap-10 lg:grid-cols-[.85fr_1.15fr] lg:items-center">

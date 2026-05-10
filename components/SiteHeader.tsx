@@ -10,9 +10,10 @@ const navItems = [
   { label: "Home", href: "/home" },
   { label: "Web Design", href: "/corporate-website-design" },
   { label: "Branding", href: "/corporate-branding" },
+  { label: "Celebrities & Athletes", href: "/websites-for-celebrities-athletes" },
   { label: "SEO & Leads", href: "/seo-lead-generation" },
   { label: "Process", href: "/process" },
-  { label: "Industries", href: "/industries" },
+  { label: "Professions", href: "/industries" },
   { label: "Contact", href: "/contact" },
 
 ];
