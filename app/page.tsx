@@ -14,35 +14,38 @@ import {
 
 const branches = [
   {
-    name: "Digital",
-    fullName: "Sitora Digital",
-    text: "Websites, branding and SEO.",
+    name: "Sitora Digital",
+    text: "Premium websites, branding and SEO.",
     icon: Building2,
   },
   {
-    name: "Dental",
-    fullName: "Sitora Dental",
-    text: "Dental practice websites.",
+    name: "Sitora Dental",
+    text: "Growth websites for dental practices.",
     icon: Stethoscope,
   },
   {
-    name: "Healthcare",
-    fullName: "Sitora Healthcare",
-    text: "Clinics and healthcare brands.",
+    name: "Sitora Healthcare",
+    text: "Digital presence for clinics and healthcare brands.",
     icon: HeartPulse,
   },
   {
-    name: "Corporate",
-    fullName: "Sitora Corporate",
-    text: "CEOs and high-profile people.",
+    name: "Sitora Corporate",
+    text: "Executive websites for CEOs and high-profile people.",
     icon: BriefcaseBusiness,
   },
   {
-    name: "AI",
-    fullName: "Sitora AI",
-    text: "Automation and smart systems.",
+    name: "Sitora AI",
+    text: "AI assistants, automation and smart lead systems.",
     icon: BrainCircuit,
   },
+];
+
+const tickerItems = [
+  "Sitora Digital",
+  "Sitora Dental",
+  "Sitora Healthcare",
+  "Sitora Corporate",
+  "Sitora AI",
 ];
 
 export default function SitoraGateway() {
@@ -69,7 +72,7 @@ export default function SitoraGateway() {
       </div>
 
       {/* Soft glow */}
-      <div className="absolute left-1/2 top-12 h-56 w-56 -translate-x-1/2 rounded-full bg-[#d8b66d]/20 blur-[90px] sm:top-20 sm:h-72 sm:w-72 sm:blur-[110px]" />
+      <div className="absolute left-1/2 top-10 h-56 w-56 -translate-x-1/2 rounded-full bg-[#d8b66d]/20 blur-[90px] sm:top-20 sm:h-72 sm:w-72 sm:blur-[110px]" />
 
       <section className="relative z-10 flex min-h-screen items-center justify-center px-4 py-6 sm:px-6 sm:py-10 lg:px-8">
         <motion.div
@@ -98,16 +101,38 @@ export default function SitoraGateway() {
             Sitora
           </h1>
 
-          <p className="mx-auto mt-3 max-w-3xl text-lg font-semibold leading-7 text-white/88 sm:mt-5 sm:text-2xl sm:leading-10">
+          <p className="mx-auto mt-3 max-w-sm text-base font-semibold leading-7 text-white/88 sm:mt-5 sm:max-w-3xl sm:text-2xl sm:leading-10">
             One digital house. Specialist branches. Global ambition.
           </p>
 
-          <p className="mx-auto mt-2 max-w-2xl text-xs leading-6 text-white/56 sm:mt-3 sm:text-base sm:leading-7">
+          <p className="mx-auto mt-2 max-w-sm text-xs leading-6 text-white/56 sm:mt-3 sm:max-w-2xl sm:text-base sm:leading-7">
             Premium websites, branding, SEO platforms and AI-powered systems
             for ambitious businesses.
           </p>
 
-          {/* Branch cards */}
+          {/* Mobile branch ticker */}
+          <div className="mt-6 w-full max-w-sm overflow-hidden border-y border-white/10 py-3 sm:hidden">
+            <motion.div
+              animate={{ x: ["0%", "-50%"] }}
+              transition={{
+                duration: 18,
+                repeat: Infinity,
+                ease: "linear",
+              }}
+              className="flex w-max items-center gap-5 whitespace-nowrap text-[11px] font-bold uppercase tracking-[0.24em] text-[#d8b66d]"
+            >
+              {[...tickerItems, ...tickerItems, ...tickerItems].map(
+                (item, index) => (
+                  <div key={`${item}-${index}`} className="flex items-center gap-5">
+                    <span>{item}</span>
+                    <span className="text-white/28">·</span>
+                  </div>
+                )
+              )}
+            </motion.div>
+          </div>
+
+          {/* Desktop branch cards */}
           <motion.div
             initial={{ opacity: 0, y: 22 }}
             animate={{ opacity: 1, y: 0 }}
@@ -116,14 +141,14 @@ export default function SitoraGateway() {
               duration: 0.7,
               ease: [0.22, 1, 0.36, 1],
             }}
-            className="mx-auto mt-5 grid w-full max-w-sm grid-cols-2 gap-2 sm:mt-8 sm:max-w-5xl sm:grid-cols-2 sm:gap-3 lg:grid-cols-5"
+            className="mx-auto mt-8 hidden w-full max-w-5xl gap-3 sm:grid sm:grid-cols-2 lg:grid-cols-5"
           >
             {branches.map((branch, index) => {
               const Icon = branch.icon;
 
               return (
                 <motion.div
-                  key={branch.fullName}
+                  key={branch.name}
                   initial={{ opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{
@@ -132,23 +157,19 @@ export default function SitoraGateway() {
                     ease: [0.22, 1, 0.36, 1],
                   }}
                   whileHover={{ y: -6, scale: 1.02 }}
-                  className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.045] p-3 text-left shadow-2xl backdrop-blur-xl transition duration-300 hover:border-[#d8b66d]/45 hover:bg-white/[0.075] sm:rounded-3xl sm:p-4"
+                  className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.045] p-4 text-left shadow-2xl backdrop-blur-xl transition duration-300 hover:border-[#d8b66d]/45 hover:bg-white/[0.075]"
                 >
                   <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#d8b66d]/70 to-transparent opacity-0 transition duration-300 group-hover:opacity-100" />
 
-                  <div className="mb-2 flex h-9 w-9 items-center justify-center rounded-xl border border-[#d8b66d]/25 bg-[#d8b66d]/10 text-[#d8b66d] shadow-[0_0_30px_rgba(216,182,109,0.14)] sm:mb-4 sm:h-10 sm:w-10 sm:rounded-2xl">
-                    <Icon className="h-4 w-4 sm:h-5 sm:w-5" />
+                  <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-2xl border border-[#d8b66d]/25 bg-[#d8b66d]/10 text-[#d8b66d] shadow-[0_0_30px_rgba(216,182,109,0.14)]">
+                    <Icon className="h-5 w-5" />
                   </div>
 
-                  <h2 className="text-sm font-semibold tracking-tight text-white sm:hidden">
+                  <h2 className="text-sm font-semibold tracking-tight text-white">
                     {branch.name}
                   </h2>
 
-                  <h2 className="hidden text-sm font-semibold tracking-tight text-white sm:block">
-                    {branch.fullName}
-                  </h2>
-
-                  <p className="mt-1 text-[11px] leading-4 text-white/52 sm:mt-2 sm:text-xs sm:leading-5">
+                  <p className="mt-2 text-xs leading-5 text-white/52">
                     {branch.text}
                   </p>
                 </motion.div>
@@ -156,7 +177,7 @@ export default function SitoraGateway() {
             })}
           </motion.div>
 
-          <div className="mt-4 flex flex-wrap items-center justify-center gap-1.5 text-[9px] font-bold uppercase tracking-[0.18em] text-white/42 sm:mt-7 sm:gap-2 sm:text-xs sm:tracking-[0.22em]">
+          <div className="mt-5 flex flex-wrap items-center justify-center gap-1.5 text-[9px] font-bold uppercase tracking-[0.18em] text-white/42 sm:mt-7 sm:gap-2 sm:text-xs sm:tracking-[0.22em]">
             <span>Websites</span>
             <span className="text-[#d8b66d]/60">·</span>
             <span>Branding</span>
@@ -167,7 +188,7 @@ export default function SitoraGateway() {
           </div>
 
           {/* CTA */}
-          <div className="mt-4 flex justify-center sm:mt-6">
+          <div className="mt-5 flex justify-center sm:mt-6">
             <Link
               href="/home"
               className="group inline-flex items-center justify-center gap-3 rounded-full bg-[#d8b66d] px-8 py-4 text-xs font-bold uppercase tracking-[0.24em] text-[#070910] shadow-2xl shadow-[#d8b66d]/20 transition hover:-translate-y-1 hover:bg-[#f2cf83] hover:shadow-[#d8b66d]/35 sm:gap-4 sm:px-12 sm:py-5 sm:text-sm sm:tracking-[0.32em]"
