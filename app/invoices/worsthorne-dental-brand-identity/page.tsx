@@ -106,9 +106,9 @@ export default function WorsthorneDentalInvoicePage() {
               Brand identity, website design and digital presence services.
             </p>
             <p className="mt-3 text-slate-600">
-              Email: [your email]
+              Email: [enquiries@sitora.co.uk]
               <br />
-              Website: [your website]
+              Website: [https://www.sitora.co.uk]
             </p>
           </div>
 
@@ -120,9 +120,10 @@ export default function WorsthorneDentalInvoicePage() {
               Worsthorne Dental Clinic
             </h2>
             <p className="mt-3 leading-7 text-slate-600">
-              [Client address]
+              [93 Lindsay Park,
+Burnley BB10 3SQ]
               <br />
-              [Client email]
+              [admin@worsthornedental.co.uk]
             </p>
           </div>
         </div>
