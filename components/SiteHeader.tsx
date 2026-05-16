@@ -11,6 +11,7 @@ const navItems = [
   { label: "Web Design", href: "/corporate-website-design" },
   { label: "Branding", href: "/corporate-branding" },
   { label: "Celebrities & Athletes", href: "/websites-for-celebrities-athletes" },
+  { label: "Packages", href: "/brand-identity-packages" },
   { label: "SEO & Leads", href: "/seo-lead-generation" },
   { label: "Process", href: "/process" },
   { label: "Professions", href: "/industries" },
