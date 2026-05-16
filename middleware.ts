@@ -77,5 +77,7 @@ export const config = {
     "/proposals/:path*",
     "/invoices/:path*",
     "/api/invoices/:path*",
+    "/brandbook/:path*",
+
   ],
 };
