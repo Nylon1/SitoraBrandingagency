@@ -167,26 +167,52 @@ function PrintButton() {
 export default function WorsthorneDentalBrandInvestmentProposalPage() {
   return (
     <main className="min-h-screen bg-[#f8f5ef] text-[#101827]">
-      <style>{`
-        html {
-          scroll-behavior: smooth;
-        }
+    <style>{`
+  html {
+    scroll-behavior: smooth;
+  }
 
-        @media print {
-          body {
-            background: white !important;
-          }
+  @media print {
+    html,
+    body {
+      background: #ffffff !important;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
 
-          nav,
-          button {
-            display: none !important;
-          }
+    nav,
+    button,
+    .no-print,
+    .print\\:hidden {
+      display: none !important;
+    }
 
-          section {
-            page-break-inside: avoid;
-          }
-        }
-      `}</style>
+    main,
+    section,
+    div {
+      opacity: 1 !important;
+      transform: none !important;
+      animation: none !important;
+    }
+
+    section {
+      page-break-inside: avoid;
+      break-inside: avoid;
+      padding-top: 28px !important;
+      padding-bottom: 28px !important;
+    }
+
+    .print-page-break {
+      page-break-before: always;
+      break-before: page;
+    }
+
+    a {
+      text-decoration: none !important;
+      color: inherit !important;
+    }
+  }
+`}</style>
 
       <section className="relative overflow-hidden bg-[#070b12] px-5 py-20 text-white sm:px-8 lg:px-10 lg:py-28 print:bg-white print:text-[#101827]">
         <div className="absolute inset-0 opacity-90 print:hidden">
