@@ -38,6 +38,10 @@ export default function AdminReportsPage() {
   const [reportSummary, setReportSummary] = useState("");
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
+  const [loginCreating, setLoginCreating] = useState(false);
+  const [clientLoginEmail, setClientLoginEmail] = useState("");
+  const [clientLoginPassword, setClientLoginPassword] = useState("");
+
   useEffect(() => {
     loadAdmin();
   }, []);
@@ -105,7 +109,9 @@ export default function AdminReportsPage() {
     }
 
     if (!newPracticeName.trim() || !newEmail.trim()) {
-      throw new Error("Add a practice name and email, or select an existing client.");
+      throw new Error(
+        "Add a practice name and email, or select an existing client."
+      );
     }
 
     const { data, error } = await supabaseBrowser
@@ -152,8 +158,9 @@ export default function AdminReportsPage() {
         } as Client);
 
       const folder = makeSafeFileName(client.practice_name || "client");
+      const rawName = selectedFile.name.replace(/\.pdf$/i, "");
       const fileName =
-        Date.now() + "-" + makeSafeFileName(selectedFile.name.replace(".pdf", "")) + ".pdf";
+        Date.now() + "-" + makeSafeFileName(rawName) + ".pdf";
       const storagePath = folder + "/" + fileName;
 
       const { error: uploadError } = await supabaseBrowser.storage
@@ -167,16 +174,18 @@ export default function AdminReportsPage() {
         throw new Error(uploadError.message);
       }
 
-      const { error: reportError } = await supabaseBrowser.from("reports").insert({
-        client_id: clientId,
-        report_type: reportType,
-        title: reportTitle.trim(),
-        summary:
-          reportSummary.trim() ||
-          "Your Sitora Healthcare audit report is ready to download securely.",
-        status: "ready",
-        storage_path: storagePath
-      });
+      const { error: reportError } = await supabaseBrowser
+        .from("reports")
+        .insert({
+          client_id: clientId,
+          report_type: reportType,
+          title: reportTitle.trim(),
+          summary:
+            reportSummary.trim() ||
+            "Your Sitora Healthcare audit report is ready to download securely.",
+          status: "ready",
+          storage_path: storagePath
+        });
 
       if (reportError) {
         throw new Error(reportError.message);
@@ -200,6 +209,64 @@ export default function AdminReportsPage() {
     }
 
     setUploading(false);
+  }
+
+  async function createClientLogin() {
+    const clientId = selectedClientId;
+
+    if (!clientId) {
+      setMessage("Select an existing client first before creating a login.");
+      return;
+    }
+
+    const client = clients.find((item) => item.id === clientId);
+
+    if (!client?.email) {
+      setMessage("Selected client does not have an email address.");
+      return;
+    }
+
+    setLoginCreating(true);
+    setMessage("Creating client login...");
+
+    try {
+      const {
+        data: { session }
+      } = await supabaseBrowser.auth.getSession();
+
+      if (!session?.access_token) {
+        throw new Error("Admin session not found. Please sign in again.");
+      }
+
+      const response = await fetch("/api/admin/create-client-user", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + session.access_token
+        },
+        body: JSON.stringify({
+          clientId,
+          email: client.email
+        })
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || "Could not create client login.");
+      }
+
+      setClientLoginEmail(result.email);
+      setClientLoginPassword(result.tempPassword);
+      setMessage("Client login created successfully.");
+    } catch (error) {
+      const errorMessage =
+        error instanceof Error ? error.message : "Unknown login creation error";
+
+      setMessage("Login creation failed: " + errorMessage);
+    }
+
+    setLoginCreating(false);
   }
 
   async function logout() {
@@ -240,8 +307,8 @@ export default function AdminReportsPage() {
             </h1>
 
             <p className="mt-4 max-w-3xl text-sm leading-7 text-slate-300">
-              Add clients, upload final PDF reports, and assign them securely to
-              the client portal.
+              Add clients, create client logins, upload final PDF reports, and
+              assign them securely to the client portal.
             </p>
           </div>
 
@@ -269,7 +336,11 @@ export default function AdminReportsPage() {
 
             <select
               value={selectedClientId}
-              onChange={(e) => setSelectedClientId(e.target.value)}
+              onChange={(e) => {
+                setSelectedClientId(e.target.value);
+                setClientLoginEmail("");
+                setClientLoginPassword("");
+              }}
               className="w-full rounded-2xl border border-white/10 bg-slate-900 px-4 py-3 text-white outline-none ring-amber-300/40 focus:ring-4"
             >
               <option value="">Create new client</option>
@@ -279,6 +350,54 @@ export default function AdminReportsPage() {
                 </option>
               ))}
             </select>
+
+            {selectedClientId && (
+              <div className="mt-5 rounded-2xl border border-amber-300/20 bg-amber-300/5 p-4">
+                <p className="text-sm font-semibold text-amber-100">
+                  Client Portal Login
+                </p>
+
+                <p className="mt-1 text-sm text-slate-300">
+                  Create a secure login for this client so they can access their
+                  reports.
+                </p>
+
+                <button
+                  onClick={createClientLogin}
+                  disabled={loginCreating}
+                  className="mt-4 rounded-2xl bg-amber-300 px-5 py-3 font-semibold text-slate-950 hover:bg-amber-200 disabled:opacity-50"
+                >
+                  {loginCreating ? "Creating Login..." : "Create Client Login"}
+                </button>
+
+                {clientLoginEmail && clientLoginPassword && (
+                  <div className="mt-4 rounded-2xl border border-emerald-300/20 bg-emerald-300/5 p-4">
+                    <p className="text-sm font-semibold text-emerald-100">
+                      Login details created
+                    </p>
+
+                    <p className="mt-2 text-sm text-slate-300">
+                      Email:{" "}
+                      <span className="font-semibold text-white">
+                        {clientLoginEmail}
+                      </span>
+                    </p>
+
+                    <p className="mt-1 text-sm text-slate-300">
+                      Temporary password:{" "}
+                      <span className="font-semibold text-white">
+                        {clientLoginPassword}
+                      </span>
+                    </p>
+
+                    <p className="mt-3 text-xs leading-5 text-slate-400">
+                      Send these details to the client securely and ask them to
+                      keep them private.
+                    </p>
+                  </div>
+                )}
+              </div>
+            )}
 
             {!selectedClientId && (
               <div className="mt-6 grid gap-4">
