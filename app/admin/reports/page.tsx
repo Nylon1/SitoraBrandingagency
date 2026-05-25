@@ -33,7 +33,7 @@ export default function AdminReportsPage() {
   const [newEmail, setNewEmail] = useState("");
   const [newWebsite, setNewWebsite] = useState("");
 
-  const [reportType, setReportType] = useState("Compliance Audit");
+  const [reportType, setReportType] = useState("Digital Compliance & Trust Audit");
   const [reportTitle, setReportTitle] = useState("");
   const [reportSummary, setReportSummary] = useState("");
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -464,10 +464,10 @@ export default function AdminReportsPage() {
               onChange={(e) => setReportType(e.target.value)}
               className="w-full rounded-2xl border border-white/10 bg-slate-900 px-4 py-3 text-white outline-none ring-amber-300/40 focus:ring-4"
             >
-              <option>Compliance Audit</option>
-              <option>Local Competitor Audit</option>
-              <option>Price & Services Audit</option>
-              <option>Healthcare Digital Audit</option>
+              <option>Digital Compliance & Trust Audit</option>
+              <option>Local Competitor Price & Services Audit</option>
+              
+              <option>Patient Journey & Conversion Journey</option>
             </select>
 
             <label className="mb-2 mt-5 block text-sm font-medium text-slate-200">
