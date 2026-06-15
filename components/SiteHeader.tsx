@@ -16,7 +16,7 @@ const navItems = [
   { label: "Process", href: "/process" },
   { label: "Professions", href: "/industries" },
   { label: "Contact", href: "/contact" },
-
+{ label: "DeckStudio", href: "/deckstudio" },
 ];
 
 export function SiteHeader() {

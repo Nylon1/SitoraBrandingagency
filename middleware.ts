@@ -79,5 +79,9 @@ export const config = {
     "/api/invoices/:path*",
     "/brandbook/:path*",
 
+    "/deckstudio/:path*",
+    "/admin/deckstudio/:path*",
+    "/api/deckstudio/:path*",
+
   ],
 };
