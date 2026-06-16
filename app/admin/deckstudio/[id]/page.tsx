@@ -1,7 +1,8 @@
 import DownloadSvgButton from "@/components/deckstudio/DownloadSvgButton";
 import DownloadAllSvgsButton from "@/components/deckstudio/DownloadAllSvgsButton";
 import { createClient } from "@supabase/supabase-js";
-
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 
 const supabase = createClient(
