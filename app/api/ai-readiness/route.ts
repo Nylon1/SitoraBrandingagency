@@ -25,6 +25,10 @@ function formatList(items?: string[]) {
   return items.join(", ");
 }
 
+function clean(value?: string) {
+  return value && value.trim().length > 0 ? value : "Not provided";
+}
+
 export async function POST(request: Request) {
   try {
     const body = (await request.json()) as AIReadinessPayload;
@@ -36,52 +40,86 @@ export async function POST(request: Request) {
       );
     }
 
+    if (!process.env.RESEND_API_KEY) {
+      console.error("Missing RESEND_API_KEY");
+      return NextResponse.json(
+        { error: "Email service not configured" },
+        { status: 500 }
+      );
+    }
+
+    const fromEmail =
+      process.env.AI_READINESS_FROM_EMAIL || "Sitora <onboarding@resend.dev>";
+
+    const toEmail = process.env.AI_READINESS_TO_EMAIL;
+
+    if (!toEmail) {
+      console.error("Missing AI_READINESS_TO_EMAIL");
+      return NextResponse.json(
+        { error: "Recipient email not configured" },
+        { status: 500 }
+      );
+    }
+
+    const submittedAt = new Date().toLocaleString("en-GB", {
+      dateStyle: "full",
+      timeStyle: "short",
+    });
+
     await resend.emails.send({
-      from:
-        process.env.AI_READINESS_FROM_EMAIL ||
-        "Sitora <noreply@sitora.co.uk>",
-      to: process.env.AI_READINESS_TO_EMAIL || "hello@sitora.co.uk",
+      from: fromEmail,
+      to: toEmail,
+      replyTo: body.email,
       subject: `New AI Readiness Enquiry - ${body.businessName}`,
       html: `
-        <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #111;">
-          <h2>New AI Readiness Enquiry</h2>
+        <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #111; max-width: 720px;">
+          <h2 style="margin-bottom: 4px;">New AI Readiness Enquiry</h2>
+          <p style="color: #555; margin-top: 0;">Submitted: ${submittedAt}</p>
 
-          <p><strong>Name:</strong> ${body.name}</p>
-          <p><strong>Business:</strong> ${body.businessName}</p>
-          <p><strong>Email:</strong> ${body.email}</p>
-          <p><strong>Website:</strong> ${body.website || "Not provided"}</p>
-          <p><strong>Industry:</strong> ${body.industry}</p>
+          <hr style="border: none; border-top: 1px solid #ddd; margin: 24px 0;" />
 
-          <hr />
+          <h3>Business Details</h3>
+          <p><strong>Name:</strong> ${clean(body.name)}</p>
+          <p><strong>Business:</strong> ${clean(body.businessName)}</p>
+          <p><strong>Email:</strong> ${clean(body.email)}</p>
+          <p><strong>Website:</strong> ${clean(body.website)}</p>
+          <p><strong>Industry:</strong> ${clean(body.industry)}</p>
 
-          <p><strong>Currently uses AI:</strong> ${body.currentlyUsesAI || "Not provided"}</p>
+          <hr style="border: none; border-top: 1px solid #ddd; margin: 24px 0;" />
+
+          <h3>AI Usage</h3>
+          <p><strong>Currently uses AI:</strong> ${clean(body.currentlyUsesAI)}</p>
           <p><strong>Where AI is being used:</strong> ${formatList(body.aiUses)}</p>
-          <p><strong>AI chatbot:</strong> ${body.hasChatbot || "Not provided"}</p>
-          <p><strong>Staff use AI tools:</strong> ${body.staffUseAI || "Not provided"}</p>
-          <p><strong>Customer/patient/staff/client data entered into AI:</strong> ${body.entersSensitiveData || "Not provided"}</p>
-          <p><strong>AI influences decisions:</strong> ${body.influencesDecisions || "Not provided"}</p>
-          <p><strong>AI policy/tool register:</strong> ${body.hasPolicy || "Not provided"}</p>
+          <p><strong>AI chatbot:</strong> ${clean(body.hasChatbot)}</p>
+          <p><strong>Staff use AI tools:</strong> ${clean(body.staffUseAI)}</p>
+          <p><strong>Customer/patient/staff/client data entered into AI:</strong> ${clean(body.entersSensitiveData)}</p>
+          <p><strong>AI influences decisions:</strong> ${clean(body.influencesDecisions)}</p>
+          <p><strong>AI policy/tool register:</strong> ${clean(body.hasPolicy)}</p>
           <p><strong>Support needed:</strong> ${formatList(body.supportNeeded)}</p>
 
-          <hr />
+          <hr style="border: none; border-top: 1px solid #ddd; margin: 24px 0;" />
 
-          <p><strong>Concerns:</strong></p>
-          <p>${body.concerns || "None provided"}</p>
+          <h3>Additional Concerns</h3>
+          <p>${clean(body.concerns)}</p>
+
+          <hr style="border: none; border-top: 1px solid #ddd; margin: 24px 0;" />
+
+          <p style="font-size: 13px; color: #666;">
+            This enquiry came from the Sitora AI Readiness form.
+          </p>
         </div>
       `,
     });
 
     await resend.emails.send({
-      from:
-        process.env.AI_READINESS_FROM_EMAIL ||
-        "Sitora <noreply@sitora.co.uk>",
+      from: fromEmail,
       to: body.email,
       subject: "Your AI Readiness Review Request",
       html: `
-        <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #111;">
+        <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #111; max-width: 680px;">
           <h2>Thank you for requesting an AI Readiness Review</h2>
 
-          <p>Hi ${body.name},</p>
+          <p>Hi ${clean(body.name)},</p>
 
           <p>Thank you for submitting your AI Readiness Review request with Sitora.</p>
 
