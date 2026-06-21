@@ -1,4 +1,4 @@
-import AIReadinessForm from "./audit/AIReadinessAuditForm";
+import AIReadinessAuditForm from "./audit/AIReadinessAuditForm";
 
 export const metadata = {
   title: "AI Readiness & Governance Support | Sitora",
@@ -273,7 +273,7 @@ export default function AIReadinessPage() {
             </div>
           </div>
 
-          <AIReadinessForm />
+          <AIReadinessAuditForm />
         </div>
       </section>
     </main>
