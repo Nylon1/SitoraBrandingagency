@@ -81,6 +81,8 @@ export const config = {
     "/admin/ai-readiness/:path*",
     "/ai-readiness/audit/:path*",
 "/api/ai-readiness/audit/:path*",
+"/api/ai-readiness/audits/:path*",
+
 
   
   ],
