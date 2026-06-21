@@ -79,6 +79,8 @@ export const config = {
     "/api/invoices/:path*",
     "/brandbook/:path*",
     "/admin/ai-readiness/:path*",
+    "/ai-readiness/audit/:path*",
+"/api/ai-readiness/audit/:path*",
 
   
   ],
