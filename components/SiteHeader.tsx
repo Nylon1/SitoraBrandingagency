@@ -13,6 +13,7 @@ const navItems = [
   { label: "Celebrities & Athletes", href: "/websites-for-celebrities-athletes" },
   { label: "Packages", href: "/brand-identity-packages" },
   { label: "SEO & Leads", href: "/seo-lead-generation" },
+  { label: "AI Audit", href: "/ai-readiness" },
   { label: "Process", href: "/process" },
   { label: "Professions", href: "/industries" },
   { label: "Contact", href: "/contact" },
