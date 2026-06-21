@@ -1,7 +1,16 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
+import { createClient } from "@supabase/supabase-js";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
+
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+const supabase =
+  supabaseUrl && supabaseServiceRoleKey
+    ? createClient(supabaseUrl, supabaseServiceRoleKey)
+    : null;
 
 type AIReadinessPayload = {
   name?: string;
@@ -40,10 +49,48 @@ export async function POST(request: Request) {
       );
     }
 
+    if (!supabase) {
+      console.error("Missing Supabase environment variables");
+      return NextResponse.json(
+        { error: "Database not configured" },
+        { status: 500 }
+      );
+    }
+
     if (!process.env.RESEND_API_KEY) {
       console.error("Missing RESEND_API_KEY");
       return NextResponse.json(
         { error: "Email service not configured" },
+        { status: 500 }
+      );
+    }
+
+    const { error: supabaseError } = await supabase
+      .from("ai_readiness_enquiries")
+      .insert({
+        name: body.name,
+        business_name: body.businessName,
+        email: body.email,
+        website: body.website || null,
+        industry: body.industry,
+
+        currently_uses_ai: body.currentlyUsesAI || null,
+        ai_uses: body.aiUses || [],
+        has_chatbot: body.hasChatbot || null,
+        staff_use_ai: body.staffUseAI || null,
+        enters_sensitive_data: body.entersSensitiveData || null,
+        influences_decisions: body.influencesDecisions || null,
+        has_policy: body.hasPolicy || null,
+        support_needed: body.supportNeeded || [],
+        concerns: body.concerns || null,
+
+        status: "New",
+      });
+
+    if (supabaseError) {
+      console.error("Supabase insert error:", supabaseError);
+      return NextResponse.json(
+        { error: "Unable to save enquiry" },
         { status: 500 }
       );
     }
@@ -105,7 +152,7 @@ export async function POST(request: Request) {
           <hr style="border: none; border-top: 1px solid #ddd; margin: 24px 0;" />
 
           <p style="font-size: 13px; color: #666;">
-            This enquiry came from the Sitora AI Readiness form.
+            This enquiry came from the Sitora AI Readiness form and has been saved in Supabase.
           </p>
         </div>
       `,
