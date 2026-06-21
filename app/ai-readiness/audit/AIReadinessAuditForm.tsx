@@ -1,317 +1,237 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
+import { aiAuditSections, AuditQuestion } from "@/lib/aiAuditQuestions";
 
-const aiUseOptions = [
-  "Website chatbot",
-  "CRM",
-  "Customer service",
-  "Marketing/content",
-  "Recruitment/HR",
-  "Healthcare/patient support",
-  "Finance/eligibility",
-  "Internal admin",
-  "Software/SaaS product",
-  "Not sure",
-];
+type Answers = Record<string, string | string[]>;
 
-const supportOptions = [
-  "AI Readiness Audit",
-  "AI Governance Pack",
-  "Website/chatbot review",
-  "Staff AI policy",
-  "Full implementation",
-  "Not sure yet",
-];
-
-export default function AIReadinessForm() {
+export default function AIReadinessAuditForm() {
   const router = useRouter();
+  const [answers, setAnswers] = useState<Answers>({});
+  const [sectionIndex, setSectionIndex] = useState(0);
   const [loading, setLoading] = useState(false);
-  const [selectedUses, setSelectedUses] = useState<string[]>([]);
-  const [selectedSupport, setSelectedSupport] = useState<string[]>([]);
   const [error, setError] = useState("");
 
-  function toggleValue(value: string, list: string[], setter: (v: string[]) => void) {
-    if (list.includes(value)) {
-      setter(list.filter((item) => item !== value));
+  const currentSection = aiAuditSections[sectionIndex];
+
+  const totalQuestions = useMemo(() => {
+    return aiAuditSections.reduce(
+      (total, section) => total + section.questions.length,
+      0
+    );
+  }, []);
+
+  const answeredQuestions = useMemo(() => {
+    return Object.values(answers).filter((value) => {
+      if (Array.isArray(value)) return value.length > 0;
+      return value && value.trim().length > 0;
+    }).length;
+  }, [answers]);
+
+  function updateAnswer(questionId: string, value: string | string[]) {
+    setAnswers((previous) => ({
+      ...previous,
+      [questionId]: value,
+    }));
+  }
+
+  function toggleMultiSelect(questionId: string, option: string) {
+    const current = answers[questionId];
+    const list = Array.isArray(current) ? current : [];
+
+    if (list.includes(option)) {
+      updateAnswer(
+        questionId,
+        list.filter((item) => item !== option)
+      );
     } else {
-      setter([...list, value]);
+      updateAnswer(questionId, [...list, option]);
     }
   }
 
-  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
+  function renderQuestion(question: AuditQuestion) {
+    const value = answers[question.id];
+
+    if (question.type === "textarea") {
+      return (
+        <textarea
+          rows={5}
+          value={typeof value === "string" ? value : ""}
+          onChange={(event) => updateAnswer(question.id, event.target.value)}
+          className="mt-3 w-full rounded-2xl border border-white/10 bg-black/30 px-4 py-3 text-white outline-none focus:border-[#d4af37]"
+        />
+      );
+    }
+
+    if (question.type === "select") {
+      return (
+        <select
+          value={typeof value === "string" ? value : ""}
+          onChange={(event) => updateAnswer(question.id, event.target.value)}
+          className="mt-3 w-full rounded-2xl border border-white/10 bg-black/30 px-4 py-3 text-white outline-none focus:border-[#d4af37]"
+        >
+          <option value="">Select an option</option>
+          {question.options?.map((option) => (
+            <option key={option}>{option}</option>
+          ))}
+        </select>
+      );
+    }
+
+    if (question.type === "multiselect") {
+      const selected = Array.isArray(value) ? value : [];
+
+      return (
+        <div className="mt-3 grid gap-3 sm:grid-cols-2">
+          {question.options?.map((option) => (
+            <button
+              key={option}
+              type="button"
+              onClick={() => toggleMultiSelect(question.id, option)}
+              className={`rounded-2xl border px-4 py-3 text-left text-sm transition ${
+                selected.includes(option)
+                  ? "border-[#d4af37] bg-[#d4af37]/15 text-[#f3d77b]"
+                  : "border-white/10 bg-black/25 text-white/70 hover:bg-white/10"
+              }`}
+            >
+              {option}
+            </button>
+          ))}
+        </div>
+      );
+    }
+
+    return (
+      <input
+        value={typeof value === "string" ? value : ""}
+        onChange={(event) => updateAnswer(question.id, event.target.value)}
+        className="mt-3 w-full rounded-2xl border border-white/10 bg-black/30 px-4 py-3 text-white outline-none focus:border-[#d4af37]"
+      />
+    );
+  }
+
+  async function handleSubmit() {
     setLoading(true);
     setError("");
 
-    const formData = new FormData(event.currentTarget);
+    const businessName = answers.business_name;
+    const contactName = answers.contact_name;
+    const email = answers.email;
 
-    const payload = {
-      name: formData.get("name"),
-      businessName: formData.get("businessName"),
-      email: formData.get("email"),
-      website: formData.get("website"),
-      industry: formData.get("industry"),
-      currentlyUsesAI: formData.get("currentlyUsesAI"),
-      aiUses: selectedUses,
-      hasChatbot: formData.get("hasChatbot"),
-      staffUseAI: formData.get("staffUseAI"),
-      entersSensitiveData: formData.get("entersSensitiveData"),
-      influencesDecisions: formData.get("influencesDecisions"),
-      hasPolicy: formData.get("hasPolicy"),
-      supportNeeded: selectedSupport,
-      concerns: formData.get("concerns"),
-    };
+    if (
+      typeof businessName !== "string" ||
+      typeof contactName !== "string" ||
+      typeof email !== "string" ||
+      !businessName ||
+      !contactName ||
+      !email
+    ) {
+      setError("Please complete business name, contact name and email.");
+      setSectionIndex(0);
+      setLoading(false);
+      return;
+    }
 
     try {
-      const response = await fetch("/api/ai-readiness", {
+      const response = await fetch("/api/ai-readiness/audit", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(payload),
+        body: JSON.stringify({ answers }),
       });
 
       if (!response.ok) {
-        throw new Error("Something went wrong. Please try again.");
+        throw new Error("Unable to submit audit");
       }
 
-      router.push("/ai-readiness/thank-you");
-    } catch (err) {
-      setError("Sorry, your enquiry could not be sent. Please try again.");
+      router.push("/ai-readiness/audit/thank-you");
+    } catch {
+      setError("Sorry, the questionnaire could not be submitted. Please try again.");
     } finally {
       setLoading(false);
     }
   }
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="rounded-3xl border border-white/10 bg-white/[0.04] p-6 shadow-2xl backdrop-blur sm:p-8"
-    >
-      <div className="grid gap-5 sm:grid-cols-2">
-        <div>
-          <label className="mb-2 block text-sm text-white/70">Name</label>
-          <input
-            name="name"
-            required
-            className="w-full rounded-2xl border border-white/10 bg-black/30 px-4 py-3 text-white outline-none focus:border-[#d4af37]"
+    <div className="mt-12 rounded-3xl border border-white/10 bg-white/[0.04] p-6 shadow-2xl sm:p-8">
+      <div className="mb-8">
+        <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
+          <div>
+            <p className="text-sm text-white/50">
+              Section {sectionIndex + 1} of {aiAuditSections.length}
+            </p>
+            <h2 className="mt-2 text-2xl font-semibold text-white">
+              {currentSection.title}
+            </h2>
+            <p className="mt-2 text-white/60">{currentSection.description}</p>
+          </div>
+
+          <div className="rounded-2xl border border-white/10 bg-black/25 px-5 py-4 text-sm text-white/70">
+            {answeredQuestions} / {totalQuestions} answered
+          </div>
+        </div>
+
+        <div className="mt-6 h-2 rounded-full bg-white/10">
+          <div
+            className="h-2 rounded-full bg-[#d4af37]"
+            style={{
+              width: `${((sectionIndex + 1) / aiAuditSections.length) * 100}%`,
+            }}
           />
-        </div>
-
-        <div>
-          <label className="mb-2 block text-sm text-white/70">Business name</label>
-          <input
-            name="businessName"
-            required
-            className="w-full rounded-2xl border border-white/10 bg-black/30 px-4 py-3 text-white outline-none focus:border-[#d4af37]"
-          />
-        </div>
-
-        <div>
-          <label className="mb-2 block text-sm text-white/70">Email address</label>
-          <input
-            name="email"
-            type="email"
-            required
-            className="w-full rounded-2xl border border-white/10 bg-black/30 px-4 py-3 text-white outline-none focus:border-[#d4af37]"
-          />
-        </div>
-
-        <div>
-          <label className="mb-2 block text-sm text-white/70">Website</label>
-          <input
-            name="website"
-            placeholder="https://"
-            className="w-full rounded-2xl border border-white/10 bg-black/30 px-4 py-3 text-white outline-none focus:border-[#d4af37]"
-          />
-        </div>
-
-        <div className="sm:col-span-2">
-          <label className="mb-2 block text-sm text-white/70">Industry / sector</label>
-          <input
-            name="industry"
-            required
-            placeholder="Dental, recruitment, finance, ecommerce, SaaS..."
-            className="w-full rounded-2xl border border-white/10 bg-black/30 px-4 py-3 text-white outline-none focus:border-[#d4af37]"
-          />
-        </div>
-
-        <div>
-          <label className="mb-2 block text-sm text-white/70">
-            Do you currently use AI?
-          </label>
-          <select
-            name="currentlyUsesAI"
-            required
-            className="w-full rounded-2xl border border-white/10 bg-black/30 px-4 py-3 text-white outline-none focus:border-[#d4af37]"
-          >
-            <option value="">Select</option>
-            <option>Yes</option>
-            <option>No</option>
-            <option>Not sure</option>
-          </select>
-        </div>
-
-        <div>
-          <label className="mb-2 block text-sm text-white/70">
-            Do you use an AI chatbot?
-          </label>
-          <select
-            name="hasChatbot"
-            required
-            className="w-full rounded-2xl border border-white/10 bg-black/30 px-4 py-3 text-white outline-none focus:border-[#d4af37]"
-          >
-            <option value="">Select</option>
-            <option>Yes</option>
-            <option>No</option>
-            <option>Planning to</option>
-            <option>Not sure</option>
-          </select>
         </div>
       </div>
 
-      <div className="mt-6">
-        <label className="mb-3 block text-sm text-white/70">
-          Where is AI being used? Select all that apply.
-        </label>
-        <div className="grid gap-3 sm:grid-cols-2">
-          {aiUseOptions.map((option) => (
-            <button
-              type="button"
-              key={option}
-              onClick={() => toggleValue(option, selectedUses, setSelectedUses)}
-              className={`rounded-2xl border px-4 py-3 text-left text-sm transition ${
-                selectedUses.includes(option)
-                  ? "border-[#d4af37] bg-[#d4af37]/15 text-[#f3d77b]"
-                  : "border-white/10 bg-black/25 text-white/70 hover:bg-white/10"
-              }`}
-            >
-              {option}
-            </button>
-          ))}
-        </div>
+      <div className="space-y-6">
+        {currentSection.questions.map((question) => (
+          <div
+            key={question.id}
+            className="rounded-2xl border border-white/10 bg-black/20 p-5"
+          >
+            <label className="block text-base font-medium text-white">
+              {question.question}
+            </label>
+            {renderQuestion(question)}
+          </div>
+        ))}
       </div>
 
-      <div className="mt-6 grid gap-5 sm:grid-cols-2">
-        <div>
-          <label className="mb-2 block text-sm text-white/70">
-            Do staff use ChatGPT, Copilot, Gemini, Claude or similar?
-          </label>
-          <select
-            name="staffUseAI"
-            required
-            className="w-full rounded-2xl border border-white/10 bg-black/30 px-4 py-3 text-white outline-none focus:border-[#d4af37]"
-          >
-            <option value="">Select</option>
-            <option>Yes</option>
-            <option>No</option>
-            <option>Some staff may use it</option>
-            <option>Not sure</option>
-          </select>
-        </div>
+      {error && <p className="mt-6 text-sm text-red-300">{error}</p>}
 
-        <div>
-          <label className="mb-2 block text-sm text-white/70">
-            Do you enter customer, patient, staff or client data into AI tools?
-          </label>
-          <select
-            name="entersSensitiveData"
-            required
-            className="w-full rounded-2xl border border-white/10 bg-black/30 px-4 py-3 text-white outline-none focus:border-[#d4af37]"
-          >
-            <option value="">Select</option>
-            <option>Yes</option>
-            <option>No</option>
-            <option>Possibly</option>
-            <option>Not sure</option>
-          </select>
-        </div>
+      <div className="mt-8 flex flex-col justify-between gap-4 sm:flex-row">
+        <button
+          type="button"
+          disabled={sectionIndex === 0}
+          onClick={() => setSectionIndex((index) => Math.max(index - 1, 0))}
+          className="rounded-full border border-white/15 px-6 py-3 font-semibold text-white transition hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-40"
+        >
+          Back
+        </button>
 
-        <div>
-          <label className="mb-2 block text-sm text-white/70">
-            Does AI help make or influence decisions?
-          </label>
-          <select
-            name="influencesDecisions"
-            required
-            className="w-full rounded-2xl border border-white/10 bg-black/30 px-4 py-3 text-white outline-none focus:border-[#d4af37]"
+        {sectionIndex < aiAuditSections.length - 1 ? (
+          <button
+            type="button"
+            onClick={() =>
+              setSectionIndex((index) =>
+                Math.min(index + 1, aiAuditSections.length - 1)
+              )
+            }
+            className="rounded-full bg-[#d4af37] px-6 py-3 font-semibold text-black transition hover:bg-[#f0cf65]"
           >
-            <option value="">Select</option>
-            <option>Yes</option>
-            <option>No</option>
-            <option>Possibly</option>
-            <option>Not sure</option>
-          </select>
-        </div>
-
-        <div>
-          <label className="mb-2 block text-sm text-white/70">
-            Do you currently have an AI policy or AI tool register?
-          </label>
-          <select
-            name="hasPolicy"
-            required
-            className="w-full rounded-2xl border border-white/10 bg-black/30 px-4 py-3 text-white outline-none focus:border-[#d4af37]"
+            Next section
+          </button>
+        ) : (
+          <button
+            type="button"
+            disabled={loading}
+            onClick={handleSubmit}
+            className="rounded-full bg-[#d4af37] px-6 py-3 font-semibold text-black transition hover:bg-[#f0cf65] disabled:cursor-not-allowed disabled:opacity-60"
           >
-            <option value="">Select</option>
-            <option>Yes</option>
-            <option>No</option>
-            <option>In progress</option>
-            <option>Not sure</option>
-          </select>
-        </div>
+            {loading ? "Submitting..." : "Submit questionnaire"}
+          </button>
+        )}
       </div>
-
-      <div className="mt-6">
-        <label className="mb-3 block text-sm text-white/70">
-          What support are you interested in?
-        </label>
-        <div className="grid gap-3 sm:grid-cols-2">
-          {supportOptions.map((option) => (
-            <button
-              type="button"
-              key={option}
-              onClick={() => toggleValue(option, selectedSupport, setSelectedSupport)}
-              className={`rounded-2xl border px-4 py-3 text-left text-sm transition ${
-                selectedSupport.includes(option)
-                  ? "border-[#d4af37] bg-[#d4af37]/15 text-[#f3d77b]"
-                  : "border-white/10 bg-black/25 text-white/70 hover:bg-white/10"
-              }`}
-            >
-              {option}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      <div className="mt-6">
-        <label className="mb-2 block text-sm text-white/70">
-          Any additional concerns?
-        </label>
-        <textarea
-          name="concerns"
-          rows={5}
-          placeholder="Tell us about your current AI use, concerns, or planned AI tools..."
-          className="w-full rounded-2xl border border-white/10 bg-black/30 px-4 py-3 text-white outline-none focus:border-[#d4af37]"
-        />
-      </div>
-
-      {error && <p className="mt-4 text-sm text-red-300">{error}</p>}
-
-      <button
-        type="submit"
-        disabled={loading}
-        className="mt-6 w-full rounded-full bg-[#d4af37] px-7 py-4 font-semibold text-black transition hover:bg-[#f0cf65] disabled:cursor-not-allowed disabled:opacity-60"
-      >
-        {loading ? "Sending..." : "Request AI Readiness Review"}
-      </button>
-
-      <p className="mt-4 text-xs leading-6 text-white/50">
-        By submitting this form, you agree for Sitora to contact you about your
-        AI readiness enquiry. Sitora does not provide legal advice.
-      </p>
-    </form>
+    </div>
   );
 }
