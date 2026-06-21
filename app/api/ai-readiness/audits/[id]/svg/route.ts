@@ -126,12 +126,13 @@ function getRiskColours(risk: string | null) {
 
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await context.params;
   const { data, error } = await supabase
     .from("ai_readiness_audits")
     .select("*")
-    .eq("id", params.id)
+    .eq("id", id)
     .single();
 
   if (error || !data) {
