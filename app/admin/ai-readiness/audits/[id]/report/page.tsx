@@ -174,12 +174,7 @@ export default async function AIReadinessAuditReportPage({
               </span>
             </div>
           </div>
-<Link
-  href={`/admin/ai-readiness/audits/${audit.id}/report`}
-  className="mt-4 inline-flex rounded-full bg-[#d4af37] px-5 py-2 text-sm font-semibold text-black transition hover:bg-[#f0cf65]"
->
-  Generate readiness report
-</Link>
+
           <section className="mt-10">
             <h2 className="text-2xl font-semibold">1. Executive Summary</h2>
             <p className="mt-4 leading-8 text-white/70 print:text-gray-700">

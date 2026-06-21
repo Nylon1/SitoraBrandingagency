@@ -133,7 +133,14 @@ export default async function AIReadinessAuditsAdminPage() {
                       <h2 className="text-2xl font-semibold">
                         {audit.business_name}
                       </h2>
-
+<div className="mt-4">
+  <Link
+    href={`/admin/ai-readiness/audits/${audit.id}/report`}
+    className="inline-flex rounded-full bg-[#d4af37] px-5 py-2 text-sm font-semibold text-black transition hover:bg-[#f0cf65]"
+  >
+    Generate readiness report
+  </Link>
+</div>
                       <span className="rounded-full border border-[#d4af37]/30 bg-[#d4af37]/10 px-3 py-1 text-xs font-semibold text-[#f3d77b]">
                         {audit.status || "Submitted"}
                       </span>
