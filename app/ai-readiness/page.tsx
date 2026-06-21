@@ -1,4 +1,4 @@
-import AIReadinessForm from "./AIReadinessForm";
+import AIReadinessForm from "./audit/AIReadinessAuditForm";
 
 export const metadata = {
   title: "AI Readiness & Governance Support | Sitora",
