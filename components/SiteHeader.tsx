@@ -42,7 +42,7 @@ const navItems = [
     ],
   },
 
-  { label: "Qatar Trust 360", href: "/qatar-trust-360" },
+  { label: "Trust 360", href: "/qatar-trust-360" },
   { label: "Contact", href: "/contact" },
 ];
 
