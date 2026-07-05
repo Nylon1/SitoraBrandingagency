@@ -100,6 +100,16 @@ export default function NhsAiTrustReportPage() {
               >
                 Download Policy Brief
               </a>
+
+              <a
+  href="https://zenodo.org/records/21205158"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="rounded-2xl border border-[#28D6C2]/30 bg-[#28D6C2]/10 px-7 py-4 text-center font-semibold text-[#8EF4E8] backdrop-blur transition hover:border-[#28D6C2]/60 hover:bg-[#28D6C2]/15"
+>
+  View DOI / Open Review Version
+</a>
+
             </div>
 
             <p className="mt-4 text-sm text-slate-500">
@@ -408,7 +418,7 @@ export default function NhsAiTrustReportPage() {
               </a>
 
               <a
-                href="mailto:policy@sitora.ai"
+                href="mailto:compliance@sitora.co.uk"
                 className="rounded-2xl border border-white/15 bg-white/5 px-6 py-4 text-center font-semibold text-white transition hover:bg-white/10"
               >
                 Contact Sitora
