@@ -53,6 +53,7 @@ export type Trust360LeadInput = {
   trigger?: string | null;
   trigger_note?: string | null;
   website?: string | null;
+  qatarPresence?: string | null;
 };
 
 export type MatchedTrust360Rule = {
