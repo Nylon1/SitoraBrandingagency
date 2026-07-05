@@ -17,6 +17,10 @@ const navItems = [
   { label: "Process", href: "/process" },
   { label: "Professions", href: "/industries" },
   { label: "Contact", href: "/contact" },
+  {
+  label: "Qatar Trust 360",
+  href: "/qatar-trust-360",
+},
 { label: "DeckStudio", href: "/deckstudio" },
 ];
 
