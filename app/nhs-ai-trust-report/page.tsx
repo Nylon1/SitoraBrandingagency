@@ -286,7 +286,7 @@ export default function NhsAiTrustReportPage() {
             <div className="mt-8 rounded-2xl border border-white/10 bg-white/[0.04] p-5">
               <p className="text-sm font-medium text-slate-300">
                 These recommendations are designed to support responsible AI
-                adoption — not delay useful innovation.
+                adoption - not delay useful innovation.
               </p>
             </div>
           </div>
@@ -373,11 +373,11 @@ export default function NhsAiTrustReportPage() {
 
             <div className="mt-6 space-y-4">
               {[
-                "NHS England — digital transformation, NHS App strategy and digital clinical safety assurance.",
-                "MHRA — software and artificial intelligence as a medical device.",
-                "NICE — evidence standards framework for digital health technologies.",
-                "ICO — AI and data protection guidance.",
-                "WHO — ethics and governance of artificial intelligence for health.",
+                "NHS England - digital transformation, NHS App strategy and digital clinical safety assurance.",
+                "MHRA - software and artificial intelligence as a medical device.",
+                "NICE - evidence standards framework for digital health technologies.",
+                "ICO - AI and data protection guidance.",
+                "WHO - ethics and governance of artificial intelligence for health.",
               ].map((source) => (
                 <div key={source} className="flex gap-3">
                   <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-[#28D6C2]" />

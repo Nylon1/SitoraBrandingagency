@@ -18,6 +18,7 @@ const navItems = [
       { label: "SEO & Leads", href: "/seo-lead-generation" },
       { label: "Packages", href: "/brand-identity-packages" },
       { label: "DeckStudio", href: "/deckstudio" },
+      { label: "Accessibility Scans", href: "/ada-accessibility-scan-full" },
     ],
   },
 
