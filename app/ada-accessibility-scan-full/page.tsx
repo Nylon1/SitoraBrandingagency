@@ -9,7 +9,7 @@ export default function ADAAccessibilityAuditPage() {
         </p>
 
         <h1 className="mb-6 max-w-4xl text-4xl font-semibold tracking-tight md:text-6xl">
-          Full ADA Website Accessibility Audit for Dental Practices
+          Full ADA Website Accessibility Audit for Healthcare Practices
         </h1>
 
         <p className="mb-10 max-w-3xl text-lg leading-8 text-zinc-300">
