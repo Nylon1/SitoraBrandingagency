@@ -32,6 +32,16 @@ const navItems = [
   },
 
   {
+    label: "Trust 360",
+    href: "/trust-360",
+    children: [
+      { label: "UK Trust 360", href: "/trust-360" },
+      { label: "Run Free Exposure Check", href: "/trust-360/check" },
+      { label: "Qatar Trust 360", href: "/qatar-trust-360" },
+    ],
+  },
+
+  {
     label: "Industries",
     href: "/industries",
     children: [
@@ -43,7 +53,6 @@ const navItems = [
     ],
   },
 
-  { label: "Trust 360", href: "/qatar-trust-360" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -110,10 +119,10 @@ export function SiteHeader() {
 
         <div className="hidden shrink-0 items-center gap-3 lg:flex">
           <Link
-            href="/contact"
+            href="/trust-360/check"
             className="inline-flex items-center gap-2 rounded-full border border-[#d8b66d]/45 px-5 py-2.5 text-sm font-semibold text-[#d8b66d] transition hover:bg-[#d8b66d] hover:text-[#070910]"
           >
-            Start Project Brief <ArrowRight className="h-4 w-4" />
+            Book Discovery Call <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
 
@@ -169,11 +178,11 @@ export function SiteHeader() {
               ))}
 
               <Link
-                href="/contact"
+                href="/trust-360/check"
                 onClick={() => setOpen(false)}
                 className="mt-2 inline-flex items-center justify-center gap-2 rounded-2xl bg-[#d8b66d] px-5 py-4 text-sm font-bold text-[#070910] transition hover:bg-[#f2cf83]"
               >
-                Start Project Brief <ArrowRight className="h-4 w-4" />
+                Run Free Exposure Check <ArrowRight className="h-4 w-4" />
               </Link>
             </nav>
           </motion.div>
