@@ -26,6 +26,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/industries/finance-brokers",
     "/industries/corporate-services",
     "/websites-for-celebrities-athletes",
+    "/deckstudio",
+    "/tools/qr-code-generator",
+    "/trust-360",
+    "/qatar-trust-360",
+    "/ai-readiness",
+    "/ada-accessibility-scan-full",
+    "/corporate-website-design",
+    "/corporate-branding",
+    "/seo-lead-generation",
+    "/brand-identity-packages",
+    "/home"
   ];
 
   return staticPages.map((path) => ({
