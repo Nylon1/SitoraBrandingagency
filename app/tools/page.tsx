@@ -4,6 +4,7 @@ import {
   ArrowRight,
   BriefcaseBusiness,
   CalendarDays,
+  Lightbulb,
   QrCode,
   Sparkles,
 } from "lucide-react";
@@ -11,16 +12,26 @@ import {
 export const metadata: Metadata = {
   title: "Free Business Tools | Sitora",
   description:
-    "Create branded QR codes, appointment cards and business cards using Sitora's free digital tools.",
+    "Explore Sitora's free digital tools for healthcare content, branded QR codes and practical business assets.",
 };
 
 const tools = [
+  {
+    title: "Healthcare Post Ideas",
+    description:
+      "Browse 500 social media content ideas for dentists across ten categories. Search, filter, save and copy ideas without signing up.",
+    href: "/tools/healthcare-post-ideas",
+    status: "Live",
+    action: "Explore ideas",
+    icon: Lightbulb,
+  },
   {
     title: "QR Code Generator",
     description:
       "Create branded, high-resolution QR codes with custom colours, patterns, corners, frames and your logo.",
     href: "/tools/qr-code-generator",
     status: "Live",
+    action: "Open generator",
     icon: QrCode,
   },
   {
@@ -29,6 +40,7 @@ const tools = [
       "Create professional appointment reminder cards for dental practices, clinics and service businesses.",
     href: "/tools/appointment-card-generator",
     status: "Coming soon",
+    action: "Coming soon",
     icon: CalendarDays,
   },
   {
@@ -37,6 +49,7 @@ const tools = [
       "Design clean, branded business cards with your contact details, logo and QR code.",
     href: "/tools/business-card-generator",
     status: "Coming soon",
+    action: "Coming soon",
     icon: BriefcaseBusiness,
   },
 ];
@@ -67,12 +80,12 @@ export default function ToolsPage() {
             </h1>
 
             <p className="mx-auto mt-6 max-w-3xl text-base leading-8 text-white/52 sm:text-lg">
-              Create polished branded assets without needing specialist
-              design software.
+              Find content ideas and create polished digital assets without
+              needing specialist software.
             </p>
           </div>
 
-          <div className="mt-16 grid gap-5 lg:grid-cols-3">
+          <div className="mt-16 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
             {tools.map((tool) => {
               const Icon = tool.icon;
               const live = tool.status === "Live";
@@ -100,11 +113,11 @@ export default function ToolsPage() {
                     </span>
                   </div>
 
-                  <h2 className="mt-8 text-3xl font-semibold tracking-tight">
+                  <h2 className="mt-8 text-2xl font-semibold tracking-tight">
                     {tool.title}
                   </h2>
 
-                  <p className="mt-4 min-h-24 text-sm leading-7 text-white/45">
+                  <p className="mt-4 min-h-28 text-sm leading-7 text-white/45">
                     {tool.description}
                   </p>
 
@@ -113,12 +126,12 @@ export default function ToolsPage() {
                       href={tool.href}
                       className="mt-8 inline-flex items-center gap-3 rounded-full bg-[#d8b66d] px-6 py-3 text-sm font-bold text-[#080a0f] transition hover:bg-[#f1cf86]"
                     >
-                      Open generator
+                      {tool.action}
                       <ArrowRight className="h-4 w-4" />
                     </Link>
                   ) : (
                     <span className="mt-8 inline-flex items-center rounded-full border border-white/10 px-6 py-3 text-sm font-semibold text-white/35">
-                      Coming soon
+                      {tool.action}
                     </span>
                   )}
                 </article>
