@@ -53,6 +53,11 @@ const navItems = [
       label: "LinkedIn Coach (HumanSignal)",
       href: "/tools/human-signal",
     },
+
+     { 
+      label: "Social Media Post Ideas",
+      href: "tools/healthcare-post-ideas",
+    },
   ],
 },
 
