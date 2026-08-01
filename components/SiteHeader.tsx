@@ -48,13 +48,10 @@ const navItems = [
       label: "QR Code Generator",
       href: "/tools/qr-code-generator",
     },
+ 
     {
-      label: "Appointment Card Generator",
-      href: "/tools/appointment-card-generator",
-    },
-    {
-      label: "Business Card Generator",
-      href: "/tools/business-card-generator",
+      label: "LinkedIn Coach (HumanSignal)",
+      href: "/tools/human-signal",
     },
   ],
 },
