@@ -19,7 +19,7 @@ const tools = [
   {
     title: "Healthcare Post Ideas",
     description:
-      "Browse 500 social media content ideas for dentists across ten categories. Search, filter, save and copy ideas without signing up.",
+      "Browse 1,500 social media ideas for dentists, opticians and healthcare startups. Search, filter, save and copy ideas without signing up.",
     href: "/tools/healthcare-post-ideas",
     status: "Live",
     action: "Explore ideas",
