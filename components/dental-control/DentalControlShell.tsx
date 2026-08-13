@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
-import { ArrowLeft, ArrowRight, Building2, ChevronDown, Command, Grid3X3, Menu, Play, ShieldCheck, Sparkles, UserRound, X } from "lucide-react";
+import { useMemo, useState } from "react";
+import { ArrowLeft, ArrowRight, ChevronDown, Command, Grid3X3, Menu, Play, ShieldCheck, Sparkles, UserRound, X } from "lucide-react";
 import { dentalRoutes, orderedPitchRoutes } from "@/lib/dental-control/routes";
 
 type DemoRole = "CEO" | "Branch Manager" | "Clinical Director" | "Insurance Team";
@@ -11,19 +11,24 @@ type DemoRole = "CEO" | "Branch Manager" | "Clinical Director" | "Insurance Team
 const roles: DemoRole[] = ["CEO", "Branch Manager", "Clinical Director", "Insurance Team"];
 const groups = ["Operate", "Intelligence", "Governance", "Enterprise", "Commercial"] as const;
 
+function initialRole(): DemoRole {
+  if (typeof window === "undefined") return "CEO";
+  const savedRole = window.localStorage.getItem("sitora-demo-role") as DemoRole | null;
+  return savedRole && roles.includes(savedRole) ? savedRole : "CEO";
+}
+
+function initialDemoMode() {
+  if (typeof window === "undefined") return true;
+  const savedDemo = window.localStorage.getItem("sitora-demo-mode");
+  return savedDemo === null ? true : savedDemo === "true";
+}
+
 export function DentalControlShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
-  const [role, setRole] = useState<DemoRole>("CEO");
-  const [demo, setDemo] = useState(true);
+  const [role, setRole] = useState<DemoRole>(initialRole);
+  const [demo, setDemo] = useState(initialDemoMode);
   const [roleOpen, setRoleOpen] = useState(false);
-
-  useEffect(() => {
-    const savedRole = window.localStorage.getItem("sitora-demo-role") as DemoRole | null;
-    const savedDemo = window.localStorage.getItem("sitora-demo-mode");
-    if (savedRole && roles.includes(savedRole)) setRole(savedRole);
-    if (savedDemo !== null) setDemo(savedDemo === "true");
-  }, []);
 
   function changeRole(next: DemoRole) {
     setRole(next);
