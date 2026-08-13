@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, BarChart3, Building2, Sparkles, TrendingDown, TrendingUp } from "lucide-react";
+import { ArrowLeft, ArrowRight, BarChart3, Sparkles, TrendingUp } from "lucide-react";
 import { branches, sar } from "@/lib/dental-control/demo-data";
 
 const metrics = [
