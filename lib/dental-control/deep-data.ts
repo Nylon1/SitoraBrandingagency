@@ -147,16 +147,24 @@ export const platformLayers = [
   { layer: "Connectors", items: ["PMS / EMR", "NPHIES", "Imaging", "Accounting", "Payments", "HR / roster"] },
 ];
 
-export function findBranch(id: string) {
-  if (id === "jeddah-tahlia") return branchDrilldowns["jeddah-tahlia"];
+export function findBranch(id: string): DeepBranch {
+  const template = branchDrilldowns["jeddah-tahlia"];
+  if (id === "jeddah-tahlia") return template;
+
   const base = branches.find((branch) => branch.id === id);
-  if (!base) return branchDrilldowns["jeddah-tahlia"];
+  if (!base) return template;
+
   return {
-    ...branchDrilldowns["jeddah-tahlia"],
-    ...base,
+    ...template,
     id: base.id,
     name: base.name,
     city: base.city,
+    revenue: base.revenue,
+    collections: base.collections,
+    utilisation: base.utilisation,
+    governance: base.governance,
+    claimsRisk: base.claimsRisk,
+    treatmentOpportunity: base.treatmentOpportunity,
     executiveSummary: `${base.name} is shown using the deep-demo operating model. This branch view is ready for branch-specific synthetic data expansion.`,
   };
 }
