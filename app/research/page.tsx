@@ -64,6 +64,10 @@ export default function ResearchHubPage() {
           <p className="mt-6 max-w-3xl text-base leading-8 text-white/55 md:text-lg">
             Sitora publishes independent research at the intersection of healthcare operations, responsible AI, public policy and Saudi/Gulf digital infrastructure. Our aim is to identify practical gaps, distinguish evidence from hypothesis and turn complex system problems into testable operating models.
           </p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link href="/research/methodology" className="rounded-xl border border-white/10 bg-white/[0.04] px-4 py-2.5 text-sm font-medium text-white/70">Research methodology</Link>
+            <Link href="/research/saudi-gulf-innovation" className="rounded-xl border border-[#c49a53]/25 bg-[#c49a53]/[0.06] px-4 py-2.5 text-sm font-medium text-[#dfc489]">Saudi & Gulf innovation</Link>
+          </div>
         </div>
       </section>
 
