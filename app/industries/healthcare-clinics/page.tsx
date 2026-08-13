@@ -253,6 +253,22 @@ export default function HealthcareClinicsWebsiteDesignPage() { return ( <main cl
     </div>
   </section>
 
+  <section className="px-5 py-20 sm:px-8">
+    <div className="mx-auto max-w-7xl rounded-[2.2rem] border border-sky-300/15 bg-[linear-gradient(135deg,rgba(14,165,233,0.10),rgba(255,255,255,0.035),rgba(216,182,109,0.08))] p-7 sm:p-10 lg:p-12">
+      <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
+        <div className="max-w-3xl">
+          <p className="text-sm font-bold uppercase tracking-[0.28em] text-sky-300">Healthcare technology research</p>
+          <h2 className="mt-4 text-3xl font-semibold tracking-[-0.04em] sm:text-4xl">How are Saudi dental and healthcare systems evolving beyond the traditional clinic stack?</h2>
+          <p className="mt-5 text-base leading-8 text-white/60">Our Saudi Dental Software Landscape 2026 examines NPHIES-connected workflows, PMS/HIS capabilities, imaging, claims and the opportunity for cross-system operating intelligence. It is a useful case study in the wider healthcare interoperability problem.</p>
+        </div>
+        <div className="flex flex-col gap-3 sm:flex-row lg:flex-col">
+          <a href="/research/saudi-dental-software-landscape-2026" className="inline-flex items-center justify-center gap-2 rounded-full bg-sky-300 px-6 py-3.5 font-bold text-[#071018] transition hover:bg-sky-200">Read the research <ArrowRight className="h-4 w-4" /></a>
+          <a href="/dental-control" className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 px-6 py-3.5 font-semibold text-white/80 transition hover:bg-white/10">Explore the prototype</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section id="contact" className="px-5 pb-28 pt-24 sm:px-8">
     <div className="mx-auto max-w-5xl text-center">
       <p className="text-sm font-bold uppercase tracking-[0.32em] text-[#d8b66d]">Start a Healthcare Website Project</p>
