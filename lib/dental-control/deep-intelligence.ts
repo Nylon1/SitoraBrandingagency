@@ -2,12 +2,12 @@ export const executiveChanges = [
   { label: "Revenue pace", current: "SAR 184k/day", previous: "SAR 171k/day", delta: "+7.6%", tone: "good", reason: "Riyadh North and Olaya are above run rate" },
   { label: "Chair utilisation", current: "78.4%", previous: "76.1%", delta: "+2.3 pts", tone: "good", reason: "Improved morning utilisation in Riyadh" },
   { label: "Claims exposure", current: "SAR 143k", previous: "SAR 119k", delta: "+20.2%", tone: "warn", reason: "Repeated Jeddah supporting-information pattern" },
-  { label: "Unbooked accepted treatment", current: "SAR 311k", previous: "SAR 286k", delta: "+8.7%", tone: "warn", reason: "38 plans have crossed the seven-day threshold" },
-  { label: "Record completeness", current: "92.7%", previous: "91.4%", delta: "+1.3 pts", tone: "good", reason: "Fewer incomplete endodontic records" },
+  { label: "Unbooked accepted treatment", current: "SAR 311k", previous: "SAR 286k", delta: "+8.7%", tone: "warn", reason: "38 plans worth SAR 184.7k have crossed the seven-day threshold" },
+  { label: "Record completeness", current: "97.7%", previous: "96.9%", delta: "+0.8 pts", tone: "good", reason: "1,157 of 1,184 reviewed records are complete" },
 ];
 
 export const branchComparison = [
-  { metric: "Revenue / chair", riyadh: 117750, jeddah: 88400, format: "sar", insight: "Riyadh generates 33% more revenue per chair." },
+  { metric: "Revenue / chair", riyadh: 157000, jeddah: 118000, format: "sar", insight: "Riyadh North generates 33% more revenue per chair." },
   { metric: "Chair utilisation", riyadh: 87, jeddah: 69, format: "pct", insight: "Jeddah has materially more unused capacity." },
   { metric: "Treatment acceptance", riyadh: 74, jeddah: 61, format: "pct", insight: "The gap suggests both case mix and follow-up workflow differences." },
   { metric: "Claims rejection", riyadh: 2.4, jeddah: 7.3, format: "pct1", insight: "Jeddah rejection is more than 3x Riyadh North." },
