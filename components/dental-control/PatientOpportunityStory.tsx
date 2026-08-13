@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowLeft, CheckCircle2, Clock3, Sparkles, UserRound, WalletCards } from "lucide-react";
+import { ArrowLeft, CheckCircle2, Clock3, Sparkles } from "lucide-react";
 import { patientStory } from "@/lib/dental-control/deep-data";
 import { sar } from "@/lib/dental-control/demo-data";
 
