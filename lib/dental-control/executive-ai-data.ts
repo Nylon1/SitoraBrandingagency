@@ -5,6 +5,8 @@ export type EvidenceLink = {
   type: "branch" | "claim" | "clinician" | "patient" | "action" | "metric";
   href?: string;
   value?: string;
+  source: string;
+  freshness: string;
 };
 
 export type CopilotAnswer = {
@@ -60,6 +62,14 @@ export const scenarios = [
 const jeddah = branches.find((branch) => branch.id === "jeddah-tahlia")!;
 const riyadh = branches.find((branch) => branch.id === "riyadh-north")!;
 
+const source = {
+  pms: { source: "Dental PMS · appointments + treatment", freshness: "refreshed 4 min ago" },
+  claims: { source: "NPHIES prototype connector · claim status", freshness: "refreshed 12 min ago" },
+  finance: { source: "Finance sandbox · collections + value", freshness: "refreshed 18 min ago" },
+  governance: { source: "Record Guardian rules engine", freshness: "evaluated 6 min ago" },
+  model: { source: "Sitora deterministic analytics", freshness: "calculated from latest reconciled inputs" },
+};
+
 export function getExecutiveAnswer(question: string): CopilotAnswer {
   const q = question.toLowerCase();
 
@@ -69,9 +79,9 @@ export function getExecutiveAnswer(question: string): CopilotAnswer {
       confidence: 91,
       summary: "The group remains commercially healthy, but Jeddah Tahlia is creating a disproportionate share of operational risk. Treatment backlog increased, its claims exception cluster persisted, and chair utilisation remains below the group threshold.",
       evidence: [
-        { label: "Jeddah Tahlia", type: "branch", href: "/tools/dental-control/branch/jeddah-tahlia", value: "69% utilisation" },
-        { label: "Treatment backlog", type: "metric", value: "SAR 184.7k >7 days" },
-        { label: "Claims cluster JED-SUP-01", type: "claim", value: "11 claims / SAR 41.6k" },
+        { label: "Jeddah Tahlia", type: "branch", href: "/tools/dental-control/branch/jeddah-tahlia", value: "69% utilisation", ...source.pms },
+        { label: "Treatment backlog", type: "metric", value: "SAR 184.7k >7 days", ...source.model },
+        { label: "Claims cluster JED-SUP-01", type: "claim", value: "11 claims / SAR 41.6k", ...source.claims },
       ],
       drivers: [
         { label: "Jeddah chair utilisation", impact: "-9.4 pts vs group", direction: "negative" },
@@ -90,9 +100,9 @@ export function getExecutiveAnswer(question: string): CopilotAnswer {
       confidence: 86,
       summary: "The demo dataset does not support a credible single action worth SAR 250k. The strongest route combines accepted-treatment recovery, Jeddah capacity recovery and claims remediation.",
       evidence: [
-        { label: "Accepted treatment >7 days", type: "metric", value: "SAR 184.7k" },
-        { label: "Jeddah capacity scenario", type: "branch", href: "/tools/dental-control/branch/jeddah-tahlia", value: "SAR 92k–128k upside" },
-        { label: "JED-SUP-01", type: "claim", value: "SAR 41.6k exposure" },
+        { label: "Accepted treatment >7 days", type: "metric", value: "SAR 184.7k", ...source.model },
+        { label: "Jeddah capacity scenario", type: "branch", href: "/tools/dental-control/branch/jeddah-tahlia", value: "SAR 92k–128k upside", ...source.pms },
+        { label: "JED-SUP-01", type: "claim", value: "SAR 41.6k exposure", ...source.claims },
       ],
       drivers: [
         { label: "Treatment recovery at 45%", impact: "~SAR 83k", direction: "positive" },
@@ -111,9 +121,9 @@ export function getExecutiveAnswer(question: string): CopilotAnswer {
       confidence: 82,
       summary: "Using the current demo treatment mix and revenue-per-clinical-hour range, nine additional utilisation points translate to an estimated SAR 92k–128k monthly revenue opportunity. This is a modeled scenario, not a forecast guarantee.",
       evidence: [
-        { label: "Jeddah current utilisation", type: "branch", href: "/tools/dental-control/branch/jeddah-tahlia", value: "69%" },
-        { label: "Group utilisation", type: "metric", value: "78.4%" },
-        { label: "Riyadh North comparator", type: "branch", value: `${riyadh.utilisation}%` },
+        { label: "Jeddah current utilisation", type: "branch", href: "/tools/dental-control/branch/jeddah-tahlia", value: "69%", ...source.pms },
+        { label: "Group utilisation", type: "metric", value: "78.4%", ...source.model },
+        { label: "Riyadh North comparator", type: "branch", href: "/tools/dental-control/branch/riyadh-north", value: `${riyadh.utilisation}%`, ...source.pms },
       ],
       drivers: [
         { label: "Unused clinical capacity", impact: "Primary upside source", direction: "positive" },
@@ -132,9 +142,9 @@ export function getExecutiveAnswer(question: string): CopilotAnswer {
       confidence: 94,
       summary: "Eleven claims share the same supporting-information exception pattern. That makes this more likely to be a workflow or documentation issue than eleven unrelated failures.",
       evidence: [
-        { label: "JED-SUP-01 cluster", type: "claim", value: "11 claims" },
-        { label: "Cluster value", type: "metric", value: "SAR 41.6k" },
-        { label: "Jeddah total claims risk", type: "branch", href: "/tools/dental-control/branch/jeddah-tahlia", value: sar(jeddah.claimsRisk) },
+        { label: "JED-SUP-01 cluster", type: "claim", value: "11 claims", ...source.claims },
+        { label: "Cluster value", type: "metric", value: "SAR 41.6k", ...source.finance },
+        { label: "Jeddah total claims risk", type: "branch", href: "/tools/dental-control/branch/jeddah-tahlia", value: sar(jeddah.claimsRisk), ...source.claims },
       ],
       drivers: [
         { label: "Repeated exception signature", impact: "11 matching claims", direction: "negative" },
@@ -153,9 +163,9 @@ export function getExecutiveAnswer(question: string): CopilotAnswer {
       confidence: 90,
       summary: "Jeddah combines the group's lowest utilisation, highest treatment opportunity and highest claims exposure. Those signals interact, so solving them through one accountable branch recovery plan has more leverage than chasing isolated alerts.",
       evidence: [
-        { label: "Jeddah Tahlia", type: "branch", href: "/tools/dental-control/branch/jeddah-tahlia", value: `${jeddah.utilisation}% utilisation` },
-        { label: "Treatment opportunity", type: "metric", value: sar(jeddah.treatmentOpportunity) },
-        { label: "Claims risk", type: "metric", value: sar(jeddah.claimsRisk) },
+        { label: "Jeddah Tahlia", type: "branch", href: "/tools/dental-control/branch/jeddah-tahlia", value: `${jeddah.utilisation}% utilisation`, ...source.pms },
+        { label: "Treatment opportunity", type: "metric", value: sar(jeddah.treatmentOpportunity), ...source.model },
+        { label: "Claims risk", type: "metric", value: sar(jeddah.claimsRisk), ...source.claims },
       ],
       drivers: [
         { label: "Capacity gap", impact: "Largest operational drag", direction: "negative" },
@@ -173,9 +183,9 @@ export function getExecutiveAnswer(question: string): CopilotAnswer {
     confidence: 92,
     summary: `Jeddah is at ${jeddah.utilisation}% chair utilisation while carrying ${sar(jeddah.treatmentOpportunity)} of treatment opportunity and ${sar(jeddah.claimsRisk)} of claims risk. The issue is not simply low demand: accepted treatment exists but is not consistently converting into booked chair time.`,
     evidence: [
-      { label: "Open Jeddah command centre", type: "branch", href: "/tools/dental-control/branch/jeddah-tahlia", value: `${jeddah.utilisation}% utilisation` },
-      { label: "Dr Faisal Al-Zahrani", type: "clinician", href: "/tools/dental-control/clinician/dr-faisal-al-zahrani", value: "Clinician drill-down" },
-      { label: "Patient J-11307", type: "patient", href: "/tools/dental-control/patient/J-11307", value: "SAR 7.6k stranded plan" },
+      { label: "Open Jeddah command centre", type: "branch", href: "/tools/dental-control/branch/jeddah-tahlia", value: `${jeddah.utilisation}% utilisation`, ...source.pms },
+      { label: "Dr Faisal Al-Zahrani", type: "clinician", href: "/tools/dental-control/clinician/dr-faisal-al-zahrani", value: "Clinician drill-down", ...source.pms },
+      { label: "Patient J-11307", type: "patient", href: "/tools/dental-control/patient/J-11307", value: "SAR 7.6k stranded plan", ...source.pms },
     ],
     drivers: [
       { label: "Low utilisation", impact: "9.4 pts below group", direction: "negative" },
