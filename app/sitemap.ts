@@ -34,6 +34,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/ada-accessibility-scan-full",
     "/brand-identity-packages",
     "/dental-control",
+    "/research",
     "/research/saudi-dental-software-landscape-2026",
   ];
 
@@ -41,7 +42,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${baseUrl}${path}`,
     lastModified: new Date(),
     changeFrequency:
-      path === "" || path === "/home" || path.startsWith("/research/")
+      path === "" || path === "/home" || path.startsWith("/research")
         ? "weekly"
         : "monthly",
     priority:
@@ -49,7 +50,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         ? 1
         : path === "/contact"
           ? 0.9
-          : path === "/dental-control" || path.startsWith("/research/")
+          : path === "/research" || path === "/dental-control" || path.startsWith("/research/")
             ? 0.9
             : path.startsWith("/industries")
               ? 0.75
