@@ -8,7 +8,8 @@ import { AutoBreadcrumbs } from "@/components/AutoBreadcrumbs";
 export function SiteShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
 
-  const hideChrome = pathname === "/";
+  const hideChrome =
+    pathname === "/" || pathname.startsWith("/tools/dental-control");
 
   if (hideChrome) {
     return <>{children}</>;
