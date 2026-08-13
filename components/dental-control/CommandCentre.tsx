@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import { Activity, AlertTriangle, ArrowLeft, ArrowRight, CheckCircle2, Clock3, Gauge, LineChart, ShieldAlert, Sparkles, Target, TrendingDown, TrendingUp, Users } from "lucide-react";
+import { Activity, ArrowLeft, ArrowRight, CheckCircle2, Clock3, Gauge, LineChart, ShieldAlert, Sparkles, Target, TrendingDown, TrendingUp, Users, type LucideIcon } from "lucide-react";
 
 const branches = [
   { name: "Riyadh North", target: 980000, forecast: 1012000, pace: 103, utilisation: 87, risk: "Low" },
@@ -60,5 +60,5 @@ export function CommandCentre() {
   </div>;
 }
 
-function Metric({label,value,sub,icon:Icon,tone="default"}:{label:string;value:string;sub:string;icon:any;tone?:"default"|"good"|"warn"}) { return <div className="rounded-2xl border border-white/[0.07] bg-white/[0.03] p-4"><div className="flex items-center justify-between"><div className="text-[9px] uppercase tracking-[0.12em] text-white/27">{label}</div><Icon size={14} className={tone==="good"?"text-emerald-300":tone==="warn"?"text-amber-200":"text-[#73cabf]"}/></div><div className="mt-3 text-[22px] font-semibold">{value}</div><div className="mt-1 text-[9px] text-white/28">{sub}</div></div> }
-function Insight({icon:Icon,title,copy}:{icon:any;title:string;copy:string}) { return <div className="rounded-2xl border border-white/[0.07] bg-white/[0.025] p-4"><div className="flex items-center gap-2 text-[11px] font-semibold text-white/78"><Icon size={14} className="text-[#73cabf]"/>{title}</div><p className="mt-2 text-[10px] leading-5 text-white/34">{copy}</p></div> }
+function Metric({label,value,sub,icon:Icon,tone="default"}:{label:string;value:string;sub:string;icon:LucideIcon;tone?:"default"|"good"|"warn"}) { return <div className="rounded-2xl border border-white/[0.07] bg-white/[0.03] p-4"><div className="flex items-center justify-between"><div className="text-[9px] uppercase tracking-[0.12em] text-white/27">{label}</div><Icon size={14} className={tone==="good"?"text-emerald-300":tone==="warn"?"text-amber-200":"text-[#73cabf]"}/></div><div className="mt-3 text-[22px] font-semibold">{value}</div><div className="mt-1 text-[9px] text-white/28">{sub}</div></div> }
+function Insight({icon:Icon,title,copy}:{icon:LucideIcon;title:string;copy:string}) { return <div className="rounded-2xl border border-white/[0.07] bg-white/[0.025] p-4"><div className="flex items-center gap-2 text-[11px] font-semibold text-white/78"><Icon size={14} className="text-[#73cabf]"/>{title}</div><p className="mt-2 text-[10px] leading-5 text-white/34">{copy}</p></div> }
