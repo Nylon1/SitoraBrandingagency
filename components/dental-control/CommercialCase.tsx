@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import { ArrowLeft, ArrowRight, Calculator, CircleDollarSign, Gauge, Layers3, Sparkles, TrendingUp } from "lucide-react";
+import { ArrowLeft, Calculator, CircleDollarSign, Gauge, Layers3, Sparkles, TrendingUp } from "lucide-react";
 import { branchPnL, calculateRoi, pricingTiers, roiModel, valueCase } from "@/lib/dental-control/commercial-data";
 
 function sar(value: number) {
