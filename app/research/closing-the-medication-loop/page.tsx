@@ -1,0 +1,2 @@
+import Link from "next/link";
+export default function Page(){return <main className="min-h-screen bg-[#07100f] text-white"><div className="mx-auto max-w-4xl px-5 py-24"><Link href="/research" className="text-sm text-[#7acdc3]">← Sitora Research</Link><h1 className="mt-8 text-4xl font-semibold">Research paper</h1><p className="mt-6 text-white/55">The full web edition is in final editorial review and will be published here shortly.</p></div></main>}
