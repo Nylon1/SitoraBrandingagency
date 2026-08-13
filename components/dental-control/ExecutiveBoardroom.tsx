@@ -6,8 +6,6 @@ import {
   ArrowLeft,
   ArrowRight,
   Bot,
-  Building2,
-  CheckCircle2,
   CircleDollarSign,
   Command,
   FileWarning,
@@ -15,7 +13,6 @@ import {
   GitCompareArrows,
   Sparkles,
   Target,
-  TrendingUp,
 } from "lucide-react";
 import { branchComparison, boardroomQuestions, decisionFeed, executiveChanges } from "@/lib/dental-control/deep-intelligence";
 
