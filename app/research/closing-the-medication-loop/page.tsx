@@ -48,6 +48,14 @@ export default function Page() {
           <section>
             <h2 className="text-3xl font-semibold tracking-[-0.03em]">Build on NHS foundations, do not duplicate them</h2>
             <div className="mt-6 grid gap-4 md:grid-cols-2">
+              <a
+  href="/downloads/CareGrid_Closing_the_Medication_Loop_Report.pdf"
+  target="_blank"
+  rel="noreferrer"
+  className="rounded-xl border border-white/10 bg-white/[0.04] px-5 py-3 text-sm font-medium text-white/70 transition hover:bg-white/[0.08] hover:text-white"
+>
+  Download full PDF
+</a>
               {[
                 ["Electronic Prescription Service", "Keep the signed prescription transaction and connect change context to cross-provider ownership."],
                 ["Summary / Shared Care Records", "Keep authoritative viewing and provenance, then add actionable workflow, acknowledgement and resolution."],

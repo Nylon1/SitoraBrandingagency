@@ -74,6 +74,16 @@ export default function SaudiDentalSoftwareLandscapePage() {
             What existing systems already cover, where workflow still fragments, and the next opportunities for dental technology in Saudi Arabia.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
+
+            <a
+  href="/downloads/Saudi_Dental_Software_Landscape_2026.pdf"
+  target="_blank"
+  rel="noreferrer"
+  className="rounded-xl border border-white/10 bg-white/[0.04] px-5 py-3 text-sm font-medium text-white/70 transition hover:bg-white/[0.08] hover:text-white"
+>
+  Download full PDF
+</a>
+
             <Link href="/dental-control" className="rounded-xl bg-[#2aa89a] px-5 py-3 text-sm font-semibold text-[#04110f]">
               Explore the Dental Control prototype
             </Link>

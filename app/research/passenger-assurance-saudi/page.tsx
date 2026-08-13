@@ -30,6 +30,16 @@ export default function Page() {
         <section className="border-t border-white/[0.07] py-12">
           <h2 className="text-3xl font-semibold tracking-[-0.03em]">What the proposed layer does</h2>
           <div className="mt-7 grid gap-4 md:grid-cols-2">
+
+            <a
+  href="/downloads/Passenger_Assurance_Sovereign_Biometric_Report_Comms_Update.pdf"
+  target="_blank"
+  rel="noreferrer"
+  className="rounded-xl border border-white/10 bg-white/[0.04] px-5 py-3 text-sm font-medium text-white/70 transition hover:bg-white/[0.08] hover:text-white"
+>
+  Download full PDF
+</a>
+
             {[
               ["Journey state", "Track where the passenger is against where they need to be in the airport journey."],
               ["Timing intelligence", "Estimate whether enough time remains to complete the journey before gate closure."],

@@ -47,6 +47,8 @@ export default function ResearchMethodologyPage() {
         <section className="mt-14 border-t border-white/[0.07] pt-12">
           <h2 className="text-2xl font-semibold tracking-[-0.03em]">Publication standard</h2>
           <div className="mt-5 space-y-4 text-sm leading-7 text-white/52">
+
+          
             <p>Each public paper should identify its purpose, publication date, evidence basis and material limitations. Where figures are historic, estimated or drawn from a limited population, that context should travel with the figure.</p>
             <p>Desk research cannot show how a workflow performs inside every organisation. Where the decisive evidence requires interviews, pilots, operational data or independent technical review, the paper should say so explicitly.</p>
             <p>Research pages may be revised when stronger evidence becomes available. Significant updates should be reflected in the page date or version note.</p>
