@@ -1,0 +1,24 @@
+import Link from "next/link";
+import { ArrowRight, BarChart3, Building2, ClipboardCheck, Layers3, Network, PlayCircle, Sparkles, UserRoundSearch } from "lucide-react";
+
+const routes = [
+  { href: "/tools/dental-control", title: "Control Tower", copy: "Executive overview across revenue, utilisation, claims, governance and opportunity.", icon: BarChart3, tag: "Start here" },
+  { href: "/tools/dental-control/demo", title: "VC Demo Mode", copy: "Five-minute presenter journey from signal to business outcome.", icon: PlayCircle, tag: "Pitch" },
+  { href: "/tools/dental-control/boardroom", title: "Executive Boardroom", copy: "What changed, why it changed and which decisions matter now.", icon: Building2, tag: "CEO" },
+  { href: "/tools/dental-control/branch/jeddah-tahlia", title: "Jeddah Branch Drill-down", copy: "Deep branch command centre across chairs, clinicians, claims, treatment and records.", icon: UserRoundSearch, tag: "Operations" },
+  { href: "/tools/dental-control/compare", title: "Branch Comparison Studio", copy: "Interactive branch-vs-branch analysis and transferable workflow insight.", icon: BarChart3, tag: "Benchmarking" },
+  { href: "/tools/dental-control/actions-live", title: "Interactive Action Centre", copy: "Assign owners and move actions through workflow states during the demo.", icon: ClipboardCheck, tag: "Interactive" },
+  { href: "/tools/dental-control/platform", title: "Platform & Integrations", copy: "Connector, canonical-data, event-fabric and future-module architecture.", icon: Layers3, tag: "Engineering" },
+  { href: "/tools/dental-control/onboarding", title: "Pilot Onboarding", copy: "Simulated setup journey showing how Sitora connects without replacing the PMS.", icon: Network, tag: "Implementation" },
+];
+
+export function PrototypeIndex() {
+  return <div className="min-h-screen bg-[#071310] text-white">
+    <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_78%_5%,rgba(42,168,154,0.11),transparent_30%),radial-gradient(circle_at_12%_92%,rgba(196,154,83,0.07),transparent_22%)]" />
+    <main className="relative mx-auto max-w-[1320px] px-4 py-10 md:px-7 md:py-14">
+      <div className="max-w-4xl"><div className="inline-flex items-center gap-2 rounded-full border border-[#2aa89a]/18 bg-[#2aa89a]/[0.05] px-3 py-1 text-[9px] font-semibold uppercase tracking-[0.16em] text-[#78cfc4]"><Sparkles size={12}/> Prototype map</div><h1 className="mt-4 text-[34px] font-semibold tracking-[-0.045em] md:text-[50px]">Sitora Dental Control is now a connected product story, not a single dashboard.</h1><p className="mt-4 max-w-3xl text-[12px] leading-6 text-white/40">Use this page locally to review each layer of the prototype. The routes are designed to demonstrate executive intelligence, operational drill-down, workflow action and platform extensibility as one coherent SaaS proposition.</p></div>
+      <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">{routes.map(({href,title,copy,icon:Icon,tag})=><Link key={href} href={href} className="group rounded-3xl border border-white/[0.07] bg-white/[0.025] p-5 transition hover:-translate-y-0.5 hover:border-[#2aa89a]/25 hover:bg-white/[0.04]"><div className="flex items-center justify-between"><div className="rounded-xl border border-white/[0.06] bg-white/[0.03] p-2.5 text-[#73cabf]"><Icon size={17}/></div><span className="rounded-full border border-white/[0.06] px-2 py-1 text-[8px] uppercase tracking-[0.12em] text-white/28">{tag}</span></div><div className="mt-5 text-[14px] font-semibold text-white/82">{title}</div><p className="mt-2 min-h-[60px] text-[10px] leading-5 text-white/32">{copy}</p><div className="mt-5 flex items-center gap-2 text-[10px] font-medium text-[#78cfc4]">Open experience <ArrowRight size={12} className="transition group-hover:translate-x-0.5"/></div></Link>)}</div>
+      <div className="mt-7 rounded-3xl border border-[#c49a53]/14 bg-[#c49a53]/[0.035] p-5"><div className="text-[10px] font-semibold uppercase tracking-[0.15em] text-[#e3c183]">Recommended review order</div><div className="mt-3 text-[11px] leading-6 text-white/45">Control Tower → VC Demo → Jeddah Branch → Branch Comparison → Interactive Action Centre → Boardroom → Platform → Pilot Onboarding.</div></div>
+    </main>
+  </div>;
+}
