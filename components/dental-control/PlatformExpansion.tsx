@@ -4,7 +4,6 @@ import Link from "next/link";
 import {
   ArrowLeft,
   Boxes,
-  CheckCircle2,
   CircleDashed,
   CloudCog,
   Database,
