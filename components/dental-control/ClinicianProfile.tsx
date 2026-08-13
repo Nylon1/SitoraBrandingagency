@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, BadgeCheck, CircleDollarSign, Clock3, FileWarning, Gauge, ShieldCheck, Sparkles, TrendingDown, Users, WalletCards } from "lucide-react";
+import { ArrowLeft, ArrowRight, BadgeCheck, CircleDollarSign, Gauge, ShieldCheck, Sparkles, TrendingDown, Users } from "lucide-react";
 import { clinicianProfiles } from "@/lib/dental-control/deep-data";
 import { sar } from "@/lib/dental-control/demo-data";
 
