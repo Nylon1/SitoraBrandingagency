@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { ArrowLeft, ArrowRight, Bot, Building2, CircleDollarSign, ClipboardList, FileWarning, Gauge, ShieldCheck, Sparkles, Stethoscope, TrendingDown, Users, WalletCards } from "lucide-react";
+import { ArrowLeft, ArrowRight, Bot, Building2, CircleDollarSign, FileWarning, Gauge, ShieldCheck, Sparkles, TrendingDown, WalletCards } from "lucide-react";
 import { findBranch } from "@/lib/dental-control/deep-data";
 import { sar } from "@/lib/dental-control/demo-data";
 
