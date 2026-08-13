@@ -275,6 +275,22 @@ export default function DentalClinicsWebsiteDesignPage() { return ( <main classN
     </div>
   </section>
 
+  <section className="px-5 py-20 sm:px-8">
+    <div className="mx-auto max-w-7xl rounded-[2.2rem] border border-teal-300/15 bg-[linear-gradient(135deg,rgba(20,184,166,0.12),rgba(255,255,255,0.035),rgba(216,182,109,0.08))] p-7 sm:p-10 lg:p-12">
+      <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
+        <div className="max-w-3xl">
+          <p className="text-sm font-bold uppercase tracking-[0.28em] text-teal-300">Research: Saudi dental technology</p>
+          <h2 className="mt-4 text-3xl font-semibold tracking-[-0.04em] sm:text-4xl">What does Saudi dental software already cover, and where are the next gaps?</h2>
+          <p className="mt-5 text-base leading-8 text-white/60">Our 2026 market landscape reviews existing dental PMS/HIS platforms, NPHIES infrastructure, imaging and claims workflows, then examines the emerging opportunity in cross-system orchestration and Dental Episode Assurance.</p>
+        </div>
+        <div className="flex flex-col gap-3 sm:flex-row lg:flex-col">
+          <a href="/research/saudi-dental-software-landscape-2026" className="inline-flex items-center justify-center gap-2 rounded-full bg-teal-300 px-6 py-3.5 font-bold text-[#07110f] transition hover:bg-teal-200">Read the research <ArrowRight className="h-4 w-4" /></a>
+          <a href="/dental-control" className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 px-6 py-3.5 font-semibold text-white/80 transition hover:bg-white/10">Explore Dental Control</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section id="contact" className="px-5 pb-28 pt-24 sm:px-8">
     <div className="mx-auto max-w-5xl text-center">
       <p className="text-sm font-bold uppercase tracking-[0.32em] text-[#d8b66d]">Start a Dental Website Project</p>
