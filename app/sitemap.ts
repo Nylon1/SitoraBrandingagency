@@ -32,25 +32,27 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/qatar-trust-360",
     "/ai-readiness",
     "/ada-accessibility-scan-full",
-    "/corporate-website-design",
-    "/corporate-branding",
-    "/seo-lead-generation",
     "/brand-identity-packages",
-    "/home"
+    "/dental-control",
+    "/research/saudi-dental-software-landscape-2026",
   ];
 
   return staticPages.map((path) => ({
     url: `${baseUrl}${path}`,
     lastModified: new Date(),
     changeFrequency:
-      path === "" || path === "/home" ? "weekly" : "monthly",
+      path === "" || path === "/home" || path.startsWith("/research/")
+        ? "weekly"
+        : "monthly",
     priority:
       path === "" || path === "/home"
         ? 1
         : path === "/contact"
           ? 0.9
-          : path.startsWith("/industries")
-            ? 0.75
-            : 0.85,
+          : path === "/dental-control" || path.startsWith("/research/")
+            ? 0.9
+            : path.startsWith("/industries")
+              ? 0.75
+              : 0.85,
   }));
 }
