@@ -28,6 +28,16 @@ export default function Page() {
       </header>
 
       <div className="mx-auto max-w-5xl px-5 py-14 md:px-8 md:py-20">
+        <div className="mt-8 flex flex-wrap gap-3">
+  <a
+    href="/downloads/Beyond_Compliance_School_Health_Reform_Report_No_Em_Dashes.pdf"
+    target="_blank"
+    rel="noreferrer"
+    className="rounded-xl bg-[#2aa89a] px-5 py-3 text-sm font-semibold text-[#04110f]"
+  >
+    Download full PDF
+  </a>
+</div>
         <section className="rounded-3xl border border-[#c49a53]/20 bg-[#c49a53]/[0.05] p-6 md:p-8">
           <div className="text-xs font-semibold uppercase tracking-[0.16em] text-[#e1bf80]">Core proposition</div>
           <p className="mt-3 text-2xl font-semibold leading-9 tracking-[-0.025em]">England should move from minimum school-food compliance to measurable responsibility for the health environment schools create.</p>

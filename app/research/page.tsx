@@ -30,7 +30,7 @@ const collection = [
     title: "AI as the NHS Front Door",
     description: "Policy research on safety, accountability, public trust and human escalation when AI becomes part of the NHS patient-access pathway.",
     href: "/research/ai-as-the-nhs-front-door",
-    status: "Editorial review",
+    status: "Published Policy Research",
   },
   {
     category: "Public Health & Policy",
