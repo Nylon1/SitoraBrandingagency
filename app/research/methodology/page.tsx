@@ -53,10 +53,17 @@ export default function ResearchMethodologyPage() {
           </div>
         </section>
 
-        <section className="mt-14 rounded-3xl border border-[#2aa89a]/20 bg-[#2aa89a]/[0.055] p-6 md:p-8">
-          <h2 className="text-xl font-semibold">Read the research</h2>
-          <p className="mt-3 text-sm leading-7 text-white/50">Explore the current Sitora research collection across systems, policy, operations and Saudi/Gulf innovation.</p>
-          <Link href="/research" className="mt-5 inline-flex rounded-xl bg-[#2aa89a] px-4 py-2.5 text-sm font-semibold text-[#04110f]">Open Sitora Research</Link>
+        <section className="mt-14 grid gap-4 md:grid-cols-2">
+          <div className="rounded-3xl border border-[#2aa89a]/20 bg-[#2aa89a]/[0.055] p-6 md:p-8">
+            <h2 className="text-xl font-semibold">Read the research</h2>
+            <p className="mt-3 text-sm leading-7 text-white/50">Explore the current Sitora research collection across systems, policy, operations and Saudi/Gulf innovation.</p>
+            <Link href="/research" className="mt-5 inline-flex rounded-xl bg-[#2aa89a] px-4 py-2.5 text-sm font-semibold text-[#04110f]">Open Sitora Research</Link>
+          </div>
+          <div className="rounded-3xl border border-white/[0.08] bg-white/[0.025] p-6 md:p-8">
+            <h2 className="text-xl font-semibold">Challenge or correct the work</h2>
+            <p className="mt-3 text-sm leading-7 text-white/50">We welcome specific, source-based corrections and external review. Material errors should be corrected transparently.</p>
+            <Link href="/research/review-and-corrections" className="mt-5 inline-flex rounded-xl border border-white/12 px-4 py-2.5 text-sm font-semibold text-white/75">Review & corrections policy</Link>
+          </div>
         </section>
       </section>
     </main>
