@@ -11,8 +11,6 @@ import {
   Languages,
   ShieldCheck,
   Sparkles,
-  UserRound,
-  Users,
 } from "lucide-react";
 
 type TaskStatus = "Open" | "Assigned" | "In progress" | "Resolved";
