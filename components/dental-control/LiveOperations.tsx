@@ -20,7 +20,17 @@ const simulatedNewEvents = [
 ];
 
 type EventTone = "warn" | "good" | "info";
-type LiveEvent = Omit<(typeof eventSeed)[number], "age"> & { receivedAt:number };
+type LiveEvent = {
+  id: string;
+  type: string;
+  branch: string;
+  title: string;
+  detail: string;
+  impact: string;
+  tone: EventTone;
+  action: string;
+  ageMinutes: number;
+};
 
 const toneClass: Record<EventTone,string> = {
   warn:"border-amber-400/20 bg-amber-400/[0.045] text-amber-100",
@@ -29,7 +39,7 @@ const toneClass: Record<EventTone,string> = {
 };
 
 export function LiveOperations() {
-  const [events,setEvents] = useState<LiveEvent[]>(() => eventSeed.map(({age,...event}) => ({...event,receivedAt:Date.now()-age*60000})));
+  const [events,setEvents] = useState<LiveEvent[]>(() => eventSeed.map(({age,...event}) => ({...event,ageMinutes:age})));
   const [running,setRunning] = useState(true);
   const [liveIndex,setLiveIndex] = useState(0);
   const [tasks,setTasks] = useState<string[]>([]);
@@ -38,11 +48,19 @@ export function LiveOperations() {
     if (!running || liveIndex >= simulatedNewEvents.length) return;
     const timer = window.setTimeout(() => {
       const next = simulatedNewEvents[liveIndex];
-      setEvents(current => [{...next,receivedAt:Date.now()},...current]);
+      setEvents(current => [{...next,ageMinutes:0},...current]);
       setLiveIndex(value => value+1);
     },7000);
     return () => window.clearTimeout(timer);
   },[running,liveIndex]);
+
+  useEffect(() => {
+    if (!running) return;
+    const timer = window.setInterval(() => {
+      setEvents(current => current.map(event => ({ ...event, ageMinutes: event.ageMinutes + 1 })));
+    }, 60000);
+    return () => window.clearInterval(timer);
+  }, [running]);
 
   const metrics = useMemo(() => ({events:events.length,actionNeeded:events.filter(e=>e.tone==="warn").length,autoMatched:14,tasks:tasks.length+6}),[events,tasks]);
   const createTask = (id:string) => setTasks(current => current.includes(id) ? current : [...current,id]);
@@ -61,7 +79,7 @@ export function LiveOperations() {
         <Metric label="Open tasks" value={metrics.tasks} sub="Across connected workflows" icon={<BellRing size={15}/>}/>
       </section>
 
-      <section className="mt-5 grid gap-5 2xl:grid-cols-[1.35fr_0.65fr]"><div className="overflow-hidden rounded-3xl border border-white/[0.07] bg-white/[0.025]"><div className="flex items-center justify-between border-b border-white/[0.06] px-5 py-4"><div><div className="text-[13px] font-semibold">Live event stream</div><div className="mt-1 text-[10px] text-white/28">Newest normalized events appear at the top</div></div><div className="flex items-center gap-2 text-[9px] text-emerald-200"><span className="h-2 w-2 animate-pulse rounded-full bg-emerald-300"/> ingesting</div></div><div className="p-4 md:p-5"><AnimatePresence initial={false}>{events.map(event=><motion.div key={event.id} initial={{opacity:0,y:-12,scale:.99}} animate={{opacity:1,y:0,scale:1}} className="mb-3 rounded-2xl border border-white/[0.055] bg-white/[0.025] p-4"><div className="flex flex-wrap items-start justify-between gap-3"><div className="min-w-0 flex-1"><div className="flex flex-wrap items-center gap-2"><span className={`rounded-full border px-2 py-1 text-[8px] uppercase tracking-[0.11em] ${toneClass[event.tone]}`}>{event.type}</span><span className="text-[9px] text-white/24">{event.branch}</span><span className="inline-flex items-center gap-1 text-[9px] text-white/22"><Clock3 size={10}/>{Math.max(0,Math.floor((Date.now()-event.receivedAt)/60000))}m ago</span></div><div className="mt-2 text-[12px] font-medium text-white/82">{event.title}</div><p className="mt-1 text-[10px] leading-5 text-white/38">{event.detail}</p></div><div className="text-right"><div className="text-[10px] font-medium text-white/65">{event.impact}</div><button onClick={()=>createTask(event.id)} className={`mt-2 inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1.5 text-[9px] ${tasks.includes(event.id)?"border-emerald-400/20 bg-emerald-400/[0.05] text-emerald-200":"border-white/[0.07] text-[#78cfc4]"}`}>{tasks.includes(event.id)?<><CheckCircle2 size={10}/>Task created</>:<>{event.action}<ArrowRight size={10}/></>}</button></div></div></motion.div>)}</AnimatePresence></div></div>
+      <section className="mt-5 grid gap-5 2xl:grid-cols-[1.35fr_0.65fr]"><div className="overflow-hidden rounded-3xl border border-white/[0.07] bg-white/[0.025]"><div className="flex items-center justify-between border-b border-white/[0.06] px-5 py-4"><div><div className="text-[13px] font-semibold">Live event stream</div><div className="mt-1 text-[10px] text-white/28">Newest normalized events appear at the top</div></div><div className="flex items-center gap-2 text-[9px] text-emerald-200"><span className="h-2 w-2 animate-pulse rounded-full bg-emerald-300"/> ingesting</div></div><div className="p-4 md:p-5"><AnimatePresence initial={false}>{events.map(event=><motion.div key={event.id} initial={{opacity:0,y:-12,scale:.99}} animate={{opacity:1,y:0,scale:1}} className="mb-3 rounded-2xl border border-white/[0.055] bg-white/[0.025] p-4"><div className="flex flex-wrap items-start justify-between gap-3"><div className="min-w-0 flex-1"><div className="flex flex-wrap items-center gap-2"><span className={`rounded-full border px-2 py-1 text-[8px] uppercase tracking-[0.11em] ${toneClass[event.tone]}`}>{event.type}</span><span className="text-[9px] text-white/24">{event.branch}</span><span className="inline-flex items-center gap-1 text-[9px] text-white/22"><Clock3 size={10}/>{event.ageMinutes}m ago</span></div><div className="mt-2 text-[12px] font-medium text-white/82">{event.title}</div><p className="mt-1 text-[10px] leading-5 text-white/38">{event.detail}</p></div><div className="text-right"><div className="text-[10px] font-medium text-white/65">{event.impact}</div><button onClick={()=>createTask(event.id)} className={`mt-2 inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1.5 text-[9px] ${tasks.includes(event.id)?"border-emerald-400/20 bg-emerald-400/[0.05] text-emerald-200":"border-white/[0.07] text-[#78cfc4]"}`}>{tasks.includes(event.id)?<><CheckCircle2 size={10}/>Task created</>:<>{event.action}<ArrowRight size={10}/></>}</button></div></div></motion.div>)}</AnimatePresence></div></div>
 
       <div className="space-y-5"><div className="rounded-3xl border border-white/[0.07] bg-white/[0.025] p-5"><div className="text-[13px] font-semibold">Event → intelligence → action</div><div className="mt-4 space-y-3">{[["1","Source event","appointment.cancelled arrives from PMS"],["2","Normalize","Mapped into Sitora canonical event"],["3","Evaluate","Capacity recovery rule is triggered"],["4","Enrich","Eligible recall patients and chair economics added"],["5","Act","Action created for branch team"]].map(([n,title,copy])=><div key={n} className="flex gap-3 rounded-xl border border-white/[0.05] bg-white/[0.02] p-3"><div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#2aa89a]/12 text-[9px] text-[#79cfc5]">{n}</div><div><div className="text-[10px] font-medium text-white/70">{title}</div><div className="mt-1 text-[9px] leading-4 text-white/28">{copy}</div></div></div>)}</div></div><div className="rounded-3xl border border-amber-400/14 bg-amber-400/[0.035] p-5"><div className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-amber-200"><FileWarning size={12}/> Demo boundary</div><p className="mt-3 text-[10px] leading-5 text-white/38">This screen simulates real-time events. No real patient, NPHIES or payer data is connected. Production ingestion would require validated interfaces, security controls and Saudi deployment architecture.</p></div></div></section>
     </main>
