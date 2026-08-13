@@ -2,21 +2,14 @@
 
 import { useState } from "react";
 import {
-  Activity,
   AlertTriangle,
   ArrowRight,
   CheckCircle2,
   ChevronRight,
-  CircleDollarSign,
-  ClipboardCheck,
   FileWarning,
-  ShieldCheck,
   Sparkles,
-  Stethoscope,
   Target,
-  TrendingUp,
   UserRoundCheck,
-  WalletCards,
 } from "lucide-react";
 import {
   actions,
