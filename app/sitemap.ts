@@ -27,7 +27,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/industries/corporate-services",
     "/websites-for-celebrities-athletes",
     "/deckstudio",
+    "/tools",
     "/tools/qr-code-generator",
+    "/tools/human-signal",
+    "/tools/healthcare-post-ideas",
     "/trust-360",
     "/qatar-trust-360",
     "/ai-readiness",
@@ -53,7 +56,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency:
       path === "" ||
       path === "/home" ||
-      path.startsWith("/research")
+      path.startsWith("/research") ||
+      path === "/tools"
         ? "weekly"
         : "monthly",
 
@@ -66,8 +70,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
               path === "/dental-control" ||
               path.startsWith("/research/")
             ? 0.9
-            : path.startsWith("/industries")
-              ? 0.75
-              : 0.85,
+            : path === "/tools"
+              ? 0.85
+              : path.startsWith("/industries")
+                ? 0.75
+                : 0.85,
   }));
 }
