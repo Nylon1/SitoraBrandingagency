@@ -27,7 +27,7 @@ const navItems = [
     href: "/ai-readiness",
     children: [
       { label: "AI Readiness Audit", href: "/ai-readiness" },
-      { label: "NHS AI Trust Report", href: "/nhs-ai-trust-report" },
+      { label: "NHS AI Trust Report", href: "/research/ai-as-the-nhs-front-door" },
     ],
   },
 
@@ -40,26 +40,24 @@ const navItems = [
       { label: "Qatar Trust 360", href: "/qatar-trust-360" },
     ],
   },
-{
-  label: "Free Tools",
-  href: "/tools",
-  children: [
-    {
-      label: "QR Code Generator",
-      href: "/tools/qr-code-generator",
-    },
- 
-    {
-      label: "LinkedIn Coach (HumanSignal)",
-      href: "/tools/human-signal",
-    },
-
-     { 
-      label: "Social Media Post Ideas",
-      href: "tools/healthcare-post-ideas",
-    },
-  ],
-},
+  {
+    label: "Free Tools",
+    href: "/tools",
+    children: [
+      {
+        label: "QR Code Generator",
+        href: "/tools/qr-code-generator",
+      },
+      {
+        label: "LinkedIn Coach (HumanSignal)",
+        href: "/tools/human-signal",
+      },
+      {
+        label: "Social Media Post Ideas",
+        href: "/tools/healthcare-post-ideas",
+      },
+    ],
+  },
 
   {
     label: "Industries",
@@ -73,6 +71,7 @@ const navItems = [
     ],
   },
 
+  { label: "Research", href: "/research" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -99,7 +98,6 @@ export function SiteHeader() {
           </span>
         </Link>
 
-        {/* Desktop nav */}
         <nav className="hidden items-center justify-center gap-2 text-sm font-medium text-white/70 lg:flex">
           {navItems.map((item) => (
             <div key={item.label} className="group relative">
@@ -156,7 +154,6 @@ export function SiteHeader() {
         </button>
       </div>
 
-      {/* Mobile nav */}
       <AnimatePresence>
         {open && (
           <motion.div
