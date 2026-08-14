@@ -1,311 +1,227 @@
 "use client";
 
-import { motion } from "framer-motion"; import { ArrowRight, BadgeCheck, CalendarCheck, CheckCircle2, ClipboardList, FileText, Globe2, HeartPulse, MapPin, MessageSquareText, MonitorSmartphone, MousePointerClick, Search, ShieldCheck, Smile, Sparkles, Star, Stethoscope, Target, UsersRound, } from "lucide-react";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import {
+  ArrowRight,
+  CalendarCheck,
+  Check,
+  FileText,
+  Search,
+  ShieldCheck,
+  Smile,
+  Star,
+  Stethoscope,
+  UsersRound,
+} from "lucide-react";
 
-const outcomes = [ "Build patient trust before they contact the practice", "Present treatments clearly with premium service pages", "Support private patient enquiries and consultation bookings", "Improve local SEO for dental searches in your area", "Showcase fees, reviews, team profiles and patient journey", "Create a calm, modern and professional clinic brand online", ];
+const patientJourney = [
+  ["Discover", "Local search, referrals, social proof and treatment-specific entry pages."],
+  ["Understand", "Clear treatment explanations, realistic expectations, fees guidance and FAQs."],
+  ["Trust", "Team profiles, reviews, credentials, clinic environment and visible patient reassurance."],
+  ["Act", "Simple booking, consultation and contact routes with no unnecessary friction."],
+];
 
-const features = [ { icon: Smile, title: "Treatment Pages", text: "Dedicated pages for whitening, Invisalign, implants, hygiene, family dentistry, emergency care and cosmetic treatments.", }, { icon: Star, title: "Reviews & Trust Signals", text: "Review sections, testimonials, patient reassurance, team profiles and credibility-led layout to build confidence.", }, { icon: Search, title: "Dental SEO Structure", text: "Search-focused structure for treatments, local pages, FAQs, fees, advice articles and patient-intent keywords.", }, { icon: CalendarCheck, title: "Booking Journey", text: "Clear appointment calls-to-action, contact forms, phone prompts and consultation pathways across the site.", }, ];
+const treatmentPages = [
+  "Dental implants",
+  "Invisalign and clear aligners",
+  "Teeth whitening",
+  "Cosmetic dentistry",
+  "Emergency dentistry",
+  "Hygiene and prevention",
+  "Family dentistry",
+  "Facial aesthetics",
+];
 
-const treatmentPages = [ "Family Dentistry", "Teeth Whitening", "Dental Implants", "Invisalign / Clear Aligners", "Hygiene Appointments", "Emergency Dentistry", "Cosmetic Dentistry", "Facial Aesthetics", ];
+const essentials = [
+  { icon: Smile, title: "Treatment clarity", text: "Dedicated pages that explain options in plain language and answer the questions patients ask before they call." },
+  { icon: Star, title: "Trust architecture", text: "Reviews, team profiles, credentials, imagery and reassurance designed into the journey rather than bolted on at the bottom." },
+  { icon: Search, title: "Dental search structure", text: "Treatment, local and advice pages planned around patient intent so the site can rank for more than the practice name." },
+  { icon: CalendarCheck, title: "Booking flow", text: "Clear routes to call, enquire or book from every important treatment page, especially on mobile." },
+];
 
-const process = [ { step: "01", title: "Clinic Positioning", text: "We understand your practice, treatments, local competition, patient type and the services you most want to promote.", }, { step: "02", title: "Treatment Page Plan", text: "We map out the key treatment pages, patient FAQs, fees content, team pages and local SEO opportunities.", }, { step: "03", title: "Premium Clinic Design", text: "We create a calm, clinical and premium website design that reassures patients and reflects the quality of care.", }, { step: "04", title: "SEO & Patient Journey", text: "We structure content around patient search intent, trust points, reviews, treatment explanations and booking routes.", }, { step: "05", title: "Launch & Grow", text: "The site can grow with more treatments, advice articles, local pages, patient guides and campaign landing pages.", }, ];
+export default function DentalClinicsWebsiteDesignPage() {
+  return (
+    <main className="min-h-screen overflow-hidden bg-[#03050a] text-white">
+      <section className="relative border-b border-white/[0.07] px-5 pb-24 pt-36 sm:px-8 lg:pb-32 lg:pt-44">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_8%,rgba(216,182,109,0.14),transparent_28%),radial-gradient(circle_at_82%_18%,rgba(42,168,154,0.14),transparent_30%)]" />
+        <div className="relative mx-auto grid max-w-7xl gap-14 lg:grid-cols-[1.04fr_.96fr] lg:items-center">
+          <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
+            <div className="sitora-kicker">Sitora Dental · Digital presence</div>
+            <h1 className="mt-6 max-w-5xl text-5xl font-semibold leading-[0.98] tracking-[-0.06em] sm:text-6xl lg:text-7xl xl:text-[5.6rem]">
+              Dental websites that make patients feel confident before they ever enter the clinic.
+            </h1>
+            <p className="mt-7 max-w-2xl text-lg leading-8 text-white/58 sm:text-xl sm:leading-9">
+              We design dental websites around the real patient journey: finding the practice, understanding treatment, building trust and taking the next step.
+            </p>
 
-const trustSignals = [ "Dentist and team profiles", "Google review highlights", "Treatment explanations", "Fees and plan information", "Before and after gallery", "Patient FAQs", "Clinic location and map", "Clear booking routes", ];
-
-export default function DentalClinicsWebsiteDesignPage() { return ( <main className="min-h-screen overflow-hidden bg-[#05070d] text-white"> 
-
-  <section className="relative px-5 pb-24 pt-36 sm:px-8 lg:pb-32 lg:pt-44">
-    <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_12%,rgba(216,182,109,0.23),transparent_30%),radial-gradient(circle_at_82%_20%,rgba(20,184,166,0.15),transparent_30%),linear-gradient(180deg,#05070d_0%,#07171b_48%,#05070d_100%)]" />
-    <motion.div
-      animate={{ x: [0, 32, 0], y: [0, -18, 0], rotate: [0, 3, 0] }}
-      transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
-      className="absolute right-[-20%] top-[5%] h-[700px] w-[700px] rounded-full border border-[#d8b66d]/15 bg-[radial-gradient(circle,rgba(216,182,109,0.13),transparent_64%)]"
-    />
-    <motion.div
-      animate={{ x: [0, -24, 0], y: [0, 18, 0], rotate: [0, -4, 0] }}
-      transition={{ duration: 24, repeat: Infinity, ease: "easeInOut" }}
-      className="absolute left-[-18%] bottom-[-20%] h-[620px] w-[620px] rounded-full border border-teal-400/10 bg-[radial-gradient(circle,rgba(20,184,166,0.14),transparent_66%)]"
-    />
-
-    <div className="relative mx-auto grid max-w-7xl gap-14 lg:grid-cols-[1.05fr_.95fr] lg:items-center">
-      <motion.div
-        initial={{ opacity: 0, y: 28 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-      >
-        <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.045] px-4 py-2 text-sm text-white/70 backdrop-blur">
-          <Stethoscope className="h-4 w-4 text-[#d8b66d]" />
-          Website Design for Dental Clinics
-        </div>
-
-        <h1 className="max-w-5xl text-5xl font-semibold leading-[1.02] tracking-[-0.055em] text-white sm:text-6xl lg:text-7xl xl:text-8xl">
-          Premium dental websites designed to win patient trust and grow private enquiries.
-        </h1>
-
-        <p className="mt-7 max-w-2xl text-lg leading-8 text-white/68 sm:text-xl sm:leading-9">
-          Sitora creates modern, SEO-focused dental websites that present treatments clearly, build confidence and guide patients towards booking an appointment.
-        </p>
-
-        <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-          <a
-            href="#contact"
-            className="inline-flex items-center justify-center gap-3 rounded-full bg-[#d8b66d] px-7 py-4 font-bold text-[#070910] shadow-2xl shadow-[#d8b66d]/20 transition hover:bg-[#f2cf83]"
-          >
-            Build a Dental Website <ArrowRight className="h-4 w-4" />
-          </a>
-          <a
-            href="#features"
-            className="inline-flex items-center justify-center rounded-full border border-white/15 px-7 py-4 font-semibold text-white transition hover:bg-white/10"
-          >
-            View Features
-          </a>
-        </div>
-
-        <div className="mt-12 grid max-w-2xl grid-cols-1 gap-3 sm:grid-cols-3">
-          {[
-            ["Patients", "Trust-led journey"],
-            ["Treatments", "SEO service pages"],
-            ["Bookings", "Clear appointment CTA"],
-          ].map(([top, bottom]) => (
-            <div key={top} className="rounded-2xl border border-white/10 bg-white/[0.04] p-4 backdrop-blur">
-              <p className="text-lg font-semibold text-[#d8b66d]">{top}</p>
-              <p className="mt-1 text-xs leading-5 text-white/50">{bottom}</p>
+            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+              <Link href="/contact" className="sitora-btn-primary">Discuss your practice <ArrowRight className="h-4 w-4" /></Link>
+              <a href="#journey" className="sitora-btn-secondary">See the patient journey</a>
             </div>
-          ))}
-        </div>
-      </motion.div>
 
-      <motion.div
-        initial={{ opacity: 0, scale: 0.94, y: 24 }}
-        animate={{ opacity: 1, scale: 1, y: 0 }}
-        transition={{ delay: 0.16, duration: 0.9 }}
-        className="relative"
-      >
-        <div className="absolute -inset-10 rounded-[3rem] bg-[#d8b66d]/10 blur-3xl" />
-        <div className="relative overflow-hidden rounded-[2.2rem] border border-white/10 bg-white/[0.045] p-4 shadow-2xl shadow-black/50 backdrop-blur-xl">
-          <div className="rounded-[1.7rem] border border-white/10 bg-[#0b111d] p-6">
-            <div className="mb-6 flex items-start justify-between gap-6">
-              <div>
-                <p className="text-xs font-bold uppercase tracking-[0.28em] text-[#d8b66d]">Dental Website System</p>
-                <h2 className="mt-3 text-2xl font-semibold tracking-tight sm:text-3xl">Built around patient trust, treatment clarity and bookings.</h2>
+            <div className="mt-12 flex flex-wrap gap-2">
+              {["Treatments", "Local SEO", "Reviews", "Fees", "Team", "Booking"].map((item) => (
+                <span key={item} className="rounded-full border border-white/[0.08] bg-white/[0.025] px-3.5 py-2 text-xs font-medium text-white/50">{item}</span>
+              ))}
+            </div>
+          </motion.div>
+
+          <motion.div initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.12, duration: 0.75 }}>
+            <div className="sitora-panel-strong relative overflow-hidden rounded-[2rem] p-6 sm:p-8">
+              <div className="absolute -right-24 -top-24 h-64 w-64 rounded-full bg-[#2aa89a]/10 blur-3xl" />
+              <div className="relative">
+                <div className="flex items-start justify-between gap-6">
+                  <div>
+                    <div className="text-xs font-semibold uppercase tracking-[0.18em] text-[#78d0c4]">Patient confidence system</div>
+                    <h2 className="mt-3 text-2xl font-semibold tracking-[-0.03em] sm:text-3xl">What patients need to see.</h2>
+                  </div>
+                  <Stethoscope className="h-8 w-8 text-[#78d0c4]/70" />
+                </div>
+
+                <div className="mt-8 space-y-3">
+                  {[
+                    ["Who will treat me?", "Visible clinicians, roles and credible profiles."],
+                    ["What does treatment involve?", "Clear, calm explanation without jargon overload."],
+                    ["What will it cost?", "Fees or guidance that reduces uncertainty where appropriate."],
+                    ["Can I trust this clinic?", "Reviews, evidence, environment and professional reassurance."],
+                    ["How do I book?", "A clear next step on every important page."],
+                  ].map(([title, body]) => (
+                    <div key={title} className="rounded-2xl border border-white/[0.08] bg-black/20 p-5">
+                      <div className="font-semibold text-white/86">{title}</div>
+                      <div className="mt-2 text-sm leading-6 text-white/44">{body}</div>
+                    </div>
+                  ))}
+                </div>
               </div>
-              <Smile className="h-9 w-9 shrink-0 text-white/35" />
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      <section id="journey" className="px-5 py-24 sm:px-8">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid gap-10 lg:grid-cols-[.72fr_1.28fr] lg:items-start">
+            <div>
+              <div className="sitora-kicker">Patient journey</div>
+              <h2 className="mt-4 text-4xl font-semibold tracking-[-0.045em] sm:text-5xl">The site should answer the next question before the patient has to ask it.</h2>
+              <p className="mt-6 text-base leading-8 text-white/50">A dental website is strongest when each stage naturally leads into the next instead of presenting a pile of disconnected pages.</p>
             </div>
 
-            <div className="grid gap-4 sm:grid-cols-2">
-              {[
-                ["Treatment Pages", "Clear patient information"],
-                ["Team Profiles", "Human trust signals"],
-                ["Local SEO", "Area-based visibility"],
-                ["Fees Page", "Reduce uncertainty"],
-                ["Reviews", "Social proof"],
-                ["Booking CTA", "Easy patient action"],
-              ].map(([title, text]) => (
-                <div key={title} className="rounded-2xl border border-white/10 bg-white/[0.04] p-5">
-                  <p className="font-semibold">{title}</p>
-                  <p className="mt-2 text-xs leading-5 text-white/48">{text}</p>
+            <div className="space-y-3">
+              {patientJourney.map(([title, body], index) => (
+                <div key={title} className="grid gap-4 rounded-2xl border border-white/[0.08] bg-white/[0.025] p-5 sm:grid-cols-[60px_150px_1fr] sm:p-6">
+                  <div className="text-sm font-semibold text-[#78d0c4]">0{index + 1}</div>
+                  <div className="font-semibold text-white/86">{title}</div>
+                  <div className="text-sm leading-7 text-white/46">{body}</div>
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+      </section>
 
-            <div className="mt-5 rounded-2xl border border-[#d8b66d]/20 bg-[#d8b66d]/10 p-5">
-              <div className="flex items-start gap-3">
-                <ShieldCheck className="mt-1 h-5 w-5 text-[#d8b66d]" />
-                <p className="text-sm leading-7 text-white/70">
-                  Dental patients want reassurance. A strong clinic website should feel calm, clear and easy to book from.
-                </p>
+      <section className="border-y border-white/[0.07] bg-white/[0.015] px-5 py-24 sm:px-8">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid gap-8 lg:grid-cols-[.75fr_1.25fr] lg:items-end">
+            <div>
+              <div className="sitora-kicker">Core system</div>
+              <h2 className="mt-4 text-4xl font-semibold tracking-[-0.045em] sm:text-5xl">Built for reassurance and growth.</h2>
+            </div>
+            <p className="max-w-2xl text-base leading-8 text-white/50 lg:ml-auto">The design should feel calm and premium. The structure underneath should work much harder: helping patients understand, search engines discover and reception teams receive better enquiries.</p>
+          </div>
+
+          <div className="mt-12 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+            {essentials.map((item) => {
+              const Icon = item.icon;
+              return (
+                <div key={item.title} className="sitora-panel rounded-[1.5rem] p-6">
+                  <Icon className="h-5 w-5 text-[#78d0c4]" />
+                  <h3 className="mt-5 text-lg font-semibold">{item.title}</h3>
+                  <p className="mt-3 text-sm leading-7 text-white/46">{item.text}</p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section className="px-5 py-24 sm:px-8">
+        <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[.76fr_1.24fr] lg:items-start">
+          <div>
+            <div className="sitora-kicker">Treatment architecture</div>
+            <h2 className="mt-4 text-4xl font-semibold tracking-[-0.045em] sm:text-5xl">One treatment, one clear destination.</h2>
+            <p className="mt-6 text-base leading-8 text-white/50">Patients usually search for a need or treatment, not a generic practice homepage. Dedicated pages improve clarity and create more useful search entry points.</p>
+          </div>
+
+          <div className="grid gap-3 sm:grid-cols-2">
+            {treatmentPages.map((page) => (
+              <div key={page} className="sitora-panel flex items-center gap-4 rounded-2xl p-5">
+                <FileText className="h-5 w-5 shrink-0 text-[#78d0c4]" />
+                <span className="text-sm font-medium text-white/72">{page}</span>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-y border-white/[0.07] bg-white/[0.015] px-5 py-24 sm:px-8">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid gap-12 lg:grid-cols-[.8fr_1.2fr]">
+            <div>
+              <div className="sitora-kicker">Trust details</div>
+              <h2 className="mt-4 text-4xl font-semibold tracking-[-0.045em] sm:text-5xl">Small uncertainties stop bookings.</h2>
+              <p className="mt-6 text-base leading-8 text-white/50">The site should make the clinic feel transparent without overwhelming the patient. The strongest trust signals are often simple and specific.</p>
+            </div>
+            <div className="grid gap-4 sm:grid-cols-2">
+              {[
+                "Dentist and team profiles",
+                "Independent review highlights",
+                "Fees and finance information",
+                "Before-and-after galleries where appropriate",
+                "Opening hours and location clarity",
+                "Accessible contact and booking options",
+              ].map((item) => (
+                <div key={item} className="sitora-panel rounded-2xl p-5">
+                  <Check className="h-5 w-5 text-[#78d0c4]" />
+                  <div className="mt-4 text-sm leading-7 text-white/62">{item}</div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
-      </motion.div>
-    </div>
-  </section>
+      </section>
 
-  <section className="px-5 py-20 sm:px-8">
-    <div className="mx-auto max-w-7xl rounded-[2.2rem] border border-white/10 bg-white/[0.035] p-7 sm:p-10 lg:p-12">
-      <div className="grid gap-10 lg:grid-cols-[.8fr_1.2fr] lg:items-start">
-        <div>
-          <p className="text-sm font-bold uppercase tracking-[0.32em] text-[#d8b66d]">Why it matters</p>
-          <h2 className="mt-4 text-4xl font-semibold tracking-[-0.04em] sm:text-5xl">Patients choose clinics they feel confident about.</h2>
-          <p className="mt-6 text-lg leading-8 text-white/62">
-            Before a patient calls, they often check your website, reviews, treatments, fees and team. If the site looks outdated or unclear, trust is lost quickly.
-          </p>
+      <section className="px-5 py-24 sm:px-8">
+        <div className="mx-auto max-w-7xl grid gap-4 lg:grid-cols-2">
+          <Link href="/research/saudi-dental-software-landscape-2026" className="group rounded-[1.7rem] border border-white/[0.08] bg-white/[0.025] p-7 transition hover:border-[#78d0c4]/25 hover:bg-white/[0.04]">
+            <div className="text-xs font-semibold uppercase tracking-[0.16em] text-[#78d0c4]">Sitora Research</div>
+            <h2 className="mt-4 text-2xl font-semibold tracking-[-0.03em]">Saudi Dental Software Landscape 2026</h2>
+            <p className="mt-3 text-sm leading-7 text-white/46">Our research on existing dental systems, workflow fragmentation and the next layer of dental technology.</p>
+            <div className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#78d0c4]">Read the research <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" /></div>
+          </Link>
+
+          <Link href="/dental-control" className="group rounded-[1.7rem] border border-[#d8b66d]/18 bg-[#d8b66d]/[0.045] p-7 transition hover:border-[#d8b66d]/30 hover:bg-[#d8b66d]/[0.065]">
+            <div className="text-xs font-semibold uppercase tracking-[0.16em] text-[#d8b66d]">Sitora Intelligence</div>
+            <h2 className="mt-4 text-2xl font-semibold tracking-[-0.03em]">Dental Control</h2>
+            <p className="mt-3 text-sm leading-7 text-white/46">See how Sitora is exploring the operational layer above existing dental practice systems.</p>
+            <div className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#d8b66d]">Explore Dental Control <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" /></div>
+          </Link>
         </div>
-        <div className="grid gap-4 sm:grid-cols-2">
-          {outcomes.map((item) => (
-            <div key={item} className="flex gap-3 rounded-2xl border border-white/10 bg-[#05070d] p-5">
-              <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#d8b66d]" />
-              <p className="text-sm leading-7 text-white/68">{item}</p>
+      </section>
+
+      <section className="px-5 pb-24 sm:px-8">
+        <div className="mx-auto max-w-7xl overflow-hidden rounded-[2rem] border border-[#78d0c4]/18 bg-[linear-gradient(135deg,rgba(42,168,154,0.10),rgba(255,255,255,0.025),rgba(216,182,109,0.06))] p-7 sm:p-10 lg:p-12">
+          <div className="grid gap-10 lg:grid-cols-[1fr_auto] lg:items-center">
+            <div>
+              <div className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.18em] text-[#78d0c4]"><ShieldCheck className="h-4 w-4" /> Patient trust starts online</div>
+              <h2 className="mt-4 max-w-4xl text-3xl font-semibold tracking-[-0.04em] sm:text-5xl">Your clinic may already feel premium in person. The website should make that obvious before they arrive.</h2>
+              <p className="mt-5 max-w-2xl text-sm leading-7 text-white/50">We can review the current site and identify where treatment clarity, trust, search visibility and booking flow can be improved.</p>
             </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="features" className="px-5 py-24 sm:px-8">
-    <div className="mx-auto max-w-7xl">
-      <div className="grid gap-10 lg:grid-cols-[.8fr_1.2fr] lg:items-end">
-        <div>
-          <p className="text-sm font-bold uppercase tracking-[0.32em] text-[#d8b66d]">Dental Website Features</p>
-          <h2 className="mt-4 text-4xl font-semibold tracking-[-0.04em] sm:text-5xl">Everything a modern dental clinic website needs.</h2>
-        </div>
-        <p className="max-w-2xl text-lg leading-8 text-white/60 lg:ml-auto">
-          Dental websites need more than a nice homepage. They need treatment pages, patient reassurance, clear fees, reviews and a strong route to booking.
-        </p>
-      </div>
-
-      <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-        {features.map((feature) => {
-          const Icon = feature.icon;
-          return (
-            <motion.article
-              key={feature.title}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.55 }}
-              className="group rounded-[1.7rem] border border-white/10 bg-white/[0.04] p-7 transition duration-300 hover:-translate-y-1 hover:bg-white/[0.07]"
-            >
-              <div className="mb-7 flex h-13 w-13 items-center justify-center rounded-2xl bg-[#d8b66d]/15 text-[#d8b66d] transition group-hover:bg-[#d8b66d] group-hover:text-[#070910]">
-                <Icon className="h-6 w-6" />
-              </div>
-              <h3 className="text-xl font-semibold tracking-tight">{feature.title}</h3>
-              <p className="mt-4 text-sm leading-7 text-white/58">{feature.text}</p>
-            </motion.article>
-          );
-        })}
-      </div>
-    </div>
-  </section>
-
-  <section className="border-y border-white/10 bg-white/[0.025] px-5 py-24 sm:px-8">
-    <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[.9fr_1.1fr] lg:items-center">
-      <div>
-        <p className="text-sm font-bold uppercase tracking-[0.32em] text-[#d8b66d]">Treatment SEO</p>
-        <h2 className="mt-4 text-4xl font-semibold tracking-[-0.04em] sm:text-5xl">Each treatment should have its own clear, search-focused page.</h2>
-        <p className="mt-6 text-lg leading-8 text-white/62">
-          Patients search for specific treatments, not just “dentist”. Dedicated treatment pages help explain options, answer questions and create more SEO entry points.
-        </p>
-      </div>
-
-      <div className="grid gap-4 sm:grid-cols-2">
-        {treatmentPages.map((page) => (
-          <div key={page} className="flex items-center gap-4 rounded-2xl border border-white/10 bg-[#05070d] p-5">
-            <FileText className="h-5 w-5 shrink-0 text-[#d8b66d]" />
-            <span className="font-medium">{page}</span>
+            <Link href="/contact" className="sitora-btn-primary whitespace-nowrap">Discuss your clinic <ArrowRight className="h-4 w-4" /></Link>
           </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <section id="process" className="px-5 py-24 sm:px-8">
-    <div className="mx-auto max-w-7xl">
-      <div className="max-w-3xl">
-        <p className="text-sm font-bold uppercase tracking-[0.32em] text-[#d8b66d]">Our Process</p>
-        <h2 className="mt-4 text-4xl font-semibold tracking-[-0.04em] sm:text-5xl">A structured process for dental clinic websites.</h2>
-        <p className="mt-6 text-lg leading-8 text-white/62">
-          Sitora plans dental websites around the patient journey: trust, treatments, reviews, fees, local visibility and simple booking routes.
-        </p>
-      </div>
-
-      <div className="mt-14 grid gap-5 lg:grid-cols-5">
-        {process.map((item) => (
-          <div key={item.step} className="rounded-[1.6rem] border border-white/10 bg-white/[0.04] p-6">
-            <p className="text-sm font-bold text-[#d8b66d]">{item.step}</p>
-            <h3 className="mt-5 text-xl font-semibold tracking-tight">{item.title}</h3>
-            <p className="mt-4 text-sm leading-7 text-white/56">{item.text}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <section className="px-5 pb-24 sm:px-8">
-    <div className="mx-auto max-w-7xl overflow-hidden rounded-[2.2rem] border border-white/10 bg-[linear-gradient(135deg,rgba(216,182,109,0.14),rgba(255,255,255,0.04),rgba(20,184,166,0.10))] p-7 sm:p-12">
-      <div className="grid gap-10 lg:grid-cols-[.85fr_1.15fr] lg:items-center">
-        <div>
-          <p className="text-sm font-bold uppercase tracking-[0.32em] text-[#d8b66d]">Patient Trust Signals</p>
-          <h2 className="mt-4 text-4xl font-semibold tracking-[-0.04em] sm:text-5xl">Confidence-building elements for dental clinic websites.</h2>
-          <p className="mt-6 text-lg leading-8 text-white/62">
-            Patients want to feel safe, informed and reassured. These sections help create confidence before they contact the clinic.
-          </p>
         </div>
-        <div className="grid gap-4 sm:grid-cols-2">
-          {trustSignals.map((item) => (
-            <div key={item} className="flex items-center gap-4 rounded-2xl border border-white/10 bg-black/20 p-5">
-              <BadgeCheck className="h-5 w-5 shrink-0 text-[#d8b66d]" />
-              <span className="font-medium">{item}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section className="border-y border-white/10 bg-white/[0.025] px-5 py-24 sm:px-8">
-    <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[.9fr_1.1fr] lg:items-center">
-      <div>
-        <p className="text-sm font-bold uppercase tracking-[0.32em] text-[#d8b66d]">Dental Clinic Positioning</p>
-        <h2 className="mt-4 text-4xl font-semibold tracking-[-0.04em] sm:text-5xl">A dental website should feel calm, modern and easy to book from.</h2>
-        <p className="mt-6 text-lg leading-8 text-white/62">
-          Many patients feel nervous or unsure. The website should reduce confusion, explain treatments simply and make the practice feel professional and welcoming.
-        </p>
-      </div>
-
-      <div className="grid gap-5 sm:grid-cols-2">
-        {[
-          [Target, "Clear Treatment Routes", "Visitors should quickly find the treatment or service they are interested in."],
-          [UsersRound, "Human Team Presence", "Dentist profiles, staff photos and clinic story make the practice feel approachable."],
-          [MessageSquareText, "Plain English Copy", "Treatment pages should explain benefits and next steps without confusing patients."],
-          [MapPin, "Local Visibility", "Location pages and local SEO help the clinic appear for nearby patient searches."],
-        ].map(([Icon, title, text]) => {
-          const RealIcon = Icon as typeof Target;
-          return (
-            <div key={title as string} className="rounded-[1.5rem] border border-white/10 bg-[#05070d] p-6">
-              <RealIcon className="mb-5 h-6 w-6 text-[#d8b66d]" />
-              <h3 className="text-lg font-semibold">{title as string}</h3>
-              <p className="mt-3 text-sm leading-7 text-white/56">{text as string}</p>
-            </div>
-          );
-        })}
-      </div>
-    </div>
-  </section>
-
-  <section className="px-5 py-20 sm:px-8">
-    <div className="mx-auto max-w-7xl rounded-[2.2rem] border border-teal-300/15 bg-[linear-gradient(135deg,rgba(20,184,166,0.12),rgba(255,255,255,0.035),rgba(216,182,109,0.08))] p-7 sm:p-10 lg:p-12">
-      <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
-        <div className="max-w-3xl">
-          <p className="text-sm font-bold uppercase tracking-[0.28em] text-teal-300">Research: Saudi dental technology</p>
-          <h2 className="mt-4 text-3xl font-semibold tracking-[-0.04em] sm:text-4xl">What does Saudi dental software already cover, and where are the next gaps?</h2>
-          <p className="mt-5 text-base leading-8 text-white/60">Our 2026 market landscape reviews existing dental PMS/HIS platforms, NPHIES infrastructure, imaging and claims workflows, then examines the emerging opportunity in cross-system orchestration and Dental Episode Assurance.</p>
-        </div>
-        <div className="flex flex-col gap-3 sm:flex-row lg:flex-col">
-          <a href="/research/saudi-dental-software-landscape-2026" className="inline-flex items-center justify-center gap-2 rounded-full bg-teal-300 px-6 py-3.5 font-bold text-[#07110f] transition hover:bg-teal-200">Read the research <ArrowRight className="h-4 w-4" /></a>
-          <a href="/dental-control" className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 px-6 py-3.5 font-semibold text-white/80 transition hover:bg-white/10">Explore Dental Control</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="contact" className="px-5 pb-28 pt-24 sm:px-8">
-    <div className="mx-auto max-w-5xl text-center">
-      <p className="text-sm font-bold uppercase tracking-[0.32em] text-[#d8b66d]">Start a Dental Website Project</p>
-      <h2 className="mt-4 text-4xl font-semibold tracking-[-0.05em] sm:text-6xl">Ready to build a dental website that wins trust and grows patient enquiries?</h2>
-      <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-white/62">
-        Book a Sitora consultation and we’ll map out the design, treatment page structure and SEO approach for your dental clinic website.
-      </p>
-      <a
-        href="mailto:hello@sitora.co.uk?subject=Dental Clinic Website Design Enquiry"
-        className="mt-9 inline-flex items-center gap-3 rounded-full bg-[#d8b66d] px-8 py-4 font-bold text-[#070910] shadow-2xl shadow-[#d8b66d]/20 transition hover:bg-[#f2cf83]"
-      >
-        Request a Dental Website Consultation <ArrowRight className="h-4 w-4" />
-      </a>
-    </div>
-  </section>
-</main>
-
-); }
+      </section>
+    </main>
+  );
+}
