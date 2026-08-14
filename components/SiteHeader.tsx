@@ -41,6 +41,15 @@ const navItems = [
     ],
   },
   {
+    label: "Tools",
+    href: "/tools",
+    children: [
+      { label: "QR Code Generator", href: "/tools/qr-code-generator" },
+      { label: "LinkedIn Coach (HumanSignal)", href: "/tools/human-signal" },
+      { label: "Healthcare Post Ideas", href: "/tools/healthcare-post-ideas" },
+    ],
+  },
+  {
     label: "Industries",
     href: "/industries",
     children: [
