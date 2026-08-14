@@ -1,11 +1,48 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+const title = "CareGrid: Closing the Medication Loop";
+const description =
+  "A Sitora evidence and concept paper on closing medication-change workflows across general practice, pharmacy, hospital, mental health, homecare and social care.";
+const url = "https://sitora.co.uk/research/closing-the-medication-loop";
+
 export const metadata: Metadata = {
   title: "Closing the Medication Loop | NHS Medication Coordination Research",
-  description: "A Sitora evidence and concept paper on closing medication-change workflows across general practice, pharmacy, hospital, mental health, homecare and social care.",
+  description,
   alternates: { canonical: "/research/closing-the-medication-loop" },
+  openGraph: {
+    title,
+    description,
+    url,
+    siteName: "Sitora",
+    type: "article",
+    locale: "en_GB",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+  },
   robots: { index: true, follow: true },
+};
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: title,
+  description,
+  datePublished: "2026-08-13",
+  dateModified: "2026-08-14",
+  author: { "@type": "Organization", name: "Sitora" },
+  publisher: { "@type": "Organization", name: "Sitora" },
+  mainEntityOfPage: url,
+  url,
+  about: [
+    "Medication reconciliation",
+    "NHS interoperability",
+    "Medicines waste",
+    "Integrated care",
+  ],
 };
 
 const principles = [
@@ -20,6 +57,11 @@ const principles = [
 export default function Page() {
   return (
     <main className="min-h-screen bg-[#07110f] text-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
+
       <header className="border-b border-white/[0.07] bg-[radial-gradient(circle_at_75%_0%,rgba(42,168,154,0.13),transparent_34%)]">
         <div className="mx-auto max-w-5xl px-5 py-20 md:px-8 md:py-28">
           <Link href="/research" className="text-sm text-[#7acdc3]">← Sitora Research</Link>
@@ -27,6 +69,22 @@ export default function Page() {
           <h1 className="mt-5 text-4xl font-semibold tracking-[-0.045em] md:text-6xl">CareGrid: Closing the Medication Loop</h1>
           <p className="mt-6 max-w-4xl text-lg leading-8 text-white/55 md:text-xl">A shared, signed medication-change and waste-prevention layer for integrated care.</p>
           <div className="mt-6 text-xs text-white/35">Independent concept report · not commissioned or endorsed by NHS England or an NHS organisation · financial outcomes are hypotheses for controlled evaluation</div>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <a
+              href="/downloads/CareGrid_Closing_the_Medication_Loop_Report.pdf"
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-xl bg-[#2aa89a] px-5 py-3 text-sm font-semibold text-[#04110f]"
+            >
+              Download full PDF
+            </a>
+            <Link
+              href="/research/methodology"
+              className="rounded-xl border border-white/10 bg-white/[0.04] px-5 py-3 text-sm font-medium text-white/70"
+            >
+              Research methodology
+            </Link>
+          </div>
         </div>
       </header>
 
@@ -48,27 +106,30 @@ export default function Page() {
           <section>
             <h2 className="text-3xl font-semibold tracking-[-0.03em]">Build on NHS foundations, do not duplicate them</h2>
             <div className="mt-6 grid gap-4 md:grid-cols-2">
-              <a
-  href="/downloads/CareGrid_Closing_the_Medication_Loop_Report.pdf"
-  target="_blank"
-  rel="noreferrer"
-  className="rounded-xl border border-white/10 bg-white/[0.04] px-5 py-3 text-sm font-medium text-white/70 transition hover:bg-white/[0.08] hover:text-white"
->
-  Download full PDF
-</a>
               {[
                 ["Electronic Prescription Service", "Keep the signed prescription transaction and connect change context to cross-provider ownership."],
                 ["Summary / Shared Care Records", "Keep authoritative viewing and provenance, then add actionable workflow, acknowledgement and resolution."],
                 ["Discharge Medicines Service", "Build on transfer and reconciliation by making shared status and closure measurable."],
                 ["NHS App and oversupply analytics", "Reuse status and signals where possible, then turn them into owned interventions rather than creating another portal."],
-              ].map(([title, body]) => <div key={title} className="rounded-2xl border border-white/[0.07] bg-white/[0.025] p-5"><h3 className="font-semibold text-white/85">{title}</h3><p className="mt-2 text-sm leading-7 text-white/48">{body}</p></div>)}
+              ].map(([itemTitle, body]) => (
+                <div key={itemTitle} className="rounded-2xl border border-white/[0.07] bg-white/[0.025] p-5">
+                  <h3 className="font-semibold text-white/85">{itemTitle}</h3>
+                  <p className="mt-2 text-sm leading-7 text-white/48">{body}</p>
+                </div>
+              ))}
             </div>
           </section>
 
           <section>
             <h2 className="text-3xl font-semibold tracking-[-0.03em]">Six operating rules</h2>
             <div className="mt-6 grid gap-3 md:grid-cols-2">
-              {principles.map(([title, body], i) => <div key={title} className="rounded-2xl border border-[#2aa89a]/15 bg-[#0c241f] p-5"><div className="text-xs font-semibold text-[#77cfc3]">0{i+1}</div><h3 className="mt-2 font-semibold">{title}</h3><p className="mt-2 text-sm leading-7 text-white/48">{body}</p></div>)}
+              {principles.map(([itemTitle, body], i) => (
+                <div key={itemTitle} className="rounded-2xl border border-[#2aa89a]/15 bg-[#0c241f] p-5">
+                  <div className="text-xs font-semibold text-[#77cfc3]">0{i + 1}</div>
+                  <h3 className="mt-2 font-semibold">{itemTitle}</h3>
+                  <p className="mt-2 text-sm leading-7 text-white/48">{body}</p>
+                </div>
+              ))}
             </div>
           </section>
 
