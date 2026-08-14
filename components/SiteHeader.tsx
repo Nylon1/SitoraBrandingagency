@@ -8,7 +8,6 @@ import Image from "next/image";
 
 const navItems = [
   { label: "Home", href: "/home" },
-
   {
     label: "Services",
     href: "/corporate-website-design",
@@ -21,57 +20,36 @@ const navItems = [
       { label: "Accessibility Scans", href: "/ada-accessibility-scan-full" },
     ],
   },
-
   {
-    label: "AI Audit",
+    label: "Intelligence",
     href: "/ai-readiness",
     children: [
       { label: "AI Readiness Audit", href: "/ai-readiness" },
-      { label: "NHS AI Trust Report", href: "/research/ai-as-the-nhs-front-door" },
-    ],
-  },
-
-  {
-    label: "Trust 360",
-    href: "/trust-360",
-    children: [
-      { label: "UK Trust 360", href: "/trust-360" },
-      { label: "Run Free Exposure Check", href: "/trust-360/check" },
+      { label: "Trust 360", href: "/trust-360" },
       { label: "Qatar Trust 360", href: "/qatar-trust-360" },
+      { label: "Dental Control", href: "/dental-control" },
     ],
   },
   {
-    label: "Free Tools",
-    href: "/tools",
+    label: "Research",
+    href: "/research",
     children: [
-      {
-        label: "QR Code Generator",
-        href: "/tools/qr-code-generator",
-      },
-      {
-        label: "LinkedIn Coach (HumanSignal)",
-        href: "/tools/human-signal",
-      },
-      {
-        label: "Social Media Post Ideas",
-        href: "/tools/healthcare-post-ideas",
-      },
+      { label: "Research Hub", href: "/research" },
+      { label: "Saudi Dental Software 2026", href: "/research/saudi-dental-software-landscape-2026" },
+      { label: "AI as the NHS Front Door", href: "/research/ai-as-the-nhs-front-door" },
+      { label: "Research Methodology", href: "/research/methodology" },
     ],
   },
-
   {
     label: "Industries",
     href: "/industries",
     children: [
-      { label: "Professions", href: "/industries" },
-      {
-        label: "Celebrities & Athletes",
-        href: "/websites-for-celebrities-athletes",
-      },
+      { label: "All Industries", href: "/industries" },
+      { label: "Dental Clinics", href: "/industries/dental-clinics" },
+      { label: "Healthcare Clinics", href: "/industries/healthcare-clinics" },
+      { label: "Celebrities & Athletes", href: "/websites-for-celebrities-athletes" },
     ],
   },
-
-  { label: "Research", href: "/research" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -79,132 +57,131 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="fixed left-0 right-0 top-0 z-50 border-b border-white/10 bg-[#03050a]/75 backdrop-blur-2xl">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-5 px-5 py-4 sm:px-8">
-        <Link href="/home" className="flex shrink-0 items-center gap-3">
-          <span className="relative flex h-11 w-11 items-center justify-center overflow-hidden rounded-2xl border border-[#d8b66d]/30 bg-[#05070d] shadow-lg shadow-[#d8b66d]/20">
-            <Image
-              src="/android-chrome-192x192.png"
-              alt="Sitora logo"
-              width={44}
-              height={44}
-              className="h-full w-full object-cover"
-              priority
-            />
-          </span>
-
-          <span className="text-xl font-semibold tracking-tight text-white">
-            Sitora
-          </span>
-        </Link>
-
-        <nav className="hidden items-center justify-center gap-2 text-sm font-medium text-white/70 lg:flex">
-          {navItems.map((item) => (
-            <div key={item.label} className="group relative">
-              {item.children ? (
-                <>
-                  <Link
-                    href={item.href}
-                    className="inline-flex items-center gap-1 rounded-full px-4 py-2 transition hover:bg-white/[0.06] hover:text-white"
-                  >
-                    {item.label}
-                    <ChevronDown className="h-3.5 w-3.5 transition group-hover:rotate-180" />
-                  </Link>
-
-                  <div className="invisible absolute left-0 top-full z-50 mt-3 w-72 translate-y-2 rounded-2xl border border-white/10 bg-[#05070d]/95 p-2 opacity-0 shadow-2xl shadow-black/30 backdrop-blur-2xl transition-all duration-200 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
-                    {item.children.map((child) => (
-                      <Link
-                        key={child.href}
-                        href={child.href}
-                        className="block rounded-xl px-4 py-3 text-sm text-white/75 transition hover:bg-white/[0.07] hover:text-white"
-                      >
-                        {child.label}
-                      </Link>
-                    ))}
-                  </div>
-                </>
-              ) : (
-                <Link
-                  href={item.href}
-                  className="whitespace-nowrap rounded-full px-4 py-2 transition hover:bg-white/[0.06] hover:text-white"
-                >
-                  {item.label}
-                </Link>
-              )}
-            </div>
-          ))}
-        </nav>
-
-        <div className="hidden shrink-0 items-center gap-3 lg:flex">
-          <Link
-            href="/trust-360/check"
-            className="inline-flex items-center gap-2 rounded-full border border-[#d8b66d]/45 px-5 py-2.5 text-sm font-semibold text-[#d8b66d] transition hover:bg-[#d8b66d] hover:text-[#070910]"
-          >
-            Book Discovery Call <ArrowRight className="h-4 w-4" />
+    <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-5 sm:pt-4">
+      <div className="mx-auto max-w-7xl rounded-[1.4rem] border border-white/[0.09] bg-[#05070d]/78 shadow-[0_16px_60px_rgba(0,0,0,.28)] backdrop-blur-2xl">
+        <div className="flex min-h-[68px] items-center justify-between gap-4 px-4 sm:px-5">
+          <Link href="/home" className="group flex shrink-0 items-center gap-3">
+            <span className="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-xl border border-[#d8b66d]/25 bg-[#06080e] shadow-[0_0_30px_rgba(216,182,109,.08)] transition group-hover:border-[#d8b66d]/50">
+              <Image
+                src="/android-chrome-192x192.png"
+                alt="Sitora logo"
+                width={40}
+                height={40}
+                className="h-full w-full object-cover"
+                priority
+              />
+            </span>
+            <span>
+              <span className="block text-lg font-semibold tracking-[-0.03em] text-white">Sitora</span>
+              <span className="hidden text-[9px] font-semibold uppercase tracking-[0.2em] text-white/35 sm:block">Digital · Intelligence · Research</span>
+            </span>
           </Link>
-        </div>
 
-        <button
-          type="button"
-          onClick={() => setOpen((value) => !value)}
-          className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.045] text-white lg:hidden"
-          aria-label="Toggle menu"
-        >
-          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </button>
-      </div>
-
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ opacity: 0, y: -12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -12 }}
-            transition={{ duration: 0.22 }}
-            className="border-t border-white/10 bg-[#03050a]/95 px-5 py-5 backdrop-blur-2xl lg:hidden"
-          >
-            <nav className="mx-auto grid max-w-7xl gap-3">
-              {navItems.map((item) => (
-                <div
-                  key={item.label}
-                  className="rounded-2xl border border-white/10 bg-white/[0.035]"
-                >
-                  <Link
-                    href={item.href}
-                    onClick={() => setOpen(false)}
-                    className="block px-5 py-4 text-sm font-semibold text-white transition hover:text-[#d8b66d]"
-                  >
-                    {item.label}
-                  </Link>
-
-                  {item.children && (
-                    <div className="border-t border-white/10 px-3 pb-3">
+          <nav className="hidden items-center justify-center gap-1 text-[13px] font-medium text-white/68 xl:flex">
+            {navItems.map((item) => (
+              <div key={item.label} className="group relative">
+                {item.children ? (
+                  <>
+                    <Link
+                      href={item.href}
+                      className="inline-flex items-center gap-1 rounded-full px-3 py-2 transition hover:bg-white/[0.055] hover:text-white"
+                    >
+                      {item.label}
+                      <ChevronDown className="h-3.5 w-3.5 transition duration-200 group-hover:rotate-180" />
+                    </Link>
+                    <div className="invisible absolute left-0 top-full z-50 mt-3 w-72 translate-y-2 rounded-2xl border border-white/10 bg-[#080b12]/96 p-2 opacity-0 shadow-2xl shadow-black/45 backdrop-blur-2xl transition-all duration-200 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
+                      <div className="mb-1 px-3 py-2 text-[10px] font-bold uppercase tracking-[0.18em] text-[#d8b66d]">{item.label}</div>
                       {item.children.map((child) => (
                         <Link
                           key={child.href}
                           href={child.href}
-                          onClick={() => setOpen(false)}
-                          className="block rounded-xl px-4 py-3 text-sm font-medium text-white/65 transition hover:bg-white/[0.06] hover:text-white"
+                          className="block rounded-xl px-3 py-3 text-sm text-white/68 transition hover:bg-white/[0.06] hover:text-white"
                         >
                           {child.label}
                         </Link>
                       ))}
                     </div>
-                  )}
-                </div>
-              ))}
+                  </>
+                ) : (
+                  <Link
+                    href={item.href}
+                    className="whitespace-nowrap rounded-full px-3 py-2 transition hover:bg-white/[0.055] hover:text-white"
+                  >
+                    {item.label}
+                  </Link>
+                )}
+              </div>
+            ))}
+          </nav>
 
-              <Link
-                href="/trust-360/check"
-                onClick={() => setOpen(false)}
-                className="mt-2 inline-flex items-center justify-center gap-2 rounded-2xl bg-[#d8b66d] px-5 py-4 text-sm font-bold text-[#070910] transition hover:bg-[#f2cf83]"
-              >
-                Run Free Exposure Check <ArrowRight className="h-4 w-4" />
-              </Link>
-            </nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          <div className="hidden shrink-0 xl:flex">
+            <Link
+              href="/contact"
+              className="sitora-button-primary px-5 py-2.5 text-sm"
+            >
+              Start a project <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+
+          <button
+            type="button"
+            onClick={() => setOpen((value) => !value)}
+            className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-white xl:hidden"
+            aria-label="Toggle menu"
+            aria-expanded={open}
+          >
+            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </div>
+
+        <AnimatePresence>
+          {open && (
+            <motion.div
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.18 }}
+              className="border-t border-white/[0.08] px-3 pb-3 pt-3 xl:hidden"
+            >
+              <nav className="grid gap-2">
+                {navItems.map((item) => (
+                  <div key={item.label} className="rounded-xl border border-white/[0.07] bg-white/[0.025]">
+                    <Link
+                      href={item.href}
+                      onClick={() => setOpen(false)}
+                      className="block px-4 py-3.5 text-sm font-semibold text-white"
+                    >
+                      {item.label}
+                    </Link>
+                    {item.children && (
+                      <div className="grid grid-cols-1 gap-1 border-t border-white/[0.07] p-2 sm:grid-cols-2">
+                        {item.children.map((child) => (
+                          <Link
+                            key={child.href}
+                            href={child.href}
+                            onClick={() => setOpen(false)}
+                            className="rounded-lg px-3 py-2.5 text-sm text-white/56 transition hover:bg-white/[0.05] hover:text-white"
+                          >
+                            {child.label}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ))}
+
+                <Link
+                  href="/contact"
+                  onClick={() => setOpen(false)}
+                  className="sitora-button-primary mt-1 px-5 py-3.5 text-sm"
+                >
+                  Start a project <ArrowRight className="h-4 w-4" />
+                </Link>
+              </nav>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
     </header>
   );
 }
