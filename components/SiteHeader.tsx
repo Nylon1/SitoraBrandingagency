@@ -141,9 +141,10 @@ export function SiteHeader() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.18 }}
-              className="border-t border-white/[0.08] px-3 pb-3 pt-3 xl:hidden"
+              className="max-h-[calc(100dvh-96px)] overflow-y-auto overscroll-contain border-t border-white/[0.08] px-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] pt-3 xl:hidden"
+              style={{ WebkitOverflowScrolling: "touch" }}
             >
-              <nav className="grid gap-2">
+              <nav className="grid gap-2 pb-2">
                 {navItems.map((item) => (
                   <div key={item.label} className="rounded-xl border border-white/[0.07] bg-white/[0.025]">
                     <Link
