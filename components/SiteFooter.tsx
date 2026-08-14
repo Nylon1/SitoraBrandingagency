@@ -17,8 +17,7 @@ export function SiteFooter() {
               </div>
 
               <p className="mt-5 max-w-2xl text-sm leading-7 text-white/60">
-                Global web design and corporate branding agency creating premium websites,
-                brand identities and SEO-led digital platforms for ambitious businesses.
+                Global web design, corporate branding and independent research across healthcare systems, responsible AI, public policy and Saudi/Gulf innovation.
               </p>
             </div>
 
@@ -46,25 +45,25 @@ export function SiteFooter() {
 
           <div>
             <h3 className="text-sm font-bold uppercase tracking-[0.25em] text-[#d8b66d]">
-              Industries
+              Research
             </h3>
             <div className="mt-5 grid gap-3 text-sm text-white/55">
-              <Link href="/industries/law-firms">Law Firms</Link>
-              <Link href="/industries/dental-clinics">Dental Clinics</Link>
-              <Link href="/industries/accountants">Accountants</Link>
-              <Link href="/industries/consultants">Consultants</Link>
+              <Link href="/research">Research Hub</Link>
+              <Link href="/research/saudi-dental-software-landscape-2026">Saudi Dental Software 2026</Link>
+              <Link href="/research/ai-as-the-nhs-front-door">AI as the NHS Front Door</Link>
+              <Link href="/research/methodology">Research Methodology</Link>
             </div>
           </div>
 
           <div>
             <h3 className="text-sm font-bold uppercase tracking-[0.25em] text-[#d8b66d]">
-              Global
+              Industries
             </h3>
             <div className="mt-5 grid gap-3 text-sm text-white/55">
-              <span>London</span>
-              <span>New York</span>
-              <span>Dubai</span>
-              <span>Singapore</span>
+              <Link href="/industries/law-firms">Law Firms</Link>
+              <Link href="/industries/dental-clinics">Dental Clinics</Link>
+              <Link href="/industries/healthcare-clinics">Healthcare Clinics</Link>
+              <Link href="/industries/consultants">Consultants</Link>
             </div>
           </div>
 
@@ -82,12 +81,12 @@ export function SiteFooter() {
           </div>
         </div>
 
-       <div className="mt-10 border-t border-white/10 pt-6 text-sm text-white/40">
-  <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-    <p>© {new Date().getFullYear()} Sitora. All rights reserved.</p>
-    <InstallAppButton />
-  </div>
-</div>
+        <div className="mt-10 border-t border-white/10 pt-6 text-sm text-white/40">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <p>© {new Date().getFullYear()} Sitora. All rights reserved.</p>
+            <InstallAppButton />
+          </div>
+        </div>
       </div>
     </footer>
   );
