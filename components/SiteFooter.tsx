@@ -2,88 +2,102 @@ import Link from "next/link";
 import { ArrowRight, Mail, Sparkles } from "lucide-react";
 import { InstallAppButton } from "@/components/InstallAppButton";
 
+const footerGroups = [
+  {
+    title: "Company",
+    links: [
+      ["Home", "/home"],
+      ["Industries", "/industries"],
+      ["Research", "/research"],
+      ["Contact", "/contact"],
+    ],
+  },
+  {
+    title: "Services",
+    links: [
+      ["Corporate Website Design", "/corporate-website-design"],
+      ["Corporate Branding", "/corporate-branding"],
+      ["SEO & Lead Generation", "/seo-lead-generation"],
+      ["AI Readiness", "/ai-readiness"],
+    ],
+  },
+  {
+    title: "Intelligence",
+    links: [
+      ["Dental Control", "/dental-control"],
+      ["Trust 360", "/trust-360"],
+      ["Qatar Trust 360", "/qatar-trust-360"],
+      ["Saudi & Gulf Innovation", "/research/saudi-gulf-innovation"],
+    ],
+  },
+  {
+    title: "Research",
+    links: [
+      ["Research Hub", "/research"],
+      ["Saudi Dental Software 2026", "/research/saudi-dental-software-landscape-2026"],
+      ["AI as the NHS Front Door", "/research/ai-as-the-nhs-front-door"],
+      ["Methodology", "/research/methodology"],
+    ],
+  },
+] as const;
+
 export function SiteFooter() {
   return (
-    <footer className="border-t border-white/10 bg-[#03050a] px-5 py-16 text-white sm:px-8">
-      <div className="mx-auto max-w-7xl">
-        <div className="rounded-[2rem] border border-white/10 bg-white/[0.04] p-8 sm:p-10">
-          <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
-            <div>
-              <div className="flex items-center gap-3">
-                <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#d8b66d] text-[#070910]">
-                  <Sparkles className="h-5 w-5" />
-                </span>
-                <span className="text-2xl font-semibold">Sitora</span>
-              </div>
+    <footer className="relative overflow-hidden border-t border-white/[0.08] bg-[#020409] px-5 pb-8 pt-16 text-white sm:px-8 md:pt-20">
+      <div className="pointer-events-none absolute left-1/2 top-0 h-72 w-[44rem] -translate-x-1/2 rounded-full bg-[#d8b66d]/[0.06] blur-[110px]" />
 
-              <p className="mt-5 max-w-2xl text-sm leading-7 text-white/60">
-                Global web design, corporate branding and independent research across healthcare systems, responsible AI, public policy and Saudi/Gulf innovation.
+      <div className="relative mx-auto max-w-7xl">
+        <div className="overflow-hidden rounded-[2rem] border border-white/[0.09] bg-[linear-gradient(135deg,rgba(255,255,255,.055),rgba(255,255,255,.018))] shadow-[0_30px_100px_rgba(0,0,0,.28)]">
+          <div className="grid gap-10 p-7 sm:p-9 lg:grid-cols-[1.2fr_.8fr] lg:items-end lg:p-11">
+            <div>
+              <div className="sitora-eyebrow">
+                <Sparkles className="h-4 w-4" />
+                Sitora
+              </div>
+              <h2 className="mt-5 max-w-3xl text-3xl font-semibold tracking-[-0.045em] sm:text-4xl lg:text-5xl">
+                Digital presence, intelligence and research built to carry authority.
+              </h2>
+              <p className="mt-5 max-w-2xl text-sm leading-7 text-white/52 sm:text-base sm:leading-8">
+                Sitora combines premium digital design with systems thinking, AI governance and independent research across healthcare, public policy and Saudi/Gulf innovation.
               </p>
             </div>
 
-            <a
-              href="mailto:hello@sitora.co.uk?subject=Sitora Project Enquiry"
-              className="inline-flex items-center justify-center gap-3 rounded-full bg-[#d8b66d] px-7 py-4 font-bold text-[#070910] transition hover:bg-[#f2cf83]"
-            >
-              Book Consultation <ArrowRight className="h-4 w-4" />
-            </a>
+            <div className="lg:text-right">
+              <p className="text-sm leading-7 text-white/42">Have a serious project, system problem or research challenge?</p>
+              <Link href="/contact" className="sitora-button-primary mt-5 px-6 py-3.5 text-sm">
+                Start a conversation <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+          </div>
+
+          <div className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+
+          <div className="grid gap-9 p-7 sm:grid-cols-2 sm:p-9 lg:grid-cols-4 lg:p-11">
+            {footerGroups.map((group) => (
+              <div key={group.title}>
+                <h3 className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#d8b66d]">{group.title}</h3>
+                <div className="mt-5 grid gap-3">
+                  {group.links.map(([label, href]) => (
+                    <Link key={href} href={href} className="text-sm text-white/48 transition hover:text-white">
+                      {label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
 
-        <div className="mt-10 grid gap-8 border-t border-white/10 pt-8 md:grid-cols-4">
+        <div className="mt-8 flex flex-col gap-5 border-t border-white/[0.07] pt-7 text-sm text-white/35 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h3 className="text-sm font-bold uppercase tracking-[0.25em] text-[#d8b66d]">
-              Services
-            </h3>
-            <div className="mt-5 grid gap-3 text-sm text-white/55">
-              <Link href="/corporate-website-design">Corporate Website Design</Link>
-              <Link href="/corporate-branding">Corporate Branding</Link>
-              <Link href="/seo-lead-generation">SEO & Lead Generation</Link>
-              <Link href="/industries">Industries</Link>
-            </div>
-          </div>
-
-          <div>
-            <h3 className="text-sm font-bold uppercase tracking-[0.25em] text-[#d8b66d]">
-              Research
-            </h3>
-            <div className="mt-5 grid gap-3 text-sm text-white/55">
-              <Link href="/research">Research Hub</Link>
-              <Link href="/research/saudi-dental-software-landscape-2026">Saudi Dental Software 2026</Link>
-              <Link href="/research/ai-as-the-nhs-front-door">AI as the NHS Front Door</Link>
-              <Link href="/research/methodology">Research Methodology</Link>
-            </div>
-          </div>
-
-          <div>
-            <h3 className="text-sm font-bold uppercase tracking-[0.25em] text-[#d8b66d]">
-              Industries
-            </h3>
-            <div className="mt-5 grid gap-3 text-sm text-white/55">
-              <Link href="/industries/law-firms">Law Firms</Link>
-              <Link href="/industries/dental-clinics">Dental Clinics</Link>
-              <Link href="/industries/healthcare-clinics">Healthcare Clinics</Link>
-              <Link href="/industries/consultants">Consultants</Link>
-            </div>
-          </div>
-
-          <div>
-            <h3 className="text-sm font-bold uppercase tracking-[0.25em] text-[#d8b66d]">
-              Contact
-            </h3>
-            <a
-              href="mailto:hello@sitora.co.uk"
-              className="mt-5 flex items-center gap-2 text-sm text-white/55 transition hover:text-white"
-            >
-              <Mail className="h-4 w-4 text-[#d8b66d]" />
+            <p>© {new Date().getFullYear()} Sitora. All rights reserved.</p>
+            <a href="mailto:hello@sitora.co.uk" className="mt-2 inline-flex items-center gap-2 transition hover:text-white/70">
+              <Mail className="h-3.5 w-3.5 text-[#d8b66d]" />
               hello@sitora.co.uk
             </a>
           </div>
-        </div>
-
-        <div className="mt-10 border-t border-white/10 pt-6 text-sm text-white/40">
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <p>© {new Date().getFullYear()} Sitora. All rights reserved.</p>
+          <div className="flex items-center gap-5">
+            <span className="hidden text-xs uppercase tracking-[0.18em] text-white/22 sm:inline">United Kingdom · Saudi & Gulf focus</span>
             <InstallAppButton />
           </div>
         </div>
