@@ -7,6 +7,7 @@ export const metadata: Metadata = {
 };
 
 const doi = "10.5281/zenodo.21978373";
+const zenodoRecord = "https://zenodo.org/records/21978373";
 
 export default function JlrDocumentsPage() {
   return (
@@ -14,14 +15,14 @@ export default function JlrDocumentsPage() {
       <header className="bg-[#06192f] text-white">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-5 py-5 lg:px-8">
           <a href="/research/jlr-tdv6-sdv6" className="inline-flex items-center gap-2 text-sm font-bold text-slate-200 hover:text-white"><ArrowLeft className="h-4 w-4" /> Research home</a>
-          <a href={`https://doi.org/${doi}`} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-lg border border-[#c56f47]/60 px-3 py-2 text-xs font-black text-[#f6d1bd]">DOI {doi}<ExternalLink className="h-3.5 w-3.5" /></a>
+          <a href={zenodoRecord} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-lg border border-[#c56f47]/60 px-3 py-2 text-xs font-black text-[#f6d1bd]">Zenodo · DOI {doi}<ExternalLink className="h-3.5 w-3.5" /></a>
         </div>
       </header>
 
       <section className="mx-auto max-w-6xl px-5 py-14 lg:px-8 lg:py-20">
         <p className="text-xs font-black tracking-[.18em] text-[#c56f47] uppercase">Research library</p>
         <h1 className="mt-3 max-w-3xl text-4xl font-black tracking-[-.035em] sm:text-5xl">Read the Stage 1 research directly on the website</h1>
-        <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">These web editions avoid download problems on mobile devices. The DOI remains the permanent publication identifier for Version 1.0.</p>
+        <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">These web editions avoid download problems on mobile devices. The Zenodo record is the permanent publication record for Version 1.0 and carries DOI {doi}.</p>
 
         <div className="mt-10 grid gap-6 md:grid-cols-2">
           <article className="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm sm:p-8">
@@ -43,8 +44,11 @@ export default function JlrDocumentsPage() {
 
         <div className="mt-8 rounded-2xl border border-slate-200 bg-white p-6">
           <h2 className="font-black">Permanent research record</h2>
-          <p className="mt-2 text-sm leading-6 text-slate-600">DOI: <strong>{doi}</strong>. Once the Zenodo Version 1.0 record contains the final PDFs, this DOI is the canonical route to those downloadable publication files.</p>
-          <a href={`https://doi.org/${doi}`} target="_blank" rel="noreferrer" className="mt-4 inline-flex items-center gap-2 text-sm font-black text-[#a95835]">Open DOI record <ExternalLink className="h-4 w-4" /></a>
+          <p className="mt-2 text-sm leading-6 text-slate-600">The canonical publication record is hosted by Zenodo at record 21978373. DOI: <strong>{doi}</strong>. Use the DOI when citing the paper; use the Zenodo record to view the publication metadata and files.</p>
+          <div className="mt-4 flex flex-wrap gap-4">
+            <a href={zenodoRecord} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-sm font-black text-[#a95835]">Open Zenodo record <ExternalLink className="h-4 w-4" /></a>
+            <a href={`https://doi.org/${doi}`} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-sm font-black text-[#0b2746]">Open DOI <ExternalLink className="h-4 w-4" /></a>
+          </div>
         </div>
       </section>
     </main>
