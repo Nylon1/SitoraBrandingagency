@@ -79,6 +79,8 @@ const questions = [
   "How often have replacement/remanufactured engines subsequently suffered materially similar failures?",
 ];
 
+const zenodoRecord = "https://zenodo.org/records/21978373";
+
 export default function JlrResearchPage() {
   return (
     <main className="min-h-screen bg-[#f4f7fa] text-[#0b1e36]">
@@ -94,7 +96,7 @@ export default function JlrResearchPage() {
             <a href="#questions" className="hover:text-[#f0a06f]">Open questions</a>
             <a href="#contribute" className="hover:text-[#f0a06f]">Contribute</a>
           </nav>
-          <a href="https://github.com/Nylon1/Sitora/tree/main/research/jlr-tdv6-sdv6" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-lg border border-[#d47b50]/60 px-3 py-2 text-xs font-black"><BookOpen className="h-4 w-4" /> Open record</a>
+          <a href={zenodoRecord} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-lg border border-[#d47b50]/60 px-3 py-2 text-xs font-black"><BookOpen className="h-4 w-4" /> Open publication</a>
         </div>
       </header>
 
@@ -112,7 +114,7 @@ export default function JlrResearchPage() {
             <p className="mt-7 max-w-3xl text-lg leading-8 text-slate-300 lg:text-xl">A UK-wide public-interest investigation into recurring crankshaft and main-bearing failures, manufacturer technical knowledge, replacement engines, consumer harm and international regulatory action.</p>
             <p className="mt-4 max-w-3xl text-sm leading-7 text-slate-400">Independent specialists consulted in this research describe failure volumes running into the thousands across the UK. That scale is a significant research signal, not yet an independently audited national count. Stage 2 is designed to test and quantify it.</p>
             <div className="mt-9 flex flex-wrap gap-3">
-              <a href="https://github.com/Nylon1/Sitora/tree/main/research/jlr-tdv6-sdv6" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-lg bg-[#c56f47] px-5 py-3.5 text-sm font-black text-white shadow-[0_14px_40px_rgba(197,111,71,.28)]"><BookOpen className="h-4 w-4" /> Read Stage 1 record <ArrowRight className="h-4 w-4" /></a>
+              <a href={zenodoRecord} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-lg bg-[#c56f47] px-5 py-3.5 text-sm font-black text-white shadow-[0_14px_40px_rgba(197,111,71,.28)]"><BookOpen className="h-4 w-4" /> Read published Stage 1 report <ArrowRight className="h-4 w-4" /></a>
               <a href="/research/jlr-tdv6-sdv6/submit" className="inline-flex items-center gap-2 rounded-lg border border-white/20 bg-white/[.05] px-5 py-3.5 text-sm font-bold"><Users className="h-4 w-4" /> Submit evidence</a>
             </div>
           </div>
@@ -168,7 +170,7 @@ export default function JlrResearchPage() {
         </div>
       </section>
 
-      <footer className="border-t border-white/10 bg-[#06192f] text-white"><div className="mx-auto flex max-w-[1480px] flex-col gap-3 px-5 py-8 text-sm text-slate-400 lg:flex-row lg:items-center lg:justify-between lg:px-8"><p>Stage 1 Public-Interest Research — preliminary evidence and call for contributions.</p><a href="https://github.com/Nylon1/Sitora/tree/main/research/jlr-tdv6-sdv6" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 font-bold text-white"><Download className="h-4 w-4" /> Open research record</a></div></footer>
+      <footer className="border-t border-white/10 bg-[#06192f] text-white"><div className="mx-auto flex max-w-[1480px] flex-col gap-3 px-5 py-8 text-sm text-slate-400 lg:flex-row lg:items-center lg:justify-between lg:px-8"><p>Stage 1 Public-Interest Research — preliminary evidence and call for contributions.</p><a href={zenodoRecord} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 font-bold text-white"><Download className="h-4 w-4" /> Open published research</a></div></footer>
     </main>
   );
 }
