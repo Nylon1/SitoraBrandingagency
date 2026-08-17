@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { ExternalLink } from "lucide-react";
+import ResearchSubmitCta from "./ResearchSubmitCta";
 
 const DOI = "10.5281/zenodo.21978373";
 
@@ -14,16 +15,17 @@ export default function JlrResearchLayout({ children }: { children: ReactNode })
             <span className="font-mono font-bold">DOI: {DOI}</span>
           </div>
           <a
-            href={`https://doi.org/${DOI}`}
+            href={`https://zenodo.org/records/21978373`}
             target="_blank"
             rel="noreferrer"
             className="inline-flex items-center gap-1.5 font-black text-[#9b4f2e] hover:text-[#71351f]"
           >
-            Open DOI record <ExternalLink className="h-3.5 w-3.5" />
+            Open Zenodo record <ExternalLink className="h-3.5 w-3.5" />
           </a>
         </div>
       </div>
       {children}
+      <ResearchSubmitCta />
     </>
   );
 }
