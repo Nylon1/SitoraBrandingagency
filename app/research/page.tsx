@@ -11,6 +11,12 @@ export const metadata: Metadata = {
 
 const featured = [
   {
+    eyebrow: "Published research · Automotive safety",
+    title: "JLR 3.0 TDV6/SDV6 Catastrophic Engine Failures",
+    text: "Stage 1 public-interest research examining manufacturer technical records, catastrophic crankshaft and main-bearing failures, international recall action, the UK regulatory record and the evidence required to establish the true UK scale. Version 1.0 is permanently published on Zenodo with DOI 10.5281/zenodo.21978373.",
+    href: "/research/jlr-tdv6-sdv6",
+  },
+  {
     eyebrow: "Featured research · Saudi Arabia",
     title: "Saudi Dental Software Landscape 2026",
     text: "A market and infrastructure study asking what Saudi dental systems already solve, where workflow still fragments, and whether the next opportunity is orchestration rather than another practice-management system.",
