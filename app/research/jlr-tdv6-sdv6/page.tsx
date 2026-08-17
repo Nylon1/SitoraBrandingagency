@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import {
   ArrowRight,
   BookOpen,
-  Car,
   Download,
   FileSearch,
   FolderOpen,
@@ -21,8 +20,8 @@ export const metadata: Metadata = {
 };
 
 const metrics = [
-  ["3", "vehicles", Car],
-  ["7", "engine failures", Gauge],
+  ["Thousands?", "UK failures described by specialists — scale to verify", Users],
+  ["UK-wide", "specialist repair market and owner reports", Wrench],
   ["600+", "DVSA documents", FolderOpen],
   ["68,828", "China recall", Globe2],
   ["1,338", "China warranty / claim cases", Users],
@@ -72,6 +71,7 @@ const countries = [
 
 const questions = [
   "What is the confirmed UK failure population by engine code, production period and mileage?",
+  "Can specialist garages and rebuilders provide de-duplicated job-level data to test claims of thousands of UK failures?",
   "What engineering analysis led to the 50 μm → 30 μm run-out tolerance change?",
   "What exactly was changed in the ‘improved engine’ used in China?",
   "Are the same changes present in UK service/remanufactured replacement engines?",
@@ -109,7 +109,8 @@ export default function JlrResearchPage() {
               <span className="rounded-full border border-white/15 px-3 py-1.5 text-slate-300">Open call for evidence</span>
             </div>
             <h1 className="max-w-5xl text-5xl font-black leading-[.97] tracking-[-.045em] sm:text-6xl lg:text-7xl">JLR 3.0 TDV6/SDV6<span className="block text-slate-200">catastrophic engine failures</span></h1>
-            <p className="mt-7 max-w-3xl text-lg leading-8 text-slate-300 lg:text-xl">A transparent investigation into repeated crankshaft and main-bearing failure, manufacturer technical knowledge, replacement engines, consumer harm and international regulatory action.</p>
+            <p className="mt-7 max-w-3xl text-lg leading-8 text-slate-300 lg:text-xl">A UK-wide public-interest investigation into recurring crankshaft and main-bearing failures, manufacturer technical knowledge, replacement engines, consumer harm and international regulatory action.</p>
+            <p className="mt-4 max-w-3xl text-sm leading-7 text-slate-400">Independent specialists consulted in this research describe failure volumes running into the thousands across the UK. That scale is a significant research signal, not yet an independently audited national count. Stage 2 is designed to test and quantify it.</p>
             <div className="mt-9 flex flex-wrap gap-3">
               <a href="https://github.com/Nylon1/Sitora/tree/main/research/jlr-tdv6-sdv6" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-lg bg-[#c56f47] px-5 py-3.5 text-sm font-black text-white shadow-[0_14px_40px_rgba(197,111,71,.28)]"><BookOpen className="h-4 w-4" /> Read Stage 1 record <ArrowRight className="h-4 w-4" /></a>
               <a href="https://github.com/Nylon1/Sitora/issues/6" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-lg border border-white/20 bg-white/[.05] px-5 py-3.5 text-sm font-bold"><Users className="h-4 w-4" /> Submit evidence</a>
@@ -125,13 +126,14 @@ export default function JlrResearchPage() {
 
       <section className="border-b border-slate-200 bg-white">
         <div className="mx-auto grid max-w-[1480px] gap-px bg-slate-200 sm:grid-cols-2 lg:grid-cols-6">
-          {metrics.map(([value,label,Icon]) => <div key={label} className="bg-white p-5"><Icon className="h-5 w-5 text-[#c56f47]" /><div className="mt-4 text-3xl font-black tracking-tight text-[#0b2746]">{value}</div><div className="mt-1 text-xs font-bold text-slate-500">{label}</div></div>)}
+          {metrics.map(([value,label,Icon]) => <div key={label} className="bg-white p-5"><Icon className="h-5 w-5 text-[#c56f47]" /><div className="mt-4 text-3xl font-black tracking-tight text-[#0b2746]">{value}</div><div className="mt-1 text-xs font-bold leading-5 text-slate-500">{label}</div></div>)}
         </div>
+        <div className="mx-auto max-w-[1480px] px-5 py-3 text-[11px] leading-5 text-slate-500 lg:px-8">* “Thousands” is professional testimony/intelligence supplied to Stage 1 and is not presented as a verified UK prevalence figure. The research is actively seeking auditable garage, warranty and manufacturer data.</div>
       </section>
 
       <section className="mx-auto max-w-[1480px] px-5 py-20 lg:px-8">
         <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-          {[[ShieldAlert,"Public safety","Sudden catastrophic engine failure can interrupt motive power."],[Gauge,"Replacement engines","The specification of remanufactured replacement engines is a central unanswered question."],[Landmark,"Regulatory scrutiny","Overseas recall actions create a legitimate UK comparison question."],[Wrench,"Consumer impact","Five-figure repair costs can approach the residual value of a vehicle."]].map(([Icon,title,body]) => { const C=Icon as typeof ShieldAlert; return <div key={String(title)} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"><C className="h-6 w-6 text-[#c56f47]" /><h2 className="mt-4 text-lg font-black">{String(title)}</h2><p className="mt-2 text-sm leading-6 text-slate-600">{String(body)}</p></div> })}
+          {[[ShieldAlert,"Public safety","Sudden catastrophic engine failure can interrupt motive power."],[Gauge,"Replacement engines","The specification of remanufactured replacement engines is a central unanswered question."],[Landmark,"Regulatory scrutiny","Overseas recall actions create a legitimate UK comparison question."],[Wrench,"Potential scale","A mature UK specialist repair market and reports of large case volumes make national quantification necessary."]].map(([Icon,title,body]) => { const C=Icon as typeof ShieldAlert; return <div key={String(title)} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"><C className="h-6 w-6 text-[#c56f47]" /><h2 className="mt-4 text-lg font-black">{String(title)}</h2><p className="mt-2 text-sm leading-6 text-slate-600">{String(body)}</p></div> })}
         </div>
       </section>
 
@@ -162,7 +164,7 @@ export default function JlrResearchPage() {
 
       <section id="contribute" className="mx-auto max-w-[1480px] px-5 py-20 lg:px-8">
         <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm lg:p-10">
-          <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center"><div><p className="text-xs font-black tracking-[.18em] text-[#c56f47] uppercase">Open research</p><h2 className="mt-3 text-4xl font-black tracking-tight">Help strengthen, correct or challenge the record</h2><p className="mt-4 max-w-3xl leading-7 text-slate-600">Owners, garages, engine rebuilders, engineers, warranty professionals, regulators, journalists and current or former industry personnel are invited to contribute. Contrary evidence is expressly welcome.</p></div><div className="flex flex-col gap-3"><a href="https://github.com/Nylon1/Sitora/issues/6" target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#c56f47] px-5 py-3 font-black text-white"><Users className="h-4 w-4" /> Contribute evidence</a><a href="https://github.com/Nylon1/Sitora/tree/main/research/jlr-tdv6-sdv6" target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 px-5 py-3 font-black"><FileSearch className="h-4 w-4" /> View source register</a></div></div>
+          <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center"><div><p className="text-xs font-black tracking-[.18em] text-[#c56f47] uppercase">Open research</p><h2 className="mt-3 text-4xl font-black tracking-tight">Help establish the true UK scale</h2><p className="mt-4 max-w-3xl leading-7 text-slate-600">Affected drivers, garages, engine rebuilders, engineers, warranty professionals, regulators, journalists and current or former industry personnel are invited to contribute. The aim is to move from large-scale professional reports and public signals to a de-duplicated, auditable UK evidence base. Contrary evidence is expressly welcome.</p></div><div className="flex flex-col gap-3"><a href="https://github.com/Nylon1/Sitora/issues/6" target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#c56f47] px-5 py-3 font-black text-white"><Users className="h-4 w-4" /> Contribute evidence</a><a href="https://github.com/Nylon1/Sitora/tree/main/research/jlr-tdv6-sdv6" target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 px-5 py-3 font-black"><FileSearch className="h-4 w-4" /> View source register</a></div></div>
         </div>
       </section>
 
