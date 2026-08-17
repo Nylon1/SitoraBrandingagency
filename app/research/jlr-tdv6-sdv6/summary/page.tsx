@@ -8,6 +8,7 @@ export const metadata: Metadata = {
 };
 
 const doi = "10.5281/zenodo.21978373";
+const zenodoRecord = "https://zenodo.org/records/21978373";
 
 export default function JlrExecutiveSummaryPage() {
   return (
@@ -15,7 +16,7 @@ export default function JlrExecutiveSummaryPage() {
       <header className="border-b border-white/10 bg-[#06192f] text-white">
         <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-4 px-5 py-5 lg:px-8">
           <a href="/research/jlr-tdv6-sdv6" className="inline-flex items-center gap-2 text-sm font-bold text-slate-200 hover:text-white"><ArrowLeft className="h-4 w-4" /> Research home</a>
-          <a href={`https://doi.org/${doi}`} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-lg border border-[#c56f47]/60 px-3 py-2 text-xs font-black text-[#f6d1bd]">DOI {doi}<ExternalLink className="h-3.5 w-3.5" /></a>
+          <a href={zenodoRecord} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-lg border border-[#c56f47]/60 px-3 py-2 text-xs font-black text-[#f6d1bd]">Zenodo · DOI {doi}<ExternalLink className="h-3.5 w-3.5" /></a>
         </div>
       </header>
 
@@ -60,7 +61,8 @@ export default function JlrExecutiveSummaryPage() {
 
           <div className="mt-10 flex flex-wrap gap-3 border-t border-slate-200 pt-7">
             <a href="/research/jlr-tdv6-sdv6/report" className="inline-flex items-center gap-2 rounded-xl bg-[#0b2746] px-5 py-3 text-sm font-black text-white"><BookOpen className="h-4 w-4" /> Read full report</a>
-            <a href={`https://doi.org/${doi}`} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-xl bg-[#c56f47] px-5 py-3 text-sm font-black text-white"><FileText className="h-4 w-4" /> DOI / publication record</a>
+            <a href={zenodoRecord} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-xl bg-[#c56f47] px-5 py-3 text-sm font-black text-white"><FileText className="h-4 w-4" /> Open Zenodo publication</a>
+            <a href={`https://doi.org/${doi}`} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-xl border border-slate-200 px-5 py-3 text-sm font-black text-[#0b2746]">DOI link <ExternalLink className="h-4 w-4" /></a>
           </div>
         </div>
       </article>
